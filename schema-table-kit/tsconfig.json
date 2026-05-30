@@ -19,10 +19,7 @@
     "baseUrl": ".",
     "paths": {
       "tslib": ["node_modules/tslib"],
-      "@angular/core": ["node_modules/@angular/core"],
-      "@angular/common": ["node_modules/@angular/common"],
-      "@angular/forms": ["node_modules/@angular/forms"],
-      "@angular/cdk/drag-drop": ["node_modules/@angular/cdk/drag-drop"],
+      "@angular/*": ["../node_modules/@angular/*"],
       "@schema-table-kit/core": ["src/core/index.ts"],
       "@schema-table-kit/angular": ["src/angular/index.ts"],
       "@schema-table-kit/express": ["src/express/index.ts"],
@@ -40,7 +37,19 @@
       "@placeholder-kit/core": ["../placeholder-kit/src/core/index.ts"],
       "@placeholder-kit/angular": ["../placeholder-kit/src/angular/index.ts"],
       "@document-canvas-kit/core": ["../document-canvas-kit/src/core/index.ts"],
-      "@document-canvas-kit/angular": ["../document-canvas-kit/src/angular/index.ts"]
+      "@document-canvas-kit/angular": ["../document-canvas-kit/src/angular/index.ts"],
+      "@ui-primeng-kit/core": ["../ui-primeng-kit/src/core/index.ts"],
+      "@ui-primeng-kit/angular": ["../ui-primeng-kit/src/angular/index.ts"],
+      "@crud-page-kit/core": ["../crud-page-kit/src/core/index.ts"],
+      "@crud-page-kit/angular": ["../crud-page-kit/src/angular/index.ts"],
+      "@eav-kit/core": ["../eav-kit/src/core/index.ts"],
+      "@eav-kit/angular": ["../eav-kit/src/angular/index.ts"],
+      "@auth-rbac-kit/core": ["../auth-rbac-kit/src/core/index.ts"],
+      "@auth-rbac-kit/angular": ["../auth-rbac-kit/src/angular/index.ts"],
+      "@layout-shell-kit/core": ["../layout-shell-kit/src/core/index.ts"],
+      "@layout-shell-kit/angular": ["../layout-shell-kit/src/angular/index.ts"],
+      "@quotation-editor/core": ["../quotation-editor/src/core/index.ts"],
+      "@quotation-editor/angular": ["../quotation-editor/src/angular/index.ts"]
     }
   },
   "angularCompilerOptions": {

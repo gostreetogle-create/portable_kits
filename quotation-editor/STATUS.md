@@ -1,22 +1,19 @@
 # STATUS — quotation-editor
 
-| Поле | Значение |
-|------|----------|
-| Статус | 📋 scaffold — в разработке |
-| Паттерн | B |
-| Приоритет | P0 |
+> **v0.1** · 2026-05-30 — compose canvas + picker + placeholders
 
-## TODO (реализация)
+## Done
 
-- [ ] Перенести логику из KPPDF: `features/quotations/quotation-editor.component.ts`
-- [ ] Zero import из kppdf-3.0
-- [ ] Demo `npm start` изолированно
-- [ ] Vitest green
-- [ ] COPY-GUIDE + INTEGRATION-KPPDF.md
-- [ ] Строка в корневом README portable_kits
+- [x] `<qe-quotation-editor />` composes document-canvas-kit + entity-picker-kit + placeholder-kit
+- [x] Multi-select product picker → table items
+- [x] `productsToTableItems()` helper
+- [x] `provideQuotationEditorKit()`
+- [x] Hub demo page
+- [x] Unit tests
 
-## Источник для извлечения
+## Next
 
-```
-kppdf-3.0/features/quotations/quotation-editor.component.ts
-```
+- [ ] Save/load quotation JSON
+- [ ] PDF export hook
+- [ ] Discount / tax calculations
+- [ ] Full parity with KPPDF quotation-editor (~2800 lines)

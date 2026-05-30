@@ -1,19 +1,19 @@
 # options-resolver-kit
 
-> **Статус:** 📋 scaffold — реализация не начата  
+> **Статус:** ✅ v0.1 — ported from KPPDF  
 > **Паттерн упаковки:** **D**  
-> **Приоритет:** P3 · **Универсальность:** high
+> **Приоритет:** P1 · **Универсальность:** high
 
 ## Назначение
 
-Portable kit из KPPDF 3.0.
+Кэш и загрузка опций для select/autocomplete.
 
 | | |
 |--|--|
 | **Источник KPPDF** | `shared/services/*-options.service.ts` |
-| **Public API** | provideOptionsResolver(config), OptionsResolver.getOptions(entityKey) |
-| **Зависимости** | @angular/core, HttpClient optional |
-| **Префикс** | `or-` (компоненты / CSS vars) |
+| **Public API** | `provideOptionsResolver(config)`, `OptionsResolver.getOptions(entityKey)` |
+| **Зависимости** | `@angular/core`, HttpClient optional |
+| **Префикс** | `or-` |
 
 ## Упаковка (consumer)
 
@@ -30,10 +30,12 @@ Path alias:
 
 ## Разработка
 
+Demo и тесты через hub `schema-table-kit`:
+
 ```bash
-cd options-resolver-kit
-# после реализации demo:
-npm install && npm start
+cd schema-table-kit
+npm test
+ng serve demo --port 4201
 ```
 
-Сейчас — только scaffold. См. [STATUS.md](./STATUS.md)
+См. [STATUS.md](./STATUS.md)

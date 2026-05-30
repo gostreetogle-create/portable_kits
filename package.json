@@ -1,0 +1,50 @@
+{
+  "name": "portable-kits",
+  "private": true,
+  "description": "Portable Angular/Express kits from KPPDF 3.0",
+  "workspaces": [
+    "schema-table-kit",
+    "sortable-kit",
+    "entity-picker-kit",
+    "options-resolver-kit",
+    "schema-data-table-kit",
+    "crud-factory-kit",
+    "photo-uploader-kit",
+    "placeholder-kit",
+    "document-canvas-kit",
+    "ui-primeng-kit",
+    "crud-page-kit",
+    "auth-rbac-kit",
+    "eav-kit",
+    "layout-shell-kit",
+    "quotation-editor"
+  ],
+  "scripts": {
+    "test": "npm test --workspace=schema-table-kit",
+    "build": "npm run build --workspace=schema-table-kit",
+    "start": "npm start --workspace=schema-table-kit"
+  },
+  "dependencies": {
+    "@angular/animations": "^21.0.0",
+    "@angular/cdk": "^21.0.0",
+    "@angular/common": "^21.0.0",
+    "@angular/compiler": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "@angular/forms": "^21.0.0",
+    "@angular/platform-browser": "^21.0.0",
+    "@angular/router": "^21.2.15",
+    "@primeuix/themes": "^1.0.0",
+    "primeicons": "^7.0.0",
+    "primeng": "^21.0.0",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.6.0",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^21.0.0",
+    "@angular/cli": "^21.0.0",
+    "@angular/compiler-cli": "^21.0.0",
+    "typescript": "~5.9.0",
+    "vitest": "^3.0.0"
+  }
+}

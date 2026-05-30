@@ -1,3 +1,9 @@
+@use '../../ui-primeng-kit/src/angular/styles/tokens' as upTokens;
+
+@import 'primeicons/primeicons.css';
+
+@include upTokens.kp-light-tokens-on-root;
+
 :root {
   --st-primary: #2563eb;
   --st-border: #e5e7eb;

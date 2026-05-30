@@ -1,2 +1,1 @@
-/** TODO: Express adapter for auth-rbac-kit */
-export {};
+export { createAuthMiddleware, requirePermission } from './create-auth-middleware';

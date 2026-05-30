@@ -1,0 +1,66 @@
+<section class="ui-kit-page">
+  <nav class="ui-kit-breadcrumb">
+    <a routerLink="/">Все модули</a>
+    <span>/</span>
+    <a routerLink="/modules/ui-primeng-kit">UI-кит</a>
+    <span>/</span>
+    <span>Кнопка</span>
+  </nav>
+
+  <h1>Кнопка</h1>
+  <p class="ui-kit-lead"><code>up-kp-button</code> · KpButtonComponent</p>
+
+  <section class="ui-kit-section">
+    <h2>Severity</h2>
+    <div class="ui-kit-row">
+      <up-kp-button label="Primary" (buttonClick)="onPrimaryClick()" />
+      <up-kp-button label="Secondary" severity="secondary" />
+      <up-kp-button label="Danger" severity="danger" />
+    </div>
+    <p class="ui-kit-hint">Кликов по Primary: {{ clickCount() }}</p>
+  </section>
+
+  <section class="ui-kit-section">
+    <h2>Variant</h2>
+    <div class="ui-kit-row">
+      <up-kp-button label="Premium (default)" />
+      <up-kp-button label="Flat" variant="flat" />
+      <up-kp-button label="Flat secondary" variant="flat" severity="secondary" />
+    </div>
+  </section>
+
+  <section class="ui-kit-section">
+    <h2>Style modifiers</h2>
+    <div class="ui-kit-row">
+      <up-kp-button label="Outlined" [outlined]="true" />
+      <up-kp-button label="Raised" [raised]="true" />
+      <up-kp-button label="Text" [text]="true" />
+      <up-kp-button label="Disabled" [disabled]="true" />
+    </div>
+  </section>
+
+  <section class="ui-kit-section">
+    <h2>Size</h2>
+    <div class="ui-kit-row">
+      <up-kp-button label="Small (default)" size="small" />
+      <up-kp-button label="Large" size="large" />
+    </div>
+  </section>
+
+  <section class="ui-kit-section">
+    <h2>Icon</h2>
+    <div class="ui-kit-row">
+      <up-kp-button label="Save" icon="pi pi-check" />
+      <up-kp-button icon="pi pi-trash" severity="danger" [rounded]="true" [text]="true" tooltip="Удалить" />
+      <up-kp-button label="Next" icon="pi pi-arrow-right" iconPos="right" />
+    </div>
+  </section>
+
+  <section class="ui-kit-section">
+    <h2>Loading &amp; badge</h2>
+    <div class="ui-kit-row">
+      <up-kp-button label="Load" [loading]="loading()" (buttonClick)="simulateLoading()" />
+      <up-kp-button label="Inbox" icon="pi pi-inbox" badge="3" />
+    </div>
+  </section>
+</section>

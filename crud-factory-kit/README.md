@@ -1,19 +1,19 @@
 # crud-factory-kit
 
-> **Статус:** 📋 scaffold — реализация не начата  
+> **Статус:** ✅ v0.1 — ported from KPPDF  
 > **Паттерн упаковки:** **C**  
-> **Приоритет:** P2 · **Универсальность:** high
+> **Приоритет:** P1 · **Универсальность:** high
 
 ## Назначение
 
-Portable kit из KPPDF 3.0.
+Express CRUD-роутер из Mongoose-модели.
 
 | | |
 |--|--|
 | **Источник KPPDF** | `backend/src/utils/crud-factory.ts` |
-| **Public API** | createCrudRouter(model, { permPrefix, ... }) |
+| **Public API** | `createCrudRouter(model, { permPrefix, ... })` |
 | **Зависимости** | express, mongoose (peer) |
-| **Префикс** | `cf-` (компоненты / CSS vars) |
+| **Префикс** | `cf-` |
 
 ## Упаковка (consumer)
 
@@ -23,17 +23,19 @@ Path alias:
 
 ```json
 "@crud-factory-kit/core": ["packages/crud-factory-kit/src/core/index.ts"],
-"@crud-factory-kit/angular": ["packages/crud-factory-kit/src/angular/index.ts"]
+"@crud-factory-kit/express": ["packages/crud-factory-kit/src/express/index.ts"]
 ```
 
 Подробно: [COPY-GUIDE.md](./COPY-GUIDE.md)
 
 ## Разработка
 
+Demo и тесты через hub `schema-table-kit`:
+
 ```bash
-cd crud-factory-kit
-# после реализации demo:
-npm install && npm start
+cd schema-table-kit
+npm test
+ng serve demo --port 4201
 ```
 
-Сейчас — только scaffold. См. [STATUS.md](./STATUS.md)
+См. [STATUS.md](./STATUS.md)

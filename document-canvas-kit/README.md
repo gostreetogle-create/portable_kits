@@ -1,19 +1,19 @@
 # document-canvas-kit
 
-> **Статус:** 📋 scaffold — реализация не начата  
+> **Статус:** ✅ v0.1 — ported from KPPDF (text blocks)  
 > **Паттерн упаковки:** **B**  
-> **Приоритет:** P2 · **Универсальность:** domain
+> **Приоритет:** P1 · **Универсальность:** domain
 
 ## Назначение
 
-Portable kit из KPPDF 3.0.
+Редактор блоков документа (шаблон или экземпляр).
 
 | | |
 |--|--|
-| **Источник KPPDF** | `shared/ui/kp-document-block-editor/, kp-document-text-block-edit/` |
-| **Public API** | <dc-document-canvas mode="instance|template" [(blocks)]="blocks" /> |
-| **Зависимости** | native HTML, --dc-* CSS vars |
-| **Префикс** | `dc-` (компоненты / CSS vars) |
+| **Источник KPPDF** | `shared/ui/kp-document-block-editor/` |
+| **Public API** | `<dc-document-canvas mode="instance|template" [(blocks)]="blocks" />` |
+| **Зависимости** | sortable-kit, placeholder-kit (optional hook) |
+| **Префикс** | `dc-` |
 
 ## Упаковка (consumer)
 
@@ -30,10 +30,12 @@ Path alias:
 
 ## Разработка
 
+Demo и тесты через hub `schema-table-kit`:
+
 ```bash
-cd document-canvas-kit
-# после реализации demo:
-npm install && npm start
+cd schema-table-kit
+npm test
+ng serve demo --port 4201
 ```
 
-Сейчас — только scaffold. См. [STATUS.md](./STATUS.md)
+См. [STATUS.md](./STATUS.md)

@@ -4,34 +4,43 @@
     <p>Набор переносимых Angular-модулей для быстрой интеграции в проекты.</p>
   </header>
 
-  <section class="home__modules">
-    <h2>Модули</h2>
-    <div class="home__grid">
-      @for (mod of modules; track mod.id) {
-        <a
-          class="home__card"
-          [class.home__card--ready]="mod.readiness === 'ready'"
-          [class.home__card--stub]="mod.readiness === 'stub'"
-          [class.home__card--scaffold]="mod.readiness === 'scaffold'"
-          [routerLink]="mod.route"
-        >
-          <span class="home__card-title">{{ mod.title }}</span>
-          <span class="home__card-subtitle">{{ mod.subtitle }}</span>
-          <span class="home__card-desc">{{ mod.description }}</span>
-          @switch (mod.readiness) {
-            @case ('ready') {
-              <span class="home__card-badge home__card-badge--ready">Готово</span>
-              <span class="home__card-action">Открыть →</span>
-            }
-            @case ('stub') {
-              <span class="home__card-badge home__card-badge--stub">Заглушка</span>
-            }
-            @case ('scaffold') {
-              <span class="home__card-badge home__card-badge--scaffold">Scaffold</span>
-            }
+  <div class="home__tier-columns">
+    @for (section of tierSections; track section.tier) {
+      <section class="home__tier-column">
+        <header class="home__tier-header">
+          <h2>{{ section.heading }}</h2>
+          @if (section.subtitle) {
+            <p class="home__tier-subtitle">{{ section.subtitle }}</p>
           }
-        </a>
-      }
-    </div>
-  </section>
+        </header>
+        <div class="home__grid">
+          @for (mod of section.modules; track mod.id) {
+            <a
+              class="home__card"
+              [class.home__card--ready]="mod.readiness === 'ready'"
+              [class.home__card--stub]="mod.readiness === 'stub'"
+              [class.home__card--scaffold]="mod.readiness === 'scaffold'"
+              [routerLink]="mod.route"
+            >
+              <span class="home__card-title">{{ mod.title }}</span>
+              <span class="home__card-subtitle">{{ mod.subtitle }}</span>
+              <span class="home__card-desc">{{ mod.description }}</span>
+              @switch (mod.readiness) {
+                @case ('ready') {
+                  <span class="home__card-badge home__card-badge--ready">Готово</span>
+                  <span class="home__card-action">Открыть →</span>
+                }
+                @case ('stub') {
+                  <span class="home__card-badge home__card-badge--stub">Заглушка</span>
+                }
+                @case ('scaffold') {
+                  <span class="home__card-badge home__card-badge--scaffold">Scaffold</span>
+                }
+              }
+            </a>
+          }
+        </div>
+      </section>
+    }
+  </div>
 </div>

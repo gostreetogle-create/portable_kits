@@ -15,6 +15,13 @@
     "../crud-factory-kit/src/core/**/*.ts",
     "../photo-uploader-kit/src/**/*.ts",
     "../placeholder-kit/src/**/*.ts",
-    "../document-canvas-kit/src/**/*.ts"
+    "../document-canvas-kit/src/**/*.ts",
+    "../ui-primeng-kit/src/**/*.ts",
+    "../crud-page-kit/src/**/*.ts",
+    "../eav-kit/src/**/*.ts",
+    "../auth-rbac-kit/src/core/**/*.ts",
+    "../auth-rbac-kit/src/angular/**/*.ts",
+    "../layout-shell-kit/src/**/*.ts",
+    "../quotation-editor/src/**/*.ts"
   ]
 }

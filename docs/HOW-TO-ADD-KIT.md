@@ -24,6 +24,7 @@ portable-kits/
 | **Без import из consumer** | Kit не знает про KPPDF |
 | **COPY-GUIDE.md внутри kit** | Инструкция переноса |
 | **Native / minimal deps** | Легко copy anywhere |
+| **Hub для dev** | `npm install` в корне repo; тесты/demo через `schema-table-kit` |
 
 ## 3. Обновите корневой README.md
 
@@ -49,5 +50,16 @@ portable-kits/
 ## 6. Не кладите в корень repo
 
 - ❌ Общий `src/` на все kits
-- ❌ Общий `package.json` для всех kits (пока kits ≤ 5)
+- ❌ `node_modules` junctions в kit-папках (используйте root workspaces)
 - ❌ Demo consumer-проектов (KPPDF) в этот repo
+
+## 7. Разработка и CI
+
+| Задача | Команда |
+|--------|---------|
+| Установка | `npm install` (из корня repo) |
+| Тесты всех kits в hub | `cd schema-table-kit && npm test` |
+| Сборка demo | `cd schema-table-kit && npm run build` |
+| Dev server | `cd schema-table-kit && ng serve demo --port 4201` |
+
+CI (`.github/workflows/ci.yml`): `npm ci` в корне → `npm test` + `npm run build` в `schema-table-kit`.

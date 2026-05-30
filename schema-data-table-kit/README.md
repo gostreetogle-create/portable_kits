@@ -1,19 +1,19 @@
 # schema-data-table-kit
 
-> **Статус:** 📋 scaffold — реализация не начата  
+> **Статус:** ✅ v0.1 — ported from KPPDF (new component)  
 > **Паттерн упаковки:** **A**  
 > **Приоритет:** P1 · **Универсальность:** domain
 
 ## Назначение
 
-Portable kit из KPPDF 3.0.
+Таблица данных по schema-table config (plain HTML v0.1).
 
 | | |
 |--|--|
-| **Источник KPPDF** | `kp-document-block-editor tables, quotation-editor customTableColumns` |
-| **Public API** | <sdt-schema-data-table tableKey="..." [rows]="..." /> |
-| **Зависимости** | schema-table-kit core (types, getFieldValue) |
-| **Префикс** | `sdt-` (компоненты / CSS vars) |
+| **Источник KPPDF** | inline `kp-table` + column config |
+| **Public API** | `<sdt-schema-data-table [columns]="..." [rows]="..." />` |
+| **Зависимости** | schema-table-kit core (`getFieldValue`) |
+| **Префикс** | `sdt-` |
 
 ## Упаковка (consumer)
 
@@ -30,10 +30,12 @@ Path alias:
 
 ## Разработка
 
+Demo и тесты через hub `schema-table-kit`:
+
 ```bash
-cd schema-data-table-kit
-# после реализации demo:
-npm install && npm start
+cd schema-table-kit
+npm test
+ng serve demo --port 4201
 ```
 
-Сейчас — только scaffold. См. [STATUS.md](./STATUS.md)
+См. [STATUS.md](./STATUS.md)

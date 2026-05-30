@@ -1,0 +1,46 @@
+<section class="ui-kit-page">
+  <a routerLink="/" class="ui-kit-back">← Все модули</a>
+  <h1>UI-кит</h1>
+  <p class="ui-kit-lead">
+    ui-primeng-kit · каталог мелких PrimeNG-обёрток (kp-*).
+    Готово {{ readyCount }} из {{ components.length }} компонентов.
+  </p>
+
+  <div class="ui-kit-catalog">
+    <table class="ui-kit-catalog__table">
+      <thead>
+        <tr>
+          <th>Компонент</th>
+          <th>Selector</th>
+          <th>Class</th>
+          <th>Статус</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (entry of components; track entry.id) {
+          <tr
+            class="ui-kit-catalog__row"
+            [class.ui-kit-catalog__row--ready]="entry.status === 'ready'"
+            [class.ui-kit-catalog__row--planned]="entry.status === 'planned'"
+          >
+            <td>
+              <a [routerLink]="demoRoute(entry)" class="ui-kit-catalog__link">
+                <span class="ui-kit-catalog__title">{{ entry.title }}</span>
+                <span class="ui-kit-catalog__desc">{{ entry.description }}</span>
+              </a>
+            </td>
+            <td><code>{{ entry.selector }}</code></td>
+            <td><code>{{ entry.className }}</code></td>
+            <td>
+              @if (entry.status === 'ready') {
+                <span class="ui-kit-catalog__badge ui-kit-catalog__badge--ready">ready</span>
+              } @else {
+                <span class="ui-kit-catalog__badge ui-kit-catalog__badge--planned">planned</span>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

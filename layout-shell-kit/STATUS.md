@@ -1,22 +1,17 @@
 # STATUS — layout-shell-kit
 
-| Поле | Значение |
-|------|----------|
-| Статус | 📋 scaffold — в разработке |
-| Паттерн | B |
-| Приоритет | P3 |
+> **v0.1** · 2026-05-30 — app shell with sidebar nav
 
-## TODO (реализация)
+## Done
 
-- [ ] Перенести логику из KPPDF: `layout/*, menu, kp-breadcrumbs ROUTE_LABELS`
-- [ ] Zero import из kppdf-3.0
-- [ ] Demo `npm start` изолированно
-- [ ] Vitest green
-- [ ] COPY-GUIDE + INTEGRATION-KPPDF.md
-- [ ] Строка в корневом README portable_kits
+- [x] `<ls-layout-shell>` with sidebar + `<router-outlet>`
+- [x] `provideLayoutShellKit({ appTitle, navItems })`
+- [x] Responsive mobile drawer
+- [x] Hub demo (embedded preview)
+- [x] Unit tests
 
-## Источник для извлечения
+## Next
 
-```
-kppdf-3.0/layout/*
-```
+- [ ] Breadcrumbs component
+- [ ] ui-primeng skin for nav items
+- [ ] User menu / logout slot

@@ -1,0 +1,8 @@
+@use '../ui-primeng-kit-shared';
+
+.ui-kit-input-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 420px;
+}

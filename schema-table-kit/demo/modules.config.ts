@@ -1,5 +1,8 @@
 export type KitReadiness = 'ready' | 'stub' | 'scaffold';
 
+/** Уровень сложности модуля в иерархии композиции */
+export type DemoModuleTier = 'brick' | 'composite' | 'application';
+
 export interface DemoModule {
   id: string;
   /** Русское название модуля (заголовок карточки) */
@@ -14,6 +17,25 @@ export interface DemoModule {
   hasDemo?: boolean;
   /** ready = рабочий src + demo; stub = заглушка в hub; scaffold = export {} в src/ */
   readiness: KitReadiness;
+  /** brick = атомарные UI/утилиты; composite = из кирпичиков; application = из составных */
+  tier: DemoModuleTier;
+}
+
+export interface DemoModuleTierSection {
+  tier: DemoModuleTier;
+  heading: string;
+  subtitle?: string;
+}
+
+/** Секции home-страницы hub: слева направо по возрастанию сложности */
+export const DEMO_MODULE_TIER_SECTIONS: DemoModuleTierSection[] = [
+  { tier: 'brick', heading: 'Кирпичики', subtitle: 'UI и утилиты' },
+  { tier: 'composite', heading: 'Составные модули' },
+  { tier: 'application', heading: 'Приложения и редакторы' },
+];
+
+export function getDemoModulesByTier(tier: DemoModuleTier): DemoModule[] {
+  return DEMO_MODULES.filter((m) => m.tier === tier);
 }
 
 /** Реестр demo-модулей. Чтобы добавить новый — допишите объект в массив и зарегистрируйте route в app.routes.ts */
@@ -28,6 +50,7 @@ export const DEMO_MODULES: DemoModule[] = [
     available: true,
     hasDemo: true,
     readiness: 'ready',
+    tier: 'composite',
   },
   {
     id: 'schema-data-table-kit',
@@ -39,6 +62,7 @@ export const DEMO_MODULES: DemoModule[] = [
     available: true,
     hasDemo: true,
     readiness: 'ready',
+    tier: 'composite',
   },
   {
     id: 'entity-picker-kit',
@@ -50,6 +74,7 @@ export const DEMO_MODULES: DemoModule[] = [
     available: true,
     hasDemo: true,
     readiness: 'ready',
+    tier: 'composite',
   },
   {
     id: 'document-canvas-kit',
@@ -61,6 +86,7 @@ export const DEMO_MODULES: DemoModule[] = [
     available: true,
     hasDemo: true,
     readiness: 'ready',
+    tier: 'composite',
   },
   {
     id: 'photo-uploader-kit',
@@ -71,6 +97,7 @@ export const DEMO_MODULES: DemoModule[] = [
     available: true,
     hasDemo: true,
     readiness: 'ready',
+    tier: 'composite',
   },
   {
     id: 'sortable-kit',
@@ -82,6 +109,7 @@ export const DEMO_MODULES: DemoModule[] = [
     available: true,
     hasDemo: true,
     readiness: 'ready',
+    tier: 'brick',
   },
   {
     id: 'placeholder-kit',
@@ -93,17 +121,19 @@ export const DEMO_MODULES: DemoModule[] = [
     available: true,
     hasDemo: true,
     readiness: 'ready',
+    tier: 'brick',
   },
   {
     id: 'crud-page-kit',
     title: 'CRUD-страница',
     subtitle: 'crud-page-kit',
     description:
-      'Универсальная CRUD-страница Angular: <cp-crud-page [config]="cfg" />, CrudStore, provideCrudPageKit()',
+      'Универсальная CRUD-страница Angular: <cp-crud-page [store]="store" [config]="cfg" [columns]="cols" />',
     route: '/modules/crud-page-kit',
     available: true,
-    hasDemo: false,
-    readiness: 'stub',
+    hasDemo: true,
+    readiness: 'ready',
+    tier: 'composite',
   },
   {
     id: 'crud-factory-kit',
@@ -115,6 +145,7 @@ export const DEMO_MODULES: DemoModule[] = [
     available: true,
     hasDemo: true,
     readiness: 'ready',
+    tier: 'composite',
   },
   {
     id: 'options-resolver-kit',
@@ -126,17 +157,19 @@ export const DEMO_MODULES: DemoModule[] = [
     available: true,
     hasDemo: true,
     readiness: 'ready',
+    tier: 'brick',
   },
   {
     id: 'ui-primeng-kit',
-    title: 'UI-компоненты PrimeNG',
+    title: 'UI-кит',
     subtitle: 'ui-primeng-kit',
     description:
-      'Обёртки PrimeNG (кнопки, поля, таблицы, диалоги): KpButton, KpInput, KpTable, KpDialog, barrel export',
+      'Каталог kp-* обёрток PrimeNG: таблица типов → demo вариантов (button, input, dialog, …)',
     route: '/modules/ui-primeng-kit',
     available: true,
-    hasDemo: false,
-    readiness: 'stub',
+    hasDemo: true,
+    readiness: 'ready',
+    tier: 'brick',
   },
   {
     id: 'auth-rbac-kit',
@@ -146,41 +179,45 @@ export const DEMO_MODULES: DemoModule[] = [
       'JWT, guards и проверка прав: provideAuthRbacKit(), hasPermission(), createAuthMiddleware()',
     route: '/modules/auth-rbac-kit',
     available: true,
-    hasDemo: false,
-    readiness: 'stub',
+    hasDemo: true,
+    readiness: 'ready',
+    tier: 'brick',
   },
   {
     id: 'eav-kit',
     title: 'EAV-атрибуты',
     subtitle: 'eav-kit',
     description:
-      'Редактор EAV-атрибутов сущности: <eav-attribute-editor entityKey="..." />, EavSchemaProvider',
+      'Редактор EAV-атрибутов сущности: <eav-attribute-editor entityKey="..." />, provideEavKit()',
     route: '/modules/eav-kit',
     available: true,
-    hasDemo: false,
-    readiness: 'stub',
+    hasDemo: true,
+    readiness: 'ready',
+    tier: 'composite',
   },
   {
     id: 'quotation-editor',
     title: 'Редактор коммерческих предложений',
     subtitle: 'quotation-editor',
     description:
-      'Редактор коммерческих предложений: строки, таблицы, расчёты и экспорт документа',
+      'Редактор КП: document-canvas + entity-picker + placeholders — <qe-quotation-editor />',
     route: '/modules/quotation-editor',
     available: true,
-    hasDemo: false,
-    readiness: 'stub',
+    hasDemo: true,
+    readiness: 'ready',
+    tier: 'application',
   },
   {
     id: 'layout-shell-kit',
     title: 'Оболочка приложения',
     subtitle: 'layout-shell-kit',
     description:
-      'Оболочка приложения: боковое меню, layout, хлебные крошки и метки маршрутов',
+      'Оболочка приложения: <ls-layout-shell> с боковым меню и router-outlet',
     route: '/modules/layout-shell-kit',
     available: true,
-    hasDemo: false,
-    readiness: 'stub',
+    hasDemo: true,
+    readiness: 'ready',
+    tier: 'composite',
   },
 ];
 

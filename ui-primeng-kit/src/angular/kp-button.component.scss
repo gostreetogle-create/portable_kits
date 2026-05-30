@@ -1,0 +1,97 @@
+@use './styles/kp-button' as kpBtn;
+
+:host {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+:host .p-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--kp-button-border-radius) !important;
+  transition:
+    background var(--kp-transition-base),
+    border-color var(--kp-transition-base),
+    color var(--kp-transition-base),
+    box-shadow var(--kp-transition-base),
+    transform var(--kp-transition-base);
+  gap: var(--kp-button-icon-gap);
+  font-weight: 500;
+}
+
+:host ::ng-deep .p-button:not(.p-button-icon-only):not(.p-button-text) {
+  min-height: var(--kp-button-min-height-sm);
+  padding-block: var(--kp-button-padding-y-sm);
+  padding-inline: var(--kp-button-padding-x-sm);
+}
+
+:host ::ng-deep .p-button .p-button-icon {
+  margin: 0;
+}
+
+:host ::ng-deep .p-button.p-button-text:not(.p-button-outlined) {
+  min-height: auto;
+  padding-block: var(--kp-space-2);
+  padding-inline: var(--kp-space-2);
+}
+
+:host ::ng-deep .p-button.p-button-rounded.p-button-text {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--kp-button-border-radius) !important;
+  transform: none;
+  box-shadow: none;
+  transition:
+    background var(--kp-transition-base),
+    color var(--kp-transition-base);
+}
+
+:host ::ng-deep .p-button.p-button-rounded.p-button-text:hover {
+  background: var(--kp-bg-soft) !important;
+}
+
+:host ::ng-deep .p-button.p-button-rounded.p-button-text.p-button-danger:hover {
+  background: var(--kp-danger-soft) !important;
+  color: var(--kp-danger) !important;
+}
+
+:host.up-kp-button--block-host {
+  display: flex;
+  width: 100%;
+}
+
+:host ::ng-deep .up-kp-button--block.p-button {
+  width: 100%;
+  justify-content: center;
+}
+
+:host.up-kp-button--variant-premium.up-kp-button--severity-primary ::ng-deep .p-button:not(.p-button-text):not(.p-button-outlined) {
+  @include kpBtn.kp-button-primary-premium;
+  border-radius: var(--kp-button-border-radius) !important;
+}
+
+:host.up-kp-button--variant-premium.up-kp-button--severity-secondary ::ng-deep .p-button:not(.p-button-text) {
+  @include kpBtn.kp-button-secondary-premium;
+  border-radius: var(--kp-button-border-radius) !important;
+}
+
+:host.up-kp-button--variant-premium.up-kp-button--severity-danger ::ng-deep .p-button:not(.p-button-text):not(.p-button-outlined) {
+  @include kpBtn.kp-button-danger-premium;
+  border-radius: var(--kp-button-border-radius) !important;
+}
+
+:host.up-kp-button--variant-flat.up-kp-button--severity-primary ::ng-deep .p-button:not(.p-button-text):not(.p-button-outlined) {
+  @include kpBtn.kp-button-primary-flat;
+  border-radius: var(--kp-button-border-radius) !important;
+}
+
+:host.up-kp-button--variant-flat.up-kp-button--severity-secondary ::ng-deep .p-button:not(.p-button-text) {
+  @include kpBtn.kp-button-secondary-flat;
+  border-radius: var(--kp-button-border-radius) !important;
+}
+
+:host.up-kp-button--variant-flat.up-kp-button--severity-danger ::ng-deep .p-button:not(.p-button-text):not(.p-button-outlined) {
+  @include kpBtn.kp-button-danger-flat;
+  border-radius: var(--kp-button-border-radius) !important;
+}

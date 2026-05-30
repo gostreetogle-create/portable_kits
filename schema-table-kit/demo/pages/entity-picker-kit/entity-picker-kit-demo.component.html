@@ -1,17 +1,33 @@
 <section class="demo-page">
   <a routerLink="/" class="demo-back">← Все модули</a>
   <h1>entity-picker-kit</h1>
-  <p class="demo-lead">Модальное окно выбора сущности по ключу (упрощённый порт из KPPDF product-picker).</p>
+  <p class="demo-lead">v0.2: single + multi-select modes.</p>
 
-  <button type="button" class="demo-btn" (click)="openPicker()">Выбрать товар</button>
+  <div class="demo-actions">
+    <button type="button" class="demo-btn" (click)="openSingle()">Single select</button>
+    <button type="button" class="demo-btn" (click)="openMulti()">Multi select</button>
+  </div>
 
   @if (selected(); as row) {
-    <pre class="demo-json">{{ selected() | json }}</pre>
+    <h3>Single selection</h3>
+    <pre class="demo-json">{{ row | json }}</pre>
+  }
+
+  @if (selectedMany().length > 0) {
+    <h3>Multi selection ({{ selectedMany().length }})</h3>
+    <pre class="demo-json">{{ selectedMany() | json }}</pre>
   }
 
   <ep-entity-picker
     entityKey="products"
-    [(visible)]="pickerVisible"
+    [(visible)]="singleVisible"
     (selected)="onSelected($event)"
+  />
+
+  <ep-entity-picker
+    entityKey="products"
+    selectionMode="multiple"
+    [(visible)]="multiVisible"
+    (selectedMany)="onSelectedMany($event)"
   />
 </section>

@@ -1,19 +1,19 @@
 # entity-picker-kit
 
-> **Статус:** 📋 scaffold — реализация не начата  
+> **Статус:** ✅ v0.1 — ported from KPPDF (simplified)  
 > **Паттерн упаковки:** **BD**  
 > **Приоритет:** P1 · **Универсальность:** high
 
 ## Назначение
 
-Portable kit из KPPDF 3.0.
+Модальное окно выбора сущности по ключу (single-select v0.1).
 
 | | |
 |--|--|
 | **Источник KPPDF** | `shared/ui/kp-product-picker/` |
-| **Public API** | <ep-entity-picker entityKey="products" [(visible)]="v" (selected)="onPick($event)" /> |
-| **Зависимости** | @angular/core, @angular/forms |
-| **Префикс** | `ep-` (компоненты / CSS vars) |
+| **Public API** | `<ep-entity-picker entityKey="..." [(visible)]="v" (selected)="onPick($event)" />` |
+| **Зависимости** | `@angular/core`, `@angular/forms` |
+| **Префикс** | `ep-` |
 
 ## Упаковка (consumer)
 
@@ -30,10 +30,12 @@ Path alias:
 
 ## Разработка
 
+Demo и тесты через hub `schema-table-kit`:
+
 ```bash
-cd entity-picker-kit
-# после реализации demo:
-npm install && npm start
+cd schema-table-kit
+npm test
+ng serve demo --port 4201
 ```
 
-Сейчас — только scaffold. См. [STATUS.md](./STATUS.md)
+См. [STATUS.md](./STATUS.md)

@@ -1,19 +1,19 @@
 # photo-uploader-kit
 
-> **Статус:** 📋 scaffold — реализация не начата  
+> **Статус:** ✅ v0.1 — ported from KPPDF  
 > **Паттерн упаковки:** **B**  
-> **Приоритет:** P2 · **Универсальность:** high
+> **Приоритет:** P1 · **Универсальность:** high
 
 ## Назначение
 
-Portable kit из KPPDF 3.0.
+Загрузка и управление фотографиями (plain HTML v0.1, без PrimeNG).
 
 | | |
 |--|--|
 | **Источник KPPDF** | `shared/ui/kp-photo-uploader.component.ts` |
-| **Public API** | <pu-photo-uploader [(photos)]="photos" /> |
-| **Зависимости** | @angular/core, @angular/forms only |
-| **Префикс** | `pu-` (компоненты / CSS vars) |
+| **Public API** | `<pu-photo-uploader [(photos)]="photos" />` |
+| **Зависимости** | `@angular/core`, `@angular/forms` |
+| **Префикс** | `pu-` |
 
 ## Упаковка (consumer)
 
@@ -30,10 +30,12 @@ Path alias:
 
 ## Разработка
 
+Demo и тесты через hub `schema-table-kit`:
+
 ```bash
-cd photo-uploader-kit
-# после реализации demo:
-npm install && npm start
+cd schema-table-kit
+npm test
+ng serve demo --port 4201
 ```
 
-Сейчас — только scaffold. См. [STATUS.md](./STATUS.md)
+См. [STATUS.md](./STATUS.md)

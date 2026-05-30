@@ -12,14 +12,24 @@ import type { EntityPickerRow } from '@entity-picker-kit/core';
   styleUrl: './entity-picker-kit-demo.component.scss',
 })
 export class EntityPickerKitDemoComponent {
-  readonly pickerVisible = model(false);
+  readonly singleVisible = model(false);
+  readonly multiVisible = model(false);
   readonly selected = signal<EntityPickerRow | null>(null);
+  readonly selectedMany = signal<EntityPickerRow[]>([]);
 
-  openPicker(): void {
-    this.pickerVisible.set(true);
+  openSingle(): void {
+    this.singleVisible.set(true);
+  }
+
+  openMulti(): void {
+    this.multiVisible.set(true);
   }
 
   onSelected(row: EntityPickerRow): void {
     this.selected.set(row);
+  }
+
+  onSelectedMany(rows: EntityPickerRow[]): void {
+    this.selectedMany.set(rows);
   }
 }

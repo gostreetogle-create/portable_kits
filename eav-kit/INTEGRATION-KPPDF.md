@@ -1,5 +1,11 @@
 # INTEGRATION-KPPDF — eav-kit
 
-Backlog. Подключать в KPPDF только после ✅ demo + tests.
+**Status:** ✅ v0.1 ready in portable_kits (2026-05-30)
 
-Источник: `features/attribute-definitions, EAV in products`
+Copy `eav-kit/src/`, wire `provideEavKit({ loadAttributes, saveAttributes })`.
+
+**KPPDF source:** `features/attribute-definitions/`
+
+**Hub demo:** `/modules/eav-kit`
+
+Consumer must connect load/save to Mongo/API — kit provides editor UI only in v0.1.

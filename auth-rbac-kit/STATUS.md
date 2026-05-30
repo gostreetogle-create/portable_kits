@@ -1,22 +1,17 @@
 # STATUS — auth-rbac-kit
 
-| Поле | Значение |
-|------|----------|
-| Статус | 📋 scaffold |
-| Паттерн | CD |
-| Приоритет | P3 |
+> **v0.1** · 2026-05-30 — permission helpers + Express stub
 
-## TODO (реализация)
+## Done
 
-- [ ] Перенести логику из KPPDF: `core/permissions.ts, auth guards, backend JWT`
-- [ ] Zero import из kppdf-3.0
-- [ ] Demo `npm start` изолированно
-- [ ] Vitest green
-- [ ] COPY-GUIDE + INTEGRATION-KPPDF.md
-- [ ] Строка в корневом README portable_kits
+- [x] `hasPermission()`, `hasAnyPermission()`, `DEMO_PERMISSIONS` catalog
+- [x] `AuthRbacService` + `provideAuthRbacKit({ getUser })`
+- [x] Express: `createAuthMiddleware()`, `requirePermission()`
+- [x] Hub demo with permission toggles
+- [x] Unit tests
 
-## KPPDF paths для извлечения
+## Next
 
-```
-kppdf-3.0/core/permissions.ts
-```
+- [ ] JWT decode helper
+- [ ] Angular route guards
+- [ ] Full permission registry port from KPPDF

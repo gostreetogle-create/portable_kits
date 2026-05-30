@@ -1,22 +1,17 @@
 # STATUS — eav-kit
 
-| Поле | Значение |
-|------|----------|
-| Статус | 📋 scaffold |
-| Паттерн | A |
-| Приоритет | P3 |
+> **v0.1** · 2026-05-30 — attribute definition editor
 
-## TODO (реализация)
+## Done
 
-- [ ] Перенести логику из KPPDF: `features/attribute-definitions, EAV in products`
-- [ ] Zero import из kppdf-3.0
-- [ ] Demo `npm start` изолированно
-- [ ] Vitest green
-- [ ] COPY-GUIDE + INTEGRATION-KPPDF.md
-- [ ] Строка в корневом README portable_kits
+- [x] `<eav-attribute-editor entityKey="products" />`
+- [x] `provideEavKit({ loadAttributes, saveAttributes })`
+- [x] Core helpers: `isValidEavAttributeKey`, `normalizeEavAttributeOrder`
+- [x] Hub demo with in-memory mock store
+- [x] Unit tests
 
-## KPPDF paths для извлечения
+## Next
 
-```
-kppdf-3.0/features/attribute-definitions
-```
+- [ ] Value editor for entity instances
+- [ ] Select options UI for `type: select`
+- [ ] Express schema API stub

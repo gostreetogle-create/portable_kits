@@ -1,22 +1,17 @@
 # STATUS — crud-page-kit
 
-| Поле | Значение |
-|------|----------|
-| Статус | 📋 scaffold |
-| Паттерн | D |
-| Приоритет | P2 |
+> **v0.1** · 2026-05-30 — CrudStore + generic list page
 
-## TODO (реализация)
+## Done
 
-- [ ] Перенести логику из KPPDF: `shared/crud/kp-crud-page, crud-store, crud-api`
-- [ ] Zero import из kppdf-3.0
-- [ ] Demo `npm start` изолированно
-- [ ] Vitest green
-- [ ] COPY-GUIDE + INTEGRATION-KPPDF.md
-- [ ] Строка в корневом README portable_kits
+- [x] `CrudStore<T>` with pagination, search debounce, CRUD methods
+- [x] `<cp-crud-page [store]="store" [config]="cfg" [columns]="cols">` + `#form` template
+- [x] `provideCrudPageKit({ checkPermission })`
+- [x] Demo in schema-table-kit hub with in-memory mock API
+- [x] Unit tests for CrudStore
 
-## KPPDF paths для извлечения
+## Next
 
-```
-kppdf-3.0/shared/crud/kp-crud-page
-```
+- [ ] PrimeNG table skin via ui-primeng-kit
+- [ ] Sort column headers
+- [ ] Toast/confirm dialog integration

@@ -1,0 +1,23 @@
+:host {
+  display: contents;
+}
+
+:host ::ng-deep .up-kp-dialog.p-dialog {
+  max-width: 90vw;
+  border-radius: var(--kp-radius-xl);
+}
+
+:host ::ng-deep .up-kp-dialog .p-dialog-content {
+  overflow: visible;
+  padding-bottom: var(--kp-space-2, 0.5rem);
+}
+
+:host ::ng-deep .up-kp-dialog .p-dialog-header .p-dialog-header-close:focus-visible {
+  outline: none;
+  box-shadow: var(--kp-focus-ring);
+}
+
+:host ::ng-deep .up-kp-dialog .p-dialog-content :focus-visible {
+  outline: none;
+  box-shadow: var(--kp-focus-ring);
+}

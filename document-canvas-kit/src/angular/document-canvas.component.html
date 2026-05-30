@@ -5,11 +5,41 @@
   (click)="onCanvasClick()"
   (keydown.escape)="onCanvasClick()"
 >
+  @if (backgroundImage(); as bgUrl) {
+    <img class="dc-canvas__bg" [src]="bgUrl" alt="" aria-hidden="true" />
+  }
+
   <div class="dc-canvas__toolbar">
     <span class="dc-canvas__mode">Режим: {{ mode() === 'template' ? 'шаблон' : 'экземпляр' }}</span>
-    <button type="button" class="dc-btn" (click)="addTextBlock(); $event.stopPropagation()">
-      + Текстовый блок
-    </button>
+    <div class="dc-canvas__toolbar-actions">
+      <button type="button" class="dc-btn" (click)="toggleAddMenu($event)">+ Блок</button>
+      @if (showAddMenu()) {
+        <div class="dc-add-menu" (click)="$event.stopPropagation()">
+          <button type="button" class="dc-add-menu__item" (click)="addTextBlock(); $event.stopPropagation()">
+            Текстовый блок
+          </button>
+          <button type="button" class="dc-add-menu__item" (click)="addBlock('separator'); $event.stopPropagation()">
+            Разделитель
+          </button>
+          @if (availableTableBlockOptions().length > 0) {
+            <div class="dc-add-menu__table">
+              <select
+                [ngModel]="selectedTableKind()"
+                (ngModelChange)="selectedTableKind.set($event)"
+                (click)="$event.stopPropagation()"
+              >
+                @for (opt of availableTableBlockOptions(); track opt.value) {
+                  <option [value]="opt.value">{{ opt.label }}</option>
+                }
+              </select>
+              <button type="button" class="dc-btn dc-btn--sm" (click)="addTableBlock(); $event.stopPropagation()">
+                + Таблица
+              </button>
+            </div>
+          }
+        </div>
+      }
+    </div>
   </div>
 
   <div
@@ -28,6 +58,8 @@
         class="dc-block"
         [class.dc-block--active]="activeBlockIndex() === i"
         [class.dc-block--header]="block.type === 'header'"
+        [class.dc-block--separator]="block.type === 'separator'"
+        [class.dc-block--table]="block.type === 'table'"
         role="group"
         (click)="selectBlock(i, $event)"
       >
@@ -37,12 +69,17 @@
 
         @if (activeBlockIndex() === i) {
           <div class="dc-block__toolbar" (click)="$event.stopPropagation()">
-            <button type="button" class="dc-btn dc-btn--sm" (click)="setAlign(i, 'left')" title="Влево">←</button>
-            <button type="button" class="dc-btn dc-btn--sm" (click)="setAlign(i, 'center')" title="По центру">↔</button>
-            <button type="button" class="dc-btn dc-btn--sm" (click)="setAlign(i, 'right')" title="Вправо">→</button>
             @if (block.type === 'text' || block.type === 'header') {
+              <button type="button" class="dc-btn dc-btn--sm" (click)="setAlign(i, 'left')" title="Влево">←</button>
+              <button type="button" class="dc-btn dc-btn--sm" (click)="setAlign(i, 'center')" title="По центру">↔</button>
+              <button type="button" class="dc-btn dc-btn--sm" (click)="setAlign(i, 'right')" title="Вправо">→</button>
               <button type="button" class="dc-btn dc-btn--sm" (click)="requestPlaceholder(i, $event)">
                 {{ '{{…}}' }}
+              </button>
+            }
+            @if (block.type === 'separator') {
+              <button type="button" class="dc-btn dc-btn--sm" (click)="toggleSeparatorLine(i, $event)">
+                {{ block.settings.lineHidden ? 'Показать линию' : 'Скрыть линию' }}
               </button>
             }
             <button
@@ -56,20 +93,126 @@
           </div>
         }
 
-        <div class="dc-block__body" [ngStyle]="blockStyles(block)">
-          @if (activeBlockIndex() === i && (block.type === 'text' || block.type === 'header')) {
-            <textarea
-              class="dc-block__editor"
-              rows="4"
-              [ngModel]="block.content"
-              (ngModelChange)="updateContent(i, $event)"
-              (click)="$event.stopPropagation()"
-            ></textarea>
-          } @else {
-            <div class="dc-block__preview">{{ block.content || '(пусто)' }}</div>
-          }
-        </div>
+        @if (block.type === 'table') {
+          <div class="dc-table">
+            <div class="dc-table__toolbar">
+              <span class="dc-table__title">{{ block.title || 'Таблица' }}</span>
+              @if (enablePicker() && mode() === 'instance') {
+                <div class="dc-table__actions">
+                  <button type="button" class="dc-btn dc-btn--sm" (click)="requestPicker(i, $event)">
+                    Выбрать позиции
+                  </button>
+                </div>
+              }
+            </div>
+            <table class="dc-table__grid">
+              <thead>
+                <tr>
+                  @for (col of blockTableColumns(block); track col.field) {
+                    <th [style.width]="col.width || null">{{ col.header }}</th>
+                  }
+                </tr>
+              </thead>
+              <tbody>
+                @if (blockItemRows(block).length > 0) {
+                  @for (row of blockItemRows(block); track row.item._id || row.index) {
+                    <tr>
+                      @for (col of blockTableColumns(block); track col.field) {
+                        <td
+                          [style.width]="col.width || null"
+                          [style.text-align]="col.type === 'number' || col.type === 'currency' ? 'right' : null"
+                        >
+                          {{ getItemField(row.item, col.field) }}
+                        </td>
+                      }
+                    </tr>
+                  }
+                } @else {
+                  <tr>
+                    <td>1</td>
+                    <td
+                      [attr.colspan]="blockTableColumns(block).length - 1"
+                      class="dc-table__placeholder"
+                    >
+                      @if (mode() === 'template') {
+                        Позиции добавляются при создании документа
+                      } @else {
+                        Нет позиций
+                      }
+                    </td>
+                  </tr>
+                }
+              </tbody>
+              @if (blockItemRows(block).length > 0) {
+                @let sumIdx = blockSumColumnIndex(block);
+                @let colCount = blockTableColumns(block).length;
+                <tfoot>
+                  <tr>
+                    @if (sumIdx > 0) {
+                      <td [attr.colspan]="sumIdx" class="dc-table__total-label">Итого:</td>
+                    }
+                    <td class="dc-table__total">{{ blockItemsTotal(block) | number: '1.2-2' }}</td>
+                    @if (colCount - sumIdx - 1 > 0) {
+                      <td [attr.colspan]="colCount - sumIdx - 1" aria-hidden="true"></td>
+                    }
+                  </tr>
+                </tfoot>
+              }
+            </table>
+          </div>
+        } @else if (block.type === 'separator') {
+          <div
+            class="dc-block__body dc-block__body--separator"
+            [style.padding-top.px]="block.settings.paddingTop ?? 8"
+            [style.padding-bottom.px]="block.settings.paddingBottom ?? 4"
+          >
+            @if (!block.settings.lineHidden) {
+              <hr class="dc-separator" [ngStyle]="separatorLineStyles(block)" />
+            }
+          </div>
+        } @else {
+          <div class="dc-block__body" [ngStyle]="blockStyles(block)">
+            @if (activeBlockIndex() === i && (block.type === 'text' || block.type === 'header')) {
+              <textarea
+                class="dc-block__editor"
+                rows="4"
+                [ngModel]="block.content"
+                (ngModelChange)="updateContent(i, $event)"
+                (click)="$event.stopPropagation()"
+              ></textarea>
+            } @else {
+              <div class="dc-block__preview">{{ block.content || '(пусто)' }}</div>
+            }
+          </div>
+        }
       </div>
     }
   </div>
+
+  @if (mode() === 'template') {
+    <div class="dc-bg-section">
+      <h3 class="dc-bg-section__title">Фон документа</h3>
+      @if (backgroundImage()) {
+        <div class="dc-bg-section__preview">
+          <img [src]="backgroundImage()" alt="Превью фона" />
+          <button type="button" class="dc-btn dc-btn--sm dc-btn--danger" (click)="removeBackground()">
+            Удалить фон
+          </button>
+        </div>
+      }
+      <div
+        class="dc-bg-dropzone"
+        [class.dc-bg-dropzone--active]="bgDragOver()"
+        (dragover)="onBgDragOver($event)"
+        (dragleave)="onBgDragLeave($event)"
+        (drop)="onBgDrop($event)"
+      >
+        <span>Перетащите изображение или</span>
+        <label class="dc-btn dc-btn--sm">
+          выберите файл
+          <input type="file" accept="image/*" hidden (change)="onBgFileSelected($event)" />
+        </label>
+      </div>
+    </div>
+  }
 </div>

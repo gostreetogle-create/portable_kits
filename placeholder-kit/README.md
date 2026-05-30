@@ -1,19 +1,19 @@
 # placeholder-kit
 
-> **Статус:** 📋 scaffold — реализация не начата  
+> **Статус:** ✅ v0.1 — ported from KPPDF  
 > **Паттерн упаковки:** **A**  
-> **Приоритет:** P2 · **Универсальность:** domain
+> **Приоритет:** P1 · **Универсальность:** domain
 
 ## Назначение
 
-Portable kit из KPPDF 3.0.
+Подстановка плейсхолдеров в текст и UI-пикер.
 
 | | |
 |--|--|
-| **Источник KPPDF** | `shared/placeholder/, kp-placeholder-picker` |
-| **Public API** | resolvePlaceholders(text, ctx), <ph-placeholder-picker /> |
+| **Источник KPPDF** | `shared/placeholder/`, `kp-placeholder-picker` |
+| **Public API** | `resolvePlaceholders(text, ctx)`, `<ph-placeholder-picker />` |
 | **Зависимости** | core dot-path |
-| **Префикс** | `ph-` (компоненты / CSS vars) |
+| **Префикс** | `ph-` |
 
 ## Упаковка (consumer)
 
@@ -30,10 +30,12 @@ Path alias:
 
 ## Разработка
 
+Demo и тесты через hub `schema-table-kit`:
+
 ```bash
-cd placeholder-kit
-# после реализации demo:
-npm install && npm start
+cd schema-table-kit
+npm test
+ng serve demo --port 4201
 ```
 
-Сейчас — только scaffold. См. [STATUS.md](./STATUS.md)
+См. [STATUS.md](./STATUS.md)

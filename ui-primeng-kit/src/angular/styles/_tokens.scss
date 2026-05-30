@@ -1,0 +1,68 @@
+/* Minimal KPPDF design tokens for ui-primeng-kit v0.1 */
+
+@mixin kp-light-tokens {
+  --kp-primary: #2563eb;
+  --kp-primary-hover: #1d4ed8;
+  --kp-primary-active: #1e40af;
+  --kp-primary-soft: #dbeafe;
+
+  --kp-danger: #ef4444;
+  --kp-danger-hover: #dc2626;
+  --kp-danger-soft: #fef2f2;
+
+  --kp-bg-soft: #f1f5f9;
+  --kp-bg-muted: #e2e8f0;
+  --kp-surface: #ffffff;
+  --kp-surface-hover: #f8fafc;
+
+  --kp-text: #0f172a;
+  --kp-text-secondary: #475569;
+  --kp-text-soft: #64748b;
+  --kp-text-on-primary: #ffffff;
+
+  --kp-border: #e2e8f0;
+  --kp-border-strong: #cbd5e1;
+
+  --kp-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --kp-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --kp-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --kp-shadow-premium: 0 24px 80px rgba(15, 23, 42, 0.12), 0 4px 16px rgba(15, 23, 42, 0.06);
+  --kp-shadow-premium-sm: 0 12px 48px rgba(15, 23, 42, 0.1), 0 2px 8px rgba(15, 23, 42, 0.04);
+
+  --kp-radius-xs: 4px;
+  --kp-radius-sm: 6px;
+  --kp-radius-md: 8px;
+  --kp-radius-xl: 16px;
+
+  --kp-button-border-radius: var(--kp-radius-md);
+  --kp-button-min-height-sm: 36px;
+  --kp-button-padding-y-sm: 0.4375rem;
+  --kp-button-padding-x-sm: 0.875rem;
+  --kp-button-icon-gap: var(--kp-space-2);
+
+  --kp-space-1: 4px;
+  --kp-space-2: 8px;
+  --kp-space-3: 12px;
+  --kp-space-4: 16px;
+
+  --kp-font-size-caption: 11.5px;
+  --kp-font-size-sm: 12px;
+  --kp-font-size-body: 13px;
+
+  --kp-font-weight-medium: 500;
+  --kp-line-height-body: 1.45;
+
+  --kp-control-height: 32px;
+
+  --kp-transition-fast: 100ms ease;
+  --kp-transition-base: 150ms ease;
+
+  --kp-focus-ring: 0 0 0 2px rgba(37, 99, 235, 0.4);
+  --kp-focus-ring-premium: 0 0 0 4px rgba(37, 99, 235, 0.14);
+}
+
+@mixin kp-light-tokens-on-root {
+  :root {
+    @include kp-light-tokens;
+  }
+}

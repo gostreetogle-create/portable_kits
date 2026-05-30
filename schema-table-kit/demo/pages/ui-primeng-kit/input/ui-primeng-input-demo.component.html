@@ -1,0 +1,56 @@
+<section class="ui-kit-page">
+  <nav class="ui-kit-breadcrumb">
+    <a routerLink="/">Все модули</a>
+    <span>/</span>
+    <a routerLink="/modules/ui-primeng-kit">UI-кит</a>
+    <span>/</span>
+    <span>Поле ввода</span>
+  </nav>
+
+  <h1>Поле ввода</h1>
+  <p class="ui-kit-lead"><code>up-kp-input</code> · KpInputComponent</p>
+
+  <section class="ui-kit-section">
+    <h2>Basic</h2>
+    <up-kp-input
+      label="Название"
+      name="demo-name"
+      [(value)]="name"
+      placeholder="Введите текст"
+    />
+    <p class="ui-kit-hint">Значение: {{ name() }}</p>
+  </section>
+
+  <section class="ui-kit-section">
+    <h2>Types &amp; required</h2>
+    <up-kp-input
+      label="Email"
+      name="demo-email"
+      type="email"
+      [(value)]="email"
+      placeholder="user@example.com"
+      [required]="true"
+    />
+  </section>
+
+  <section class="ui-kit-section">
+    <h2>Validation error</h2>
+    <up-kp-input
+      label="Email с ошибкой"
+      name="demo-email-error"
+      type="email"
+      [(value)]="withError"
+      error="Некорректный формат email"
+    />
+  </section>
+
+  <section class="ui-kit-section">
+    <h2>States</h2>
+    <div class="ui-kit-input-stack">
+      <up-kp-input label="Disabled" name="demo-disabled" value="Недоступно" [disabled]="true" />
+      <up-kp-input label="Readonly" name="demo-readonly" value="Только чтение" [readonly]="true" />
+      <up-kp-input label="Large" name="demo-large" placeholder="Large size" size="large" />
+      <up-kp-input label="Autofocus" name="demo-autofocus" placeholder="Фокус при открытии" [autofocus]="true" />
+    </div>
+  </section>
+</section>

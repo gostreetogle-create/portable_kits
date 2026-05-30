@@ -2,8 +2,7 @@
   <a routerLink="/" class="demo-back">← Все модули</a>
   <h1>document-canvas-kit</h1>
   <p class="demo-lead">
-    v0.1: текстовые блоки + drag-and-drop через sortable-kit. Компонент
-    <code>&lt;dc-document-canvas [(blocks)]="blocks" /&gt;</code>
+    v0.2: text/header + table + separator blocks, background image, product picker hook.
   </p>
 
   <div class="demo-actions">
@@ -14,9 +13,11 @@
 
   <dc-document-canvas
     [mode]="mode()"
-    [blocks]="blocks()"
-    (blocksChange)="onBlocksChange($event)"
+    [(blocks)]="blocks"
+    [tableItems]="tableItems()"
+    [enablePicker]="mode() === 'instance'"
     (placeholderRequested)="openPlaceholderPicker()"
+    (pickerRequested)="openProductPicker()"
   />
 
   <details class="demo-json">
@@ -24,10 +25,19 @@
     <pre>{{ blocks() | json }}</pre>
     <h3>Preview resolve</h3>
     <pre>{{ resolvedPreview() }}</pre>
+    <h3>Table items</h3>
+    <pre>{{ tableItems() | json }}</pre>
   </details>
 
   <ph-placeholder-picker
     [(visible)]="pickerVisible"
     (placeholderSelected)="onPlaceholderSelected($event)"
+  />
+
+  <ep-entity-picker
+    entityKey="products"
+    selectionMode="multiple"
+    [(visible)]="productPickerVisible"
+    (selectedMany)="onProductsPicked($event)"
   />
 </section>

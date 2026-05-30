@@ -1,0 +1,32 @@
+@use '../ui-primeng-kit-shared';
+
+.ui-kit-planned {
+  padding: 1.5rem;
+  background: var(--st-warning-bg);
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+}
+
+.ui-kit-planned__badge {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.ui-kit-planned__note {
+  color: var(--st-text-secondary);
+  font-size: 0.875rem;
+}
+
+.ui-kit-planned__back {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--st-primary);
+  text-decoration: none;
+}

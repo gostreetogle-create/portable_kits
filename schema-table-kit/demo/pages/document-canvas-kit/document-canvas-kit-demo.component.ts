@@ -1,9 +1,12 @@
 import { JsonPipe } from '@angular/common';
-import { Component, signal, viewChild } from '@angular/core';
+import { Component, effect, model, signal, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { DocumentCanvasComponent } from '@document-canvas-kit/angular';
+import { productsToTableItems } from '@quotation-editor/core';
 import { PlaceholderPickerComponent } from '@placeholder-kit/angular';
-import type { DocumentBlock } from '@document-canvas-kit/core';
+import { EntityPickerComponent } from '@entity-picker-kit/angular';
+import type { DocumentBlock, TableItem } from '@document-canvas-kit/core';
+import type { EntityPickerRow } from '@entity-picker-kit/core';
 import {
   resolvePlaceholders,
   type PlaceholderContext,
@@ -12,15 +15,23 @@ import {
 @Component({
   selector: 'demo-document-canvas-kit',
   standalone: true,
-  imports: [RouterLink, JsonPipe, DocumentCanvasComponent, PlaceholderPickerComponent],
+  imports: [
+    RouterLink,
+    JsonPipe,
+    DocumentCanvasComponent,
+    PlaceholderPickerComponent,
+    EntityPickerComponent,
+  ],
   templateUrl: './document-canvas-kit-demo.component.html',
   styleUrl: './document-canvas-kit-demo.component.scss',
 })
 export class DocumentCanvasKitDemoComponent {
   readonly canvas = viewChild.required(DocumentCanvasComponent);
 
-  readonly blocks = signal<DocumentBlock[]>([]);
+  readonly blocks = model<DocumentBlock[]>([]);
+  readonly tableItems = signal<TableItem[]>([]);
   readonly pickerVisible = signal(false);
+  readonly productPickerVisible = signal(false);
   readonly mode = signal<'template' | 'instance'>('template');
 
   readonly previewContext: PlaceholderContext = {
@@ -30,18 +41,29 @@ export class DocumentCanvasKitDemoComponent {
 
   readonly resolvedPreview = signal('');
 
-  onBlocksChange(blocks: DocumentBlock[]): void {
-    this.blocks.set(blocks);
-    const text = blocks.map((b) => b.content).join('\n---\n');
-    this.resolvedPreview.set(resolvePlaceholders(text, this.previewContext));
+  constructor() {
+    effect(() => {
+      const text = this.blocks()
+        .map((b) => b.content)
+        .join('\n---\n');
+      this.resolvedPreview.set(resolvePlaceholders(text, this.previewContext));
+    });
   }
 
   openPlaceholderPicker(): void {
     this.pickerVisible.set(true);
   }
 
+  openProductPicker(): void {
+    this.productPickerVisible.set(true);
+  }
+
   onPlaceholderSelected(token: string): void {
     this.canvas().insertPlaceholder(token);
+  }
+
+  onProductsPicked(rows: EntityPickerRow[]): void {
+    this.tableItems.update((items) => [...items, ...productsToTableItems(rows)]);
   }
 
   toggleMode(): void {

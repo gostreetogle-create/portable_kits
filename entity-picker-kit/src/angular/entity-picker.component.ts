@@ -11,7 +11,13 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import type { EntityPickerDefinition, EntityPickerRow } from '../core';
+import {
+  entityPickerRowId,
+  toggleEntityPickerSelection,
+  type EntityPickerDefinition,
+  type EntityPickerRow,
+  type EntityPickerSelectionMode,
+} from '../core';
 import { ENTITY_PICKER_KIT_CONFIG } from './tokens';
 
 @Component({
@@ -48,6 +54,9 @@ import { ENTITY_PICKER_KIT_CONFIG } from './tokens';
             <table class="ep-table">
               <thead>
                 <tr>
+                  @if (isMultiple()) {
+                    <th class="ep-table__check" aria-label="Выбор"></th>
+                  }
                   @for (col of definition()?.columns ?? []; track col.field) {
                     <th [style.width]="col.width">{{ col.header }}</th>
                   }
@@ -58,11 +67,21 @@ import { ENTITY_PICKER_KIT_CONFIG } from './tokens';
                   <tr
                     tabindex="0"
                     role="button"
-                    [class.ep-table__row--selected]="selectedId() === rowId(row)"
-                    (click)="selectRow(row)"
-                    (keydown.enter)="selectRow(row)"
-                    (dblclick)="confirmRow(row)"
+                    [class.ep-table__row--selected]="isRowSelected(row)"
+                    (click)="onRowClick(row)"
+                    (keydown.enter)="onRowClick(row)"
+                    (dblclick)="onRowDblClick(row)"
                   >
+                    @if (isMultiple()) {
+                      <td class="ep-table__check">
+                        <input
+                          type="checkbox"
+                          [checked]="isRowSelected(row)"
+                          (click)="$event.stopPropagation(); toggleRow(row)"
+                          aria-label="Выбрать строку"
+                        />
+                      </td>
+                    }
                     @for (col of definition()?.columns ?? []; track col.field) {
                       <td>{{ formatCell(row, col.field) }}</td>
                     }
@@ -74,14 +93,17 @@ import { ENTITY_PICKER_KIT_CONFIG } from './tokens';
         </div>
 
         <footer class="ep-dialog__footer">
+          @if (isMultiple() && selectedIds().size > 0) {
+            <span class="ep-dialog__count">Выбрано: {{ selectedIds().size }}</span>
+          }
           <button type="button" class="ep-btn ep-btn--secondary" (click)="close()">Отмена</button>
           <button
             type="button"
             class="ep-btn ep-btn--primary"
-            [disabled]="!selectedRow()"
+            [disabled]="!canConfirm()"
             (click)="confirmSelection()"
           >
-            Выбрать
+            {{ isMultiple() ? 'Добавить выбранные' : 'Выбрать' }}
           </button>
         </footer>
       </div>
@@ -180,6 +202,11 @@ import { ENTITY_PICKER_KIT_CONFIG } from './tokens';
       text-align: left;
     }
 
+    .ep-table__check {
+      width: 2.5rem;
+      text-align: center;
+    }
+
     .ep-table tbody tr {
       cursor: pointer;
     }
@@ -191,10 +218,17 @@ import { ENTITY_PICKER_KIT_CONFIG } from './tokens';
 
     .ep-dialog__footer {
       display: flex;
+      align-items: center;
       justify-content: flex-end;
       gap: 0.5rem;
       padding: 1rem 1.25rem;
       border-top: 1px solid var(--ep-border);
+    }
+
+    .ep-dialog__count {
+      margin-right: auto;
+      font-size: 0.875rem;
+      color: #6b7280;
     }
 
     .ep-btn {
@@ -226,14 +260,18 @@ export class EntityPickerComponent {
 
   readonly entityKey = input.required<string>();
   readonly visible = model(false);
+  /** Override entity definition selection mode. */
+  readonly selectionMode = input<EntityPickerSelectionMode | undefined>(undefined);
 
   readonly selected = output<EntityPickerRow>();
+  readonly selectedMany = output<EntityPickerRow[]>();
 
   readonly searchQuery = signal('');
   readonly rows = signal<EntityPickerRow[]>([]);
   readonly loading = signal(false);
   readonly error = signal<string | null>(null);
   readonly selectedRow = signal<EntityPickerRow | null>(null);
+  readonly selectedIds = signal<Set<string>>(new Set());
 
   readonly definition = computed(() =>
     this.config.entities.find(
@@ -241,11 +279,18 @@ export class EntityPickerComponent {
     ),
   );
 
+  readonly isMultiple = computed(() => {
+    const override = this.selectionMode();
+    if (override) return override === 'multiple';
+    return this.definition()?.selectionMode === 'multiple';
+  });
+
+  readonly idField = computed(() => this.definition()?.idField ?? '_id');
+
   readonly selectedId = computed(() => {
     const row = this.selectedRow();
-    const def = this.definition();
-    if (!row || !def) return null;
-    return String(row[def.idField ?? '_id'] ?? '');
+    if (!row) return null;
+    return entityPickerRowId(row, this.idField());
   });
 
   private readonly loadEffect = effect(() => {
@@ -268,21 +313,54 @@ export class EntityPickerComponent {
   }
 
   rowId(row: EntityPickerRow): string {
-    const def = this.definition();
-    const key = def?.idField ?? '_id';
-    return String(row[key] ?? '');
+    return entityPickerRowId(row, this.idField());
   }
 
-  selectRow(row: EntityPickerRow): void {
-    this.selectedRow.set(row);
+  isRowSelected(row: EntityPickerRow): boolean {
+    const id = this.rowId(row);
+    if (this.isMultiple()) {
+      return this.selectedIds().has(id);
+    }
+    return this.selectedId() === id;
   }
 
-  confirmRow(row: EntityPickerRow): void {
-    this.selectedRow.set(row);
-    this.confirmSelection();
+  onRowClick(row: EntityPickerRow): void {
+    if (this.isMultiple()) {
+      this.toggleRow(row);
+    } else {
+      this.selectedRow.set(row);
+    }
+  }
+
+  onRowDblClick(row: EntityPickerRow): void {
+    if (this.isMultiple()) {
+      this.toggleRow(row);
+    } else {
+      this.selectedRow.set(row);
+      this.confirmSelection();
+    }
+  }
+
+  toggleRow(row: EntityPickerRow): void {
+    const id = this.rowId(row);
+    this.selectedIds.set(toggleEntityPickerSelection(this.selectedIds(), id));
+  }
+
+  canConfirm(): boolean {
+    if (this.isMultiple()) return this.selectedIds().size > 0;
+    return !!this.selectedRow();
   }
 
   confirmSelection(): void {
+    if (this.isMultiple()) {
+      const ids = this.selectedIds();
+      const picked = this.rows().filter((row) => ids.has(this.rowId(row)));
+      if (picked.length === 0) return;
+      this.selectedMany.emit(picked);
+      this.visible.set(false);
+      return;
+    }
+
     const row = this.selectedRow();
     if (!row) return;
     this.selected.emit(row);
@@ -299,6 +377,7 @@ export class EntityPickerComponent {
     this.loading.set(false);
     this.error.set(null);
     this.selectedRow.set(null);
+    this.selectedIds.set(new Set());
   }
 
   private async loadRows(): Promise<void> {

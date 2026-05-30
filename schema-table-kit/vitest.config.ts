@@ -16,6 +16,12 @@ export default defineConfig({
       '@photo-uploader-kit/core': path.resolve(__dirname, '../photo-uploader-kit/src/core/index.ts'),
       '@placeholder-kit/core': path.resolve(__dirname, '../placeholder-kit/src/core/index.ts'),
       '@document-canvas-kit/core': path.resolve(__dirname, '../document-canvas-kit/src/core/index.ts'),
+      '@ui-primeng-kit/core': path.resolve(__dirname, '../ui-primeng-kit/src/core/index.ts'),
+      '@ui-primeng-kit/angular': path.resolve(__dirname, '../ui-primeng-kit/src/angular/index.ts'),
+      '@crud-page-kit/core': path.resolve(__dirname, '../crud-page-kit/src/core/index.ts'),
+      '@eav-kit/core': path.resolve(__dirname, '../eav-kit/src/core/index.ts'),
+      '@auth-rbac-kit/core': path.resolve(__dirname, '../auth-rbac-kit/src/core/index.ts'),
+      '@quotation-editor/core': path.resolve(__dirname, '../quotation-editor/src/core/index.ts'),
     },
   },
   test: {
