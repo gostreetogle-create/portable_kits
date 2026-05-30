@@ -1,22 +1,22 @@
 # STATUS — schema-data-table-kit
 
-| Поле | Значение |
-|------|----------|
-| Статус | 📋 scaffold |
-| Паттерн | A |
-| Приоритет | P1 |
+> **v0.1** · ported 2026-05-30 (new component; KPPDF uses `kp-table` inline)
 
-## TODO (реализация)
+## Done
 
-- [ ] Перенести логику из KPPDF: `kp-document-block-editor tables, quotation-editor customTableColumns`
-- [ ] Zero import из kppdf-3.0
-- [ ] Demo `npm start` изолированно
-- [ ] Vitest green
-- [ ] COPY-GUIDE + INTEGRATION-KPPDF.md
-- [ ] Строка в корневом README portable_kits
+- [x] `<sdt-schema-data-table [columns]="..." [rows]="..." />`
+- [x] `formatSchemaCell()` using `@schema-table-kit/core` `getFieldValue`
+- [x] `provideSchemaDataTableKit(config)`
+- [x] Demo in `schema-table-kit/demo/pages/schema-data-table-kit/`
+- [x] Unit tests
 
-## KPPDF paths для извлечения
+## Notes
 
-```
-kppdf-3.0/kp-document-block-editor tables
-```
+- KPPDF has no standalone schema-data-table — tables rendered via `kp-table` + column config.
+- v0.1: plain HTML table; sorting/pagination deferred to ui-primeng-kit / crud-page-kit.
+
+## Next
+
+- [ ] `tableKey` → resolve columns from saved TableDefinition provider
+- [ ] Sortable columns, pagination
+- [ ] Integration with document-canvas-kit table blocks

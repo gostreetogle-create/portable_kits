@@ -1,0 +1,54 @@
+.demo-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.demo-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--st-text-tertiary);
+  text-decoration: none;
+}
+
+.demo-back:hover {
+  color: var(--st-primary);
+}
+
+.demo-lead {
+  color: var(--st-text-secondary);
+  margin: 0 0 1.5rem;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 32rem;
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #fff;
+  border: 1px solid var(--st-border);
+  border-radius: 8px;
+}
+
+.task-handle {
+  color: #9ca3af;
+  user-select: none;
+}
+
+.task-title {
+  flex: 1;
+}
+
+.demo-note {
+  margin-top: 1rem;
+  color: var(--st-text-tertiary);
+  font-size: 0.875rem;
+}

@@ -1,0 +1,36 @@
+.demo-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.demo-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--st-text-tertiary);
+  text-decoration: none;
+}
+
+.demo-lead {
+  color: var(--st-text-secondary);
+}
+
+.demo-json,
+.demo-code {
+  background: #1f2937;
+  color: #e5e7eb;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  overflow: auto;
+}
+
+.demo-code {
+  white-space: pre-wrap;
+}
+
+h2 {
+  font-size: 1rem;
+  margin: 1.5rem 0 0.5rem;
+}

@@ -1,2 +1,9 @@
-/** TODO: types for schema-data-table-kit — copy/adapt from KPPDF, no imports from kppdf */
-export {};
+import type { SchemaColumn } from '@schema-table-kit/core';
+
+export interface SchemaDataTableConfig {
+  emptyMessage?: string;
+}
+
+export interface SchemaDataTableColumn extends SchemaColumn {}
+
+export type SchemaDataTableRow = Record<string, unknown>;

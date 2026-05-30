@@ -5,5 +5,13 @@
     "types": []
   },
   "files": ["demo/main.ts"],
-  "include": ["demo/**/*.ts", "src/**/*.ts"]
+  "include": [
+    "demo/**/*.ts",
+    "src/**/*.ts",
+    "../sortable-kit/src/**/*.ts",
+    "../options-resolver-kit/src/**/*.ts",
+    "../entity-picker-kit/src/**/*.ts",
+    "../schema-data-table-kit/src/**/*.ts",
+    "../crud-factory-kit/src/core/**/*.ts"
+  ]
 }

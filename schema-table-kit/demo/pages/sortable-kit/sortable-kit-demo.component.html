@@ -1,0 +1,23 @@
+<section class="demo-page">
+  <a routerLink="/" class="demo-back">← Все модули</a>
+  <h1>sortable-kit</h1>
+  <p class="demo-lead">Drag-and-drop списки на Angular CDK (обёртка из KPPDF <code>kp-sortable</code>).</p>
+
+  <div
+    soSortableList
+    [soSortableListData]="tasks()"
+    (soSortableListDropped)="onDropped($event)"
+    class="task-list"
+  >
+    @for (task of tasks(); track task.id) {
+      <div soSortableItem [soSortableItemData]="task" [soSortableLockAxis]="'y'" class="task-item">
+        <span soSortableHandle class="task-handle" aria-hidden="true">⋮⋮</span>
+        <span class="task-title">{{ task.title }}</span>
+      </div>
+    }
+  </div>
+
+  @if (lastDrop()) {
+    <p class="demo-note">{{ lastDrop() }}</p>
+  }
+</section>

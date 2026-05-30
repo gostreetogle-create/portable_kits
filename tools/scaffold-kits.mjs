@@ -161,26 +161,26 @@ const kits = [
   {
     name: 'quotation-editor',
     prefix: 'qe',
-    pattern: 'E',
-    status: 'kppdf-only',
+    pattern: 'B',
+    status: 'planned',
     priority: 'P0',
-    universal: 'no',
+    universal: 'domain',
     source: 'features/quotations/quotation-editor.component.ts',
-    publicApi: '— не portable kit',
-    deps: 'KPPDF product',
-    kppdfOnly: true,
+    publicApi: '<qe-quotation-editor ... /> (TBD)',
+    deps: 'schema-data-table-kit, document-canvas-kit (TBD)',
+    kppdfOnly: false,
   },
   {
     name: 'layout-shell-kit',
     prefix: 'ls',
-    pattern: 'E',
-    status: 'kppdf-only',
+    pattern: 'B',
+    status: 'planned',
     priority: 'P3',
-    universal: 'no',
+    universal: 'high',
     source: 'layout/*, menu, kp-breadcrumbs ROUTE_LABELS',
-    publicApi: '— не portable kit',
-    deps: 'KPPDF IA + RBAC',
-    kppdfOnly: true,
+    publicApi: '<ls-app-shell ... />, menu, breadcrumbs (TBD)',
+    deps: 'auth-rbac-kit (TBD)',
+    kppdfOnly: false,
   },
 ];
 
@@ -216,23 +216,6 @@ function pkgJson(name, desc) {
 }
 
 function readme(k) {
-  if (k.kppdfOnly) {
-    return `# ${k.name}
-
-**🔒 KPPDF-only — не portable kit**
-
-| | |
-|--|--|
-| Источник KPPDF | \`${k.source}\` |
-| Паттерн | **E** — остаётся в kppdf-3.0 |
-| Универсальность | ${k.universal} |
-
-Эту папку **не копируют** в другие проекты. Служит напоминанием в каталоге portable_kits.
-
-См. [docs/KPPDF-MODULES-CHECKLIST.md](../docs/KPPDF-MODULES-CHECKLIST.md)
-`;
-  }
-
   return `# ${k.name}
 
 > **Статус:** ${k.status === 'planned' ? '📋 scaffold — реализация не начата' : k.status}  
@@ -276,7 +259,6 @@ npm install && npm start
 }
 
 function copyGuide(k) {
-  if (k.kppdfOnly) return '';
   return `# COPY-GUIDE — ${k.name}
 
 ## Copy в consumer
@@ -305,7 +287,7 @@ function statusMd(k) {
 
 | Поле | Значение |
 |------|----------|
-| Статус | ${k.kppdfOnly ? '🔒 kppdf-only' : '📋 scaffold'} |
+| Статус | 📋 scaffold |
 | Паттерн | ${k.pattern} |
 | Приоритет | ${k.priority} |
 
@@ -338,69 +320,67 @@ function writeKit(k) {
   writeFileSync(join(root, 'README.md'), readme(k));
   writeFileSync(join(root, 'STATUS.md'), statusMd(k));
 
-  if (!k.kppdfOnly) {
-    writeFileSync(join(root, 'COPY-GUIDE.md'), copyGuide(k));
+  writeFileSync(join(root, 'COPY-GUIDE.md'), copyGuide(k));
+  writeFileSync(
+    join(root, 'QUICKSTART.md'),
+    `# QUICKSTART — ${k.name}\n\nScaffold. После реализации: \`npm install && npm start\`.\n`,
+  );
+  writeFileSync(
+    join(root, 'INTEGRATION-KPPDF.md'),
+    `# INTEGRATION-KPPDF — ${k.name}\n\nBacklog. Подключать в KPPDF только после ✅ demo + tests.\n\nИсточник: \`${k.source}\`\n`,
+  );
+  writeFileSync(join(root, 'package.json'), pkgJson(k.name, `Portable kit: ${k.name} (scaffold)`));
+
+  if (hasCore(k.pattern) || k.pattern.includes('D')) {
+    mkdirSync(join(root, 'src', 'core'), { recursive: true });
     writeFileSync(
-      join(root, 'QUICKSTART.md'),
-      `# QUICKSTART — ${k.name}\n\nScaffold. После реализации: \`npm install && npm start\`.\n`,
+      join(root, 'src', 'core', 'types.ts'),
+      `/** TODO: types for ${k.name} — copy/adapt from KPPDF, no imports from kppdf */\nexport {};\n`,
     );
     writeFileSync(
-      join(root, 'INTEGRATION-KPPDF.md'),
-      `# INTEGRATION-KPPDF — ${k.name}\n\nBacklog. Подключать в KPPDF только после ✅ demo + tests.\n\nИсточник: \`${k.source}\`\n`,
-    );
-    writeFileSync(join(root, 'package.json'), pkgJson(k.name, `Portable kit: ${k.name} (scaffold)`));
-
-    if (hasCore(k.pattern) || k.pattern.includes('D')) {
-      mkdirSync(join(root, 'src', 'core'), { recursive: true });
-      writeFileSync(
-        join(root, 'src', 'core', 'types.ts'),
-        `/** TODO: types for ${k.name} — copy/adapt from KPPDF, no imports from kppdf */\nexport {};\n`,
-      );
-      writeFileSync(
-        join(root, 'src', 'core', 'index.ts'),
-        `export * from './types';\n`,
-      );
-    }
-
-    if (k.pattern.includes('B') || k.pattern.includes('D') || k.pattern.includes('A')) {
-      mkdirSync(join(root, 'src', 'angular'), { recursive: true });
-      writeFileSync(
-        join(root, 'src', 'angular', 'index.ts'),
-        `/** TODO: ${k.publicApi} */\nexport {};\n`,
-      );
-    }
-
-    if (hasExpress(k.pattern)) {
-      mkdirSync(join(root, 'src', 'express'), { recursive: true });
-      writeFileSync(
-        join(root, 'src', 'express', 'index.ts'),
-        `/** TODO: Express adapter for ${k.name} */\nexport {};\n`,
-      );
-    }
-
-    const barrel = [];
-    if (hasCore(k.pattern) || k.pattern.includes('D')) barrel.push(`export * from './core/index';`);
-    if (k.pattern.includes('B') || k.pattern.includes('D') || k.pattern.includes('A'))
-      barrel.push(`export * from './angular/index';`);
-    if (hasExpress(k.pattern)) barrel.push(`export * from './express/index';`);
-    writeFileSync(join(root, 'src', 'index.ts'), `/** Public barrel — ${k.name} */\n${barrel.join('\n')}\n`);
-
-    mkdirSync(join(root, 'demo'), { recursive: true });
-    writeFileSync(
-      join(root, 'demo', 'README.md'),
-      `# Demo — ${k.name}\n\nTODO: isolated Angular demo (no KPPDF).\n`,
-    );
-
-    mkdirSync(join(root, 'tests'), { recursive: true });
-    writeFileSync(
-      join(root, 'tests', 'scaffold.spec.ts'),
-      `import { describe, it, expect } from 'vitest';\n\ndescribe('${k.name}', () => {\n  it('scaffold placeholder', () => {\n    expect(true).toBe(true);\n  });\n});\n`,
-    );
-    writeFileSync(
-      join(root, 'vitest.config.ts'),
-      `import { defineConfig } from 'vitest/config';\nexport default defineConfig({ test: { include: ['tests/**/*.spec.ts'] } });\n`,
+      join(root, 'src', 'core', 'index.ts'),
+      `export * from './types';\n`,
     );
   }
+
+  if (k.pattern.includes('B') || k.pattern.includes('D') || k.pattern.includes('A')) {
+    mkdirSync(join(root, 'src', 'angular'), { recursive: true });
+    writeFileSync(
+      join(root, 'src', 'angular', 'index.ts'),
+      `/** TODO: ${k.publicApi} */\nexport {};\n`,
+    );
+  }
+
+  if (hasExpress(k.pattern)) {
+    mkdirSync(join(root, 'src', 'express'), { recursive: true });
+    writeFileSync(
+      join(root, 'src', 'express', 'index.ts'),
+      `/** TODO: Express adapter for ${k.name} */\nexport {};\n`,
+    );
+  }
+
+  const barrel = [];
+  if (hasCore(k.pattern) || k.pattern.includes('D')) barrel.push(`export * from './core/index';`);
+  if (k.pattern.includes('B') || k.pattern.includes('D') || k.pattern.includes('A'))
+    barrel.push(`export * from './angular/index';`);
+  if (hasExpress(k.pattern)) barrel.push(`export * from './express/index';`);
+  writeFileSync(join(root, 'src', 'index.ts'), `/** Public barrel — ${k.name} */\n${barrel.join('\n')}\n`);
+
+  mkdirSync(join(root, 'demo'), { recursive: true });
+  writeFileSync(
+    join(root, 'demo', 'README.md'),
+    `# Demo — ${k.name}\n\nTODO: isolated Angular demo (no KPPDF).\n`,
+  );
+
+  mkdirSync(join(root, 'tests'), { recursive: true });
+  writeFileSync(
+    join(root, 'tests', 'scaffold.spec.ts'),
+    `import { describe, it, expect } from 'vitest';\n\ndescribe('${k.name}', () => {\n  it('scaffold placeholder', () => {\n    expect(true).toBe(true);\n  });\n});\n`,
+  );
+  writeFileSync(
+    join(root, 'vitest.config.ts'),
+    `import { defineConfig } from 'vitest/config';\nexport default defineConfig({ test: { include: ['tests/**/*.spec.ts'] } });\n`,
+  );
 }
 
 mkdirSync(OUT, { recursive: true });

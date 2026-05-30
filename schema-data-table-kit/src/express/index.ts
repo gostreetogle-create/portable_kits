@@ -1,2 +1,2 @@
-/** TODO: Express adapter for schema-data-table-kit */
+/** Express adapter placeholder — schema-data-table-kit is Angular-first. */
 export {};

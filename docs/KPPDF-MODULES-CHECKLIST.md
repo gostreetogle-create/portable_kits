@@ -1,6 +1,7 @@
 # Чеклист portable-модулей из KPPDF 3.0
 
-Все kits — **папки в корне `portable_kits/`** (без промежуточных `_kits-batch` и т.п.).
+Все kits — **универсальные переносимые модули** в корне `portable_kits/` (без промежуточных `_kits-batch` и т.п.).  
+KPPDF — один из возможных источников для извлечения кода, не единственный consumer и не отдельная категория kit'ов.
 
 | # | Kit | Статус | Паттерн | Copy | Универсальность |
 |---|-----|--------|---------|------|-----------------|
@@ -17,8 +18,8 @@
 | 11 | ui-primeng-kit | 📋 scaffold | B | `src/` | high |
 | 12 | auth-rbac-kit | 📋 scaffold | CD | `src/` | low |
 | 13 | eav-kit | 📋 scaffold | A | `src/` | domain |
-| 14 | quotation-editor | 🔒 kppdf-only | E | — | no |
-| 15 | layout-shell-kit | 🔒 kppdf-only | E | — | no |
+| 14 | quotation-editor | 📋 scaffold | B | `src/` | domain |
+| 15 | layout-shell-kit | 📋 scaffold | B | `src/` | high |
 
 ## Паттерны упаковки
 
@@ -28,7 +29,7 @@
 | **B** | angular + demo | `src/` |
 | **C** | core + express | `src/` |
 | **D** | core + angular (services) | `src/` |
-| **E** | README only | не copy |
+| **E** | README only (legacy) | не copy |
 
 ## Порядок разработки
 

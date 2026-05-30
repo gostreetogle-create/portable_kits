@@ -2,8 +2,8 @@
 
 | Поле | Значение |
 |------|----------|
-| Статус | 🔒 kppdf-only |
-| Паттерн | E |
+| Статус | 📋 scaffold — в разработке |
+| Паттерн | B |
 | Приоритет | P0 |
 
 ## TODO (реализация)
@@ -15,7 +15,7 @@
 - [ ] COPY-GUIDE + INTEGRATION-KPPDF.md
 - [ ] Строка в корневом README portable_kits
 
-## KPPDF paths для извлечения
+## Источник для извлечения
 
 ```
 kppdf-3.0/features/quotations/quotation-editor.component.ts

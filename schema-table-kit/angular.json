@@ -17,7 +17,7 @@
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.demo.json",
             "inlineStyleLanguage": "scss",
-            "styles": ["demo/styles.scss"],
+            "styles": ["demo/styles.scss", "../sortable-kit/src/angular/sortable.scss"],
             "scripts": []
           },
           "configurations": {

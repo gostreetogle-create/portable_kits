@@ -1,0 +1,17 @@
+<section class="demo-page">
+  <a routerLink="/" class="demo-back">← Все модули</a>
+  <h1>entity-picker-kit</h1>
+  <p class="demo-lead">Модальное окно выбора сущности по ключу (упрощённый порт из KPPDF product-picker).</p>
+
+  <button type="button" class="demo-btn" (click)="openPicker()">Выбрать товар</button>
+
+  @if (selected(); as row) {
+    <pre class="demo-json">{{ selected() | json }}</pre>
+  }
+
+  <ep-entity-picker
+    entityKey="products"
+    [(visible)]="pickerVisible"
+    (selected)="onSelected($event)"
+  />
+</section>

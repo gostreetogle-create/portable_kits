@@ -1,22 +1,22 @@
 # STATUS — options-resolver-kit
 
-| Поле | Значение |
-|------|----------|
-| Статус | 📋 scaffold |
-| Паттерн | D |
-| Приоритет | P3 |
+> **v0.1** · ported 2026-05-30 from KPPDF `shared/services/*-options.service.ts`
 
-## TODO (реализация)
+## Done
 
-- [ ] Перенести логику из KPPDF: `shared/services/*-options.service.ts`
-- [ ] Zero import из kppdf-3.0
-- [ ] Demo `npm start` изолированно
-- [ ] Vitest green
-- [ ] COPY-GUIDE + INTEGRATION-KPPDF.md
-- [ ] Строка в корневом README portable_kits
+- [x] `OptionsResolver` service with cache
+- [x] `provideOptionsResolver(config)`
+- [x] Core types: `SelectOption`, `EntityOptionsDefinition`
+- [x] Demo in `schema-table-kit/demo/pages/options-resolver-kit/`
+- [x] Unit tests (scaffold)
 
-## KPPDF paths для извлечения
+## Notes
 
-```
-kppdf-3.0/shared/services/*-options.service.ts
-```
+- Generalizes per-entity `*OptionsService` pattern into config-driven resolver.
+- Loaders are async functions — consumer wires HttpClient/CrudApi internally.
+
+## Next
+
+- [ ] HttpClient-backed default loader helper
+- [ ] `patchColumnOptions()` util from `crud-column-options.util.ts`
+- [ ] Domain-specific loaders (products, users, …) as optional presets

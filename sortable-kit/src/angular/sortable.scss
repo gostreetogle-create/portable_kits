@@ -1,0 +1,37 @@
+.so-sortable-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.so-sortable-item {
+  &.cdk-drag-preview {
+    box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+    opacity: 0.95;
+    background: var(--so-surface, #fff);
+    border-radius: 6px;
+  }
+
+  &.cdk-drag-placeholder {
+    opacity: 0.35;
+    border: 1px dashed var(--so-primary, #2563eb);
+    border-radius: 6px;
+    min-height: 24px;
+  }
+
+  &.cdk-drag-animating {
+    transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.so-sortable-handle {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+.cdk-drop-list-dragging .so-sortable-item:not(.cdk-drag-placeholder) {
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}

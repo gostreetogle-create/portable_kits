@@ -1,0 +1,36 @@
+.demo-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.demo-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--st-text-tertiary);
+  text-decoration: none;
+}
+
+.demo-lead {
+  color: var(--st-text-secondary);
+}
+
+.demo-btn {
+  padding: 0.625rem 1rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--st-primary);
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.demo-json {
+  background: #1f2937;
+  color: #e5e7eb;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  overflow: auto;
+}

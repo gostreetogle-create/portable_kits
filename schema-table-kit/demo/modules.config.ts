@@ -6,8 +6,10 @@ export interface DemoModule {
   subtitle: string;
   description: string;
   route: string;
-  /** false — карточка видна, но переход недоступен (модуль в разработке) */
+  /** false — карточка видна, но переход недоступен (устарело: используйте hasDemo) */
   available: boolean;
+  /** true — есть рабочее demo; false — страница-заглушка «в разработке» */
+  hasDemo?: boolean;
 }
 
 /** Реестр demo-модулей. Чтобы добавить новый — допишите объект в массив и зарегистрируйте route в app.routes.ts */
@@ -20,6 +22,7 @@ export const DEMO_MODULES: DemoModule[] = [
       'Единый config таблиц БД + конструктор колонок для Angular (+ optional Express schema API)',
     route: '/modules/schema-table-kit',
     available: true,
+    hasDemo: true,
   },
   {
     id: 'schema-data-table-kit',
@@ -28,7 +31,8 @@ export const DEMO_MODULES: DemoModule[] = [
     description:
       'Таблица данных по schema-table config: <sdt-schema-data-table tableKey="..." [rows]="..." />',
     route: '/modules/schema-data-table-kit',
-    available: false,
+    available: true,
+    hasDemo: true,
   },
   {
     id: 'entity-picker-kit',
@@ -37,7 +41,8 @@ export const DEMO_MODULES: DemoModule[] = [
     description:
       'Модальное окно выбора сущности по ключу: <ep-entity-picker entityKey="..." [(visible)]="v" (selected)="onPick($event)" />',
     route: '/modules/entity-picker-kit',
-    available: false,
+    available: true,
+    hasDemo: true,
   },
   {
     id: 'document-canvas-kit',
@@ -46,7 +51,8 @@ export const DEMO_MODULES: DemoModule[] = [
     description:
       'Редактор блоков документа (шаблон или экземпляр): <dc-document-canvas mode="instance|template" [(blocks)]="blocks" />',
     route: '/modules/document-canvas-kit',
-    available: false,
+    available: true,
+    hasDemo: false,
   },
   {
     id: 'photo-uploader-kit',
@@ -54,7 +60,8 @@ export const DEMO_MODULES: DemoModule[] = [
     subtitle: 'photo-uploader-kit',
     description: 'Загрузка и управление фотографиями: <pu-photo-uploader [(photos)]="photos" />',
     route: '/modules/photo-uploader-kit',
-    available: false,
+    available: true,
+    hasDemo: false,
   },
   {
     id: 'sortable-kit',
@@ -63,7 +70,8 @@ export const DEMO_MODULES: DemoModule[] = [
     description:
       'Drag-and-drop списки без Angular CDK: soSortableList, soSortableItem, soSortableHandle, moveSortableItems()',
     route: '/modules/sortable-kit',
-    available: false,
+    available: true,
+    hasDemo: true,
   },
   {
     id: 'placeholder-kit',
@@ -72,7 +80,8 @@ export const DEMO_MODULES: DemoModule[] = [
     description:
       'Подстановка плейсхолдеров в текст и UI-пикер: resolvePlaceholders(text, ctx), <ph-placeholder-picker />',
     route: '/modules/placeholder-kit',
-    available: false,
+    available: true,
+    hasDemo: false,
   },
   {
     id: 'crud-page-kit',
@@ -81,7 +90,8 @@ export const DEMO_MODULES: DemoModule[] = [
     description:
       'Универсальная CRUD-страница Angular: <cp-crud-page [config]="cfg" />, CrudStore, provideCrudPageKit()',
     route: '/modules/crud-page-kit',
-    available: false,
+    available: true,
+    hasDemo: false,
   },
   {
     id: 'crud-factory-kit',
@@ -90,7 +100,8 @@ export const DEMO_MODULES: DemoModule[] = [
     description:
       'Express CRUD-роутер из Mongoose-модели: createCrudRouter(model, { permPrefix, ... })',
     route: '/modules/crud-factory-kit',
-    available: false,
+    available: true,
+    hasDemo: true,
   },
   {
     id: 'options-resolver-kit',
@@ -99,7 +110,8 @@ export const DEMO_MODULES: DemoModule[] = [
     description:
       'Кэш и загрузка опций для select/autocomplete: provideOptionsResolver(config), OptionsResolver.getOptions(entityKey)',
     route: '/modules/options-resolver-kit',
-    available: false,
+    available: true,
+    hasDemo: true,
   },
   {
     id: 'ui-primeng-kit',
@@ -108,7 +120,8 @@ export const DEMO_MODULES: DemoModule[] = [
     description:
       'Обёртки PrimeNG (кнопки, поля, таблицы, диалоги): KpButton, KpInput, KpTable, KpDialog, barrel export',
     route: '/modules/ui-primeng-kit',
-    available: false,
+    available: true,
+    hasDemo: false,
   },
   {
     id: 'auth-rbac-kit',
@@ -117,7 +130,8 @@ export const DEMO_MODULES: DemoModule[] = [
     description:
       'JWT, guards и проверка прав: provideAuthRbacKit(), hasPermission(), createAuthMiddleware()',
     route: '/modules/auth-rbac-kit',
-    available: false,
+    available: true,
+    hasDemo: false,
   },
   {
     id: 'eav-kit',
@@ -126,7 +140,8 @@ export const DEMO_MODULES: DemoModule[] = [
     description:
       'Редактор EAV-атрибутов сущности: <eav-attribute-editor entityKey="..." />, EavSchemaProvider',
     route: '/modules/eav-kit',
-    available: false,
+    available: true,
+    hasDemo: false,
   },
   {
     id: 'quotation-editor',
@@ -135,7 +150,8 @@ export const DEMO_MODULES: DemoModule[] = [
     description:
       'Редактор коммерческих предложений: строки, таблицы, расчёты и экспорт документа',
     route: '/modules/quotation-editor',
-    available: false,
+    available: true,
+    hasDemo: false,
   },
   {
     id: 'layout-shell-kit',
@@ -144,6 +160,11 @@ export const DEMO_MODULES: DemoModule[] = [
     description:
       'Оболочка приложения: боковое меню, layout, хлебные крошки и метки маршрутов',
     route: '/modules/layout-shell-kit',
-    available: false,
+    available: true,
+    hasDemo: false,
   },
 ];
+
+export function getDemoModuleById(id: string): DemoModule | undefined {
+  return DEMO_MODULES.find((m) => m.id === id);
+}

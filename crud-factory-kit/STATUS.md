@@ -1,22 +1,22 @@
 # STATUS — crud-factory-kit
 
-| Поле | Значение |
-|------|----------|
-| Статус | 📋 scaffold |
-| Паттерн | C |
-| Приоритет | P2 |
+> **v0.1** · ported 2026-05-30 from KPPDF `backend/src/utils/crud-factory.ts`
 
-## TODO (реализация)
+## Done
 
-- [ ] Перенести логику из KPPDF: `backend/src/utils/crud-factory.ts`
-- [ ] Zero import из kppdf-3.0
-- [ ] Demo `npm start` изолированно
-- [ ] Vitest green
-- [ ] COPY-GUIDE + INTEGRATION-KPPDF.md
-- [ ] Строка в корневом README portable_kits
+- [x] `createCrudRouter(model, options)` — LIST/GET/CREATE/UPDATE/DELETE
+- [x] `success()`, `paginated()`, `error()` helpers
+- [x] Pluggable `authenticate` / `requirePermission` (no hard KPPDF deps)
+- [x] Demo in `schema-table-kit/demo/pages/crud-factory-kit/`
+- [x] Unit tests for api-response helpers
 
-## KPPDF paths для извлечения
+## Notes
 
-```
-kppdf-3.0/backend/src/utils/crud-factory.ts
-```
+- Express + Mongoose-compatible model interface (peer deps).
+- Auth middleware injected via options instead of importing KPPDF `auth`/`permission`.
+
+## Next
+
+- [ ] Integration test with mock Express + in-memory model
+- [ ] Optional demo Express server (like schema-table-kit `demo-server/`)
+- [ ] Soft-delete / bulk hooks from KPPDF extensions

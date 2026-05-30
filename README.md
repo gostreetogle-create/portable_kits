@@ -34,8 +34,8 @@ portable_kits/
 | [ui-primeng-kit](./ui-primeng-kit/) | 📋 scaffold | B | `src/` |
 | [auth-rbac-kit](./auth-rbac-kit/) | 📋 scaffold | CD | `src/` |
 | [eav-kit](./eav-kit/) | 📋 scaffold | A | `src/` |
-| [quotation-editor](./quotation-editor/) | 🔒 kppdf-only | E | — |
-| [layout-shell-kit](./layout-shell-kit/) | 🔒 kppdf-only | E | — |
+| [quotation-editor](./quotation-editor/) | 📋 scaffold | B | `src/` |
+| [layout-shell-kit](./layout-shell-kit/) | 📋 scaffold | B | `src/` |
 
 Чеклист: [docs/KPPDF-MODULES-CHECKLIST.md](./docs/KPPDF-MODULES-CHECKLIST.md)
 

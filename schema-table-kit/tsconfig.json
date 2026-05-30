@@ -18,9 +18,20 @@
     "lib": ["ES2022", "dom"],
     "baseUrl": ".",
     "paths": {
+      "tslib": ["node_modules/tslib"],
+      "@angular/cdk/drag-drop": ["node_modules/@angular/cdk/types/drag-drop.d.ts"],
       "@schema-table-kit/core": ["src/core/index.ts"],
       "@schema-table-kit/angular": ["src/angular/index.ts"],
-      "@schema-table-kit/express": ["src/express/index.ts"]
+      "@schema-table-kit/express": ["src/express/index.ts"],
+      "@sortable-kit/angular": ["../sortable-kit/src/angular/index.ts"],
+      "@options-resolver-kit/core": ["../options-resolver-kit/src/core/index.ts"],
+      "@options-resolver-kit/angular": ["../options-resolver-kit/src/angular/index.ts"],
+      "@entity-picker-kit/core": ["../entity-picker-kit/src/core/index.ts"],
+      "@entity-picker-kit/angular": ["../entity-picker-kit/src/angular/index.ts"],
+      "@schema-data-table-kit/core": ["../schema-data-table-kit/src/core/index.ts"],
+      "@schema-data-table-kit/angular": ["../schema-data-table-kit/src/angular/index.ts"],
+      "@crud-factory-kit/core": ["../crud-factory-kit/src/core/index.ts"],
+      "@crud-factory-kit/express": ["../crud-factory-kit/src/express/index.ts"]
     }
   },
   "angularCompilerOptions": {

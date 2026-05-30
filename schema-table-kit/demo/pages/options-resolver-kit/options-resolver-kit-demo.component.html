@@ -1,0 +1,23 @@
+<section class="demo-page">
+  <a routerLink="/" class="demo-back">← Все модули</a>
+  <h1>options-resolver-kit</h1>
+  <p class="demo-lead">Кэшированная загрузка опций для select/autocomplete по entityKey.</p>
+
+  <div class="demo-actions">
+    <button type="button" (click)="loadOptions('managers')">Менеджеры</button>
+    <button type="button" (click)="loadOptions('categories')">Категории</button>
+    <button type="button" (click)="reload()">Сбросить кэш и перезагрузить</button>
+  </div>
+
+  @if (loading()) {
+    <p class="demo-status">Загрузка…</p>
+  } @else if (error()) {
+    <p class="demo-status demo-status--error">{{ error() }}</p>
+  } @else {
+    <ul class="demo-options">
+      @for (opt of options(); track opt.value) {
+        <li><strong>{{ opt.label }}</strong> <span>{{ opt.value }}</span></li>
+      }
+    </ul>
+  }
+</section>
