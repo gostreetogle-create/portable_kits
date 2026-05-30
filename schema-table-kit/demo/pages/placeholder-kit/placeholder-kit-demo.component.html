@@ -1,0 +1,30 @@
+<section class="demo-page">
+  <a routerLink="/" class="demo-back">← Все модули</a>
+  <h1>placeholder-kit</h1>
+  <p class="demo-lead">
+    Подстановка <code>{{ tokenExample }}</code> и UI-пикер
+    <code>&lt;ph-placeholder-picker /&gt;</code>
+  </p>
+
+  <label class="demo-field">
+    <span>Шаблон</span>
+    <textarea rows="3" [value]="template()" (input)="onTemplateInput($any($event.target).value)"></textarea>
+  </label>
+
+  <button type="button" class="demo-btn" (click)="openPicker()">Вставить плейсхолдер…</button>
+
+  <div class="demo-output">
+    <h3>resolvePlaceholders()</h3>
+    <pre>{{ resolved() }}</pre>
+  </div>
+
+  <div class="demo-output">
+    <h3>wrapPlaceholderDisplay()</h3>
+    <div class="demo-html" [innerHTML]="displayHtml()"></div>
+  </div>
+
+  <ph-placeholder-picker
+    [(visible)]="pickerVisible"
+    (placeholderSelected)="onPlaceholderSelected($event)"
+  />
+</section>

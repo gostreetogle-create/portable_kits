@@ -13,6 +13,9 @@ export default defineConfig({
       '@crud-factory-kit/core': path.resolve(__dirname, '../crud-factory-kit/src/core/index.ts'),
       '@crud-factory-kit/express': path.resolve(__dirname, '../crud-factory-kit/src/express/index.ts'),
       '@schema-data-table-kit/core': path.resolve(__dirname, '../schema-data-table-kit/src/core/index.ts'),
+      '@photo-uploader-kit/core': path.resolve(__dirname, '../photo-uploader-kit/src/core/index.ts'),
+      '@placeholder-kit/core': path.resolve(__dirname, '../placeholder-kit/src/core/index.ts'),
+      '@document-canvas-kit/core': path.resolve(__dirname, '../document-canvas-kit/src/core/index.ts'),
     },
   },
   test: {

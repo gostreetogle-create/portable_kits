@@ -1,0 +1,33 @@
+<section class="demo-page">
+  <a routerLink="/" class="demo-back">← Все модули</a>
+  <h1>document-canvas-kit</h1>
+  <p class="demo-lead">
+    v0.1: текстовые блоки + drag-and-drop через sortable-kit. Компонент
+    <code>&lt;dc-document-canvas [(blocks)]="blocks" /&gt;</code>
+  </p>
+
+  <div class="demo-actions">
+    <button type="button" (click)="toggleMode()">
+      Режим: {{ mode() === 'template' ? 'шаблон' : 'экземпляр' }}
+    </button>
+  </div>
+
+  <dc-document-canvas
+    [mode]="mode()"
+    [blocks]="blocks()"
+    (blocksChange)="onBlocksChange($event)"
+    (placeholderRequested)="openPlaceholderPicker()"
+  />
+
+  <details class="demo-json">
+    <summary>Блоки (JSON) + preview с плейсхолдерами</summary>
+    <pre>{{ blocks() | json }}</pre>
+    <h3>Preview resolve</h3>
+    <pre>{{ resolvedPreview() }}</pre>
+  </details>
+
+  <ph-placeholder-picker
+    [(visible)]="pickerVisible"
+    (placeholderSelected)="onPlaceholderSelected($event)"
+  />
+</section>

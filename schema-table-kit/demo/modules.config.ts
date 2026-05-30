@@ -52,7 +52,7 @@ export const DEMO_MODULES: DemoModule[] = [
       'Редактор блоков документа (шаблон или экземпляр): <dc-document-canvas mode="instance|template" [(blocks)]="blocks" />',
     route: '/modules/document-canvas-kit',
     available: true,
-    hasDemo: false,
+    hasDemo: true,
   },
   {
     id: 'photo-uploader-kit',
@@ -61,7 +61,7 @@ export const DEMO_MODULES: DemoModule[] = [
     description: 'Загрузка и управление фотографиями: <pu-photo-uploader [(photos)]="photos" />',
     route: '/modules/photo-uploader-kit',
     available: true,
-    hasDemo: false,
+    hasDemo: true,
   },
   {
     id: 'sortable-kit',
@@ -81,7 +81,7 @@ export const DEMO_MODULES: DemoModule[] = [
       'Подстановка плейсхолдеров в текст и UI-пикер: resolvePlaceholders(text, ctx), <ph-placeholder-picker />',
     route: '/modules/placeholder-kit',
     available: true,
-    hasDemo: false,
+    hasDemo: true,
   },
   {
     id: 'crud-page-kit',

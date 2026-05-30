@@ -5,6 +5,9 @@ import { provideSchemaTableKit } from '../src/angular';
 import { provideEntityPickerKit } from '@entity-picker-kit/angular';
 import { provideOptionsResolver } from '@options-resolver-kit/angular';
 import { provideSchemaDataTableKit } from '@schema-data-table-kit/angular';
+import { providePhotoUploaderKit } from '@photo-uploader-kit/angular';
+import { providePlaceholderKit } from '@placeholder-kit/angular';
+import { provideDocumentCanvasKit } from '@document-canvas-kit/angular';
 import { appRoutes } from './app.routes';
 import { demoEnvironment } from './environment';
 import { MOCK_SCHEMA_CONFIG } from './mock-data/schema-tables.config';
@@ -24,5 +27,8 @@ export const appConfig: ApplicationConfig = {
     provideEntityPickerKit(DEMO_ENTITY_PICKER_CONFIG),
     provideOptionsResolver(DEMO_OPTIONS_RESOLVER_CONFIG),
     provideSchemaDataTableKit({ emptyMessage: 'Нет строк для отображения' }),
+    providePhotoUploaderKit(),
+    providePlaceholderKit(),
+    provideDocumentCanvasKit(),
   ],
 };

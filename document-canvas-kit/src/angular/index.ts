@@ -1,2 +1,2 @@
-/** TODO: <dc-document-canvas mode="instance|template" [(blocks)]="blocks" /> */
-export {};
+export { DocumentCanvasComponent } from './document-canvas.component';
+export { provideDocumentCanvasKit, DOCUMENT_CANVAS_KIT_CONFIG } from './provide-document-canvas-kit';

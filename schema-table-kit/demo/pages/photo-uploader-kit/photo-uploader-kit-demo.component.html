@@ -1,0 +1,19 @@
+<section class="demo-page">
+  <a routerLink="/" class="demo-back">← Все модули</a>
+  <h1>photo-uploader-kit</h1>
+  <p class="demo-lead">
+    Загрузка фото: drag-and-drop, URL, рамка и масштаб. Компонент
+    <code>&lt;pu-photo-uploader [(photos)]="photos" /&gt;</code>
+  </p>
+
+  <pu-photo-uploader
+    label="Фотографии товара"
+    [photos]="photos()"
+    (photosChange)="onPhotosChange($event)"
+  />
+
+  <details class="demo-json">
+    <summary>JSON модели</summary>
+    <pre>{{ jsonPreview() }}</pre>
+  </details>
+</section>

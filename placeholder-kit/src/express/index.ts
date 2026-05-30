@@ -1,2 +1,2 @@
-/** TODO: Express adapter for placeholder-kit */
+/** Express stub — placeholder resolution is client-side only. */
 export {};

@@ -1,0 +1,71 @@
+.demo-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.demo-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--st-text-tertiary);
+  text-decoration: none;
+}
+
+.demo-lead {
+  color: var(--st-text-secondary);
+}
+
+.demo-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+
+  textarea {
+    padding: 0.5rem;
+    border: 1px solid var(--st-border);
+    border-radius: 6px;
+    font-family: ui-monospace, monospace;
+  }
+}
+
+.demo-btn {
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--st-border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  margin-bottom: 1.25rem;
+}
+
+.demo-output {
+  margin-bottom: 1rem;
+
+  h3 {
+    font-size: 0.875rem;
+    margin: 0 0 0.375rem;
+    color: var(--st-text-secondary);
+  }
+
+  pre {
+    padding: 0.75rem;
+    background: #f3f4f6;
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    white-space: pre-wrap;
+  }
+}
+
+:host ::ng-deep .ph-resolved {
+  background: #dcfce7;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+:host ::ng-deep .ph-unresolved {
+  background: #fef3c7;
+  padding: 0 2px;
+  border-radius: 2px;
+}

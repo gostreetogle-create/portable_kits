@@ -1,22 +1,26 @@
 # STATUS — placeholder-kit
 
-| Поле | Значение |
-|------|----------|
-| Статус | 📋 scaffold |
-| Паттерн | A |
-| Приоритет | P2 |
+> **v0.1** · ported 2026-05-30 from KPPDF `shared/placeholder/` + `kp-placeholder-picker`
 
-## TODO (реализация)
+## Done
 
-- [ ] Перенести логику из KPPDF: `shared/placeholder/, kp-placeholder-picker`
-- [ ] Zero import из kppdf-3.0
-- [ ] Demo `npm start` изолированно
-- [ ] Vitest green
-- [ ] COPY-GUIDE + INTEGRATION-KPPDF.md
-- [ ] Строка в корневом README portable_kits
+- [x] `resolvePlaceholders()`, `resolvePlaceholderBlock()`, `extractPlaceholderTokens()`, `resolvePlaceholderToken()`
+- [x] `TemplatePlaceholderService` (Angular)
+- [x] `wrapPlaceholderDisplay()`, `escapeHtml()`, `formatRuDate()`
+- [x] `DEFAULT_PLACEHOLDER_REGISTRY`, `buildPlaceholderGroups()`
+- [x] `<ph-placeholder-picker [(visible)]="v" (placeholderSelected)="onPick($event)" />`
+- [x] `providePlaceholderKit(config)` — custom registry, field aliases
+- [x] Generic `PlaceholderContext` (Record-based, no KPPDF types)
+- [x] Demo in `schema-table-kit/demo/pages/placeholder-kit/`
+- [x] Unit tests (resolve + display util)
 
-## KPPDF paths для извлечения
+## Notes
 
-```
-kppdf-3.0/shared/placeholder/
-```
+- Full KPPDF registry has 30+ tokens; v0.1 ships a representative subset (extensible via config).
+- Legacy alias `org.address` → `org.legalAddress` preserved.
+
+## Next
+
+- [ ] Full token registry from KPPDF
+- [x] `resolvePlaceholderBlock()` for document-canvas integration
+- [ ] Express endpoint helpers in `src/express/` (pattern A)

@@ -1,0 +1,51 @@
+@if (visible()) {
+  <div class="ph-backdrop" (click)="close()" role="presentation"></div>
+  <div class="ph-dialog" role="dialog" aria-modal="true" aria-label="Вставить плейсхолдер">
+    <header class="ph-dialog__header">
+      <h2>Вставить плейсхолдер</h2>
+      <button type="button" class="ph-dialog__close" (click)="close()" aria-label="Закрыть">×</button>
+    </header>
+
+    <div class="ph-dialog__search">
+      <input
+        type="search"
+        placeholder="Поиск по названию или токену…"
+        [ngModel]="searchQuery()"
+        (ngModelChange)="searchQuery.set($event)"
+      />
+    </div>
+
+    <div class="ph-dialog__list">
+      @for (group of filteredGroups(); track group.category) {
+        @if (group.tokens.length > 0) {
+          <div class="ph-group">
+            <div class="ph-group__header">
+              <span aria-hidden="true">{{ group.icon }}</span>
+              <span>{{ group.label }}</span>
+            </div>
+            <div class="ph-group__tokens">
+              @for (token of group.tokens; track token.token) {
+                <button
+                  type="button"
+                  class="ph-token"
+                  [title]="token.description"
+                  [attr.aria-label]="'Вставить ' + token.label"
+                  (click)="onSelect(token)"
+                >
+                  <code class="ph-token__key">{{ '{{' + token.token + '}}' }}</code>
+                  <span class="ph-token__label">{{ token.label }}</span>
+                </button>
+              }
+            </div>
+          </div>
+        }
+      } @empty {
+        <p class="ph-dialog__empty">Ничего не найдено по запросу «{{ searchQuery() }}»</p>
+      }
+    </div>
+
+    <footer class="ph-dialog__footer">
+      <button type="button" class="ph-btn ph-btn--secondary" (click)="close()">Закрыть</button>
+    </footer>
+  </div>
+}

@@ -1,2 +1,2 @@
-/** Public barrel — photo-uploader-kit */
-export * from './angular/index';
+export * from './core';
+export * from './angular';

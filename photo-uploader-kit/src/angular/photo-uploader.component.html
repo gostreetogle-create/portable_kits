@@ -1,0 +1,183 @@
+<div class="pu-photo-uploader">
+  @if (label()) {
+    <span class="pu-photo-uploader__label">{{ label() }}</span>
+  }
+
+  @if (photos().length > 0) {
+    <div class="photos-gallery">
+      @for (photo of photos(); track photo.url; let i = $index) {
+        <div
+          class="photos-gallery__item"
+          (click)="zoom(photo.url)"
+          (keydown.enter)="zoom(photo.url)"
+          tabindex="0"
+          role="button"
+          [attr.aria-label]="'Открыть фото ' + (i + 1)"
+        >
+          <img
+            [src]="photo.url"
+            alt="Фото {{ i + 1 }}"
+            loading="lazy"
+            [style.object-position]="posStyle(photo)"
+            [style.transform]="'scale(' + (photo.scale || 1) + ')'"
+          />
+          <button
+            type="button"
+            class="photos-gallery__frame-btn"
+            (click)="openFrameEditor(i, $event)"
+            [attr.aria-label]="'Настроить рамку фото ' + (i + 1)"
+            title="Настроить рамку"
+          >
+            ⊡
+          </button>
+          <button
+            type="button"
+            class="photos-gallery__remove"
+            (click)="remove(i, $event)"
+            [attr.aria-label]="'Удалить фото ' + (i + 1)"
+            title="Удалить фото"
+          >
+            ×
+          </button>
+        </div>
+      }
+    </div>
+  }
+
+  <div
+    class="pu-photo-uploader__dropzone"
+    [class.pu-photo-uploader__dropzone--active]="isDragOver()"
+    [class.pu-photo-uploader__dropzone--loading]="isProcessing()"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
+    @if (isProcessing()) {
+      <span class="pu-photo-uploader__dropzone-icon" aria-hidden="true">…</span>
+      <span class="pu-photo-uploader__dropzone-text">Загрузка фото…</span>
+    } @else {
+      <span class="pu-photo-uploader__dropzone-icon" aria-hidden="true">↑</span>
+      <span class="pu-photo-uploader__dropzone-text">
+        {{ dropzoneHint }}
+        <button
+          type="button"
+          class="pu-photo-uploader__browse-btn"
+          (click)="browseClick(fileInput)"
+        >
+          выберите файлы
+        </button>
+      </span>
+    }
+
+    <input
+      #fileInput
+      type="file"
+      accept="image/*"
+      multiple
+      hidden
+      (change)="onFilesSelected($event)"
+    />
+  </div>
+
+  <div class="photos-add-row">
+    <div class="photos-add-row__input">
+      <input
+        type="url"
+        class="pu-photo-uploader__url-input"
+        placeholder="https://... или вставьте URL"
+        [ngModel]="newUrl()"
+        (ngModelChange)="newUrl.set($event)"
+        (keydown.enter)="addUrl()"
+      />
+    </div>
+    <button type="button" class="pu-photo-uploader__add-btn" (click)="addUrl()" title="Добавить URL">
+      +
+    </button>
+  </div>
+</div>
+
+@if (editingFrameIndex() !== null) {
+  <div
+    class="photo-frame-overlay"
+    (click)="closeFrameEditor()"
+    (keydown.escape)="closeFrameEditor()"
+    role="dialog"
+    aria-label="Настройка рамки фото"
+    tabindex="0"
+  >
+    <div
+      class="photo-frame-editor"
+      (click)="$event.stopPropagation()"
+      (keydown.escape)="closeFrameEditor()"
+      tabindex="-1"
+    >
+      <div class="photo-frame-editor__header">
+        <span>Настройка рамки</span>
+        <button type="button" class="photo-frame-editor__close" (click)="closeFrameEditor()" aria-label="Закрыть">
+          ×
+        </button>
+      </div>
+
+      <div
+        class="photo-frame-editor__preview"
+        (mousedown)="onFrameMouseDown($event)"
+        (mousemove)="onFrameMouseMove($event)"
+        (mouseup)="onFrameMouseUp()"
+        (mouseleave)="onFrameMouseUp()"
+      >
+        <img
+          [src]="photos()[editingFrameIndex()!].url"
+          alt="Превью"
+          draggable="false"
+          [style.object-fit]="'cover'"
+          [style.object-position]="posStyle(photos()[editingFrameIndex()!])"
+          [style.transform]="'scale(' + (photos()[editingFrameIndex()!].scale || 1) + ')'"
+        />
+        <span class="photo-frame-editor__hint" aria-hidden="true">↔ Перетащите для позиционирования</span>
+      </div>
+
+      <div class="photo-frame-editor__controls">
+        <div class="photo-frame-editor__zoom">
+          <label for="frame-zoom-slider" class="photo-frame-editor__zoom-label">
+            Масштаб: {{ ((photos()[editingFrameIndex()!].scale || 1) * 100) | number: '1.0-0' }}%
+          </label>
+          <input
+            id="frame-zoom-slider"
+            type="range"
+            min="0.5"
+            max="2"
+            step="0.05"
+            [value]="photos()[editingFrameIndex()!].scale || 1"
+            (input)="onFrameScaleChange($event, editingFrameIndex()!)"
+          />
+        </div>
+        <div class="photo-frame-editor__actions">
+          <button type="button" class="pu-btn pu-btn--secondary" (click)="resetFrame(editingFrameIndex()!)">
+            Сбросить
+          </button>
+          <button type="button" class="pu-btn pu-btn--primary" (click)="closeFrameEditor()">Готово</button>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+@if (zoomedUrl(); as src) {
+  <div
+    class="photo-zoom-overlay"
+    (click)="zoomedUrl.set(null)"
+    (keydown.escape)="zoomedUrl.set(null)"
+    role="dialog"
+    aria-label="Просмотр фото"
+  >
+    <button
+      type="button"
+      class="photo-zoom-overlay__close"
+      (click)="zoomedUrl.set(null); $event.stopPropagation()"
+      aria-label="Закрыть"
+    >
+      ×
+    </button>
+    <img [src]="src" alt="Фото" />
+  </div>
+}

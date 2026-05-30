@@ -1,0 +1,75 @@
+<div
+  class="dc-canvas"
+  [class.dc-canvas--instance]="mode() === 'instance'"
+  tabindex="0"
+  (click)="onCanvasClick()"
+  (keydown.escape)="onCanvasClick()"
+>
+  <div class="dc-canvas__toolbar">
+    <span class="dc-canvas__mode">Режим: {{ mode() === 'template' ? 'шаблон' : 'экземпляр' }}</span>
+    <button type="button" class="dc-btn" (click)="addTextBlock(); $event.stopPropagation()">
+      + Текстовый блок
+    </button>
+  </div>
+
+  <div
+    class="dc-canvas__blocks"
+    soSortableList
+    [soSortableListData]="blocks()"
+    [soSortableListDisabled]="reorderLocked()"
+    (soSortableListDropped)="onBlockDropped($event)"
+  >
+    @for (block of blocks(); track trackBlock($index, block); let i = $index) {
+      <div
+        soSortableItem
+        [soSortableItemData]="block"
+        [soSortableItemDisabled]="reorderLocked()"
+        [soSortableLockAxis]="'y'"
+        class="dc-block"
+        [class.dc-block--active]="activeBlockIndex() === i"
+        [class.dc-block--header]="block.type === 'header'"
+        role="group"
+        (click)="selectBlock(i, $event)"
+      >
+        @if (!reorderLocked()) {
+          <span soSortableHandle class="dc-block__handle" aria-label="Перетащить">⋮⋮</span>
+        }
+
+        @if (activeBlockIndex() === i) {
+          <div class="dc-block__toolbar" (click)="$event.stopPropagation()">
+            <button type="button" class="dc-btn dc-btn--sm" (click)="setAlign(i, 'left')" title="Влево">←</button>
+            <button type="button" class="dc-btn dc-btn--sm" (click)="setAlign(i, 'center')" title="По центру">↔</button>
+            <button type="button" class="dc-btn dc-btn--sm" (click)="setAlign(i, 'right')" title="Вправо">→</button>
+            @if (block.type === 'text' || block.type === 'header') {
+              <button type="button" class="dc-btn dc-btn--sm" (click)="requestPlaceholder(i, $event)">
+                {{ '{{…}}' }}
+              </button>
+            }
+            <button
+              type="button"
+              class="dc-btn dc-btn--sm dc-btn--danger"
+              (click)="removeBlock(i, $event)"
+              [disabled]="blocks().length <= 1"
+            >
+              ×
+            </button>
+          </div>
+        }
+
+        <div class="dc-block__body" [ngStyle]="blockStyles(block)">
+          @if (activeBlockIndex() === i && (block.type === 'text' || block.type === 'header')) {
+            <textarea
+              class="dc-block__editor"
+              rows="4"
+              [ngModel]="block.content"
+              (ngModelChange)="updateContent(i, $event)"
+              (click)="$event.stopPropagation()"
+            ></textarea>
+          } @else {
+            <div class="dc-block__preview">{{ block.content || '(пусто)' }}</div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>

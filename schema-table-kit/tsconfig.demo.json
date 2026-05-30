@@ -12,6 +12,9 @@
     "../options-resolver-kit/src/**/*.ts",
     "../entity-picker-kit/src/**/*.ts",
     "../schema-data-table-kit/src/**/*.ts",
-    "../crud-factory-kit/src/core/**/*.ts"
+    "../crud-factory-kit/src/core/**/*.ts",
+    "../photo-uploader-kit/src/**/*.ts",
+    "../placeholder-kit/src/**/*.ts",
+    "../document-canvas-kit/src/**/*.ts"
   ]
 }

@@ -19,7 +19,10 @@
     "baseUrl": ".",
     "paths": {
       "tslib": ["node_modules/tslib"],
-      "@angular/cdk/drag-drop": ["node_modules/@angular/cdk/types/drag-drop.d.ts"],
+      "@angular/core": ["node_modules/@angular/core"],
+      "@angular/common": ["node_modules/@angular/common"],
+      "@angular/forms": ["node_modules/@angular/forms"],
+      "@angular/cdk/drag-drop": ["node_modules/@angular/cdk/drag-drop"],
       "@schema-table-kit/core": ["src/core/index.ts"],
       "@schema-table-kit/angular": ["src/angular/index.ts"],
       "@schema-table-kit/express": ["src/express/index.ts"],
@@ -31,7 +34,13 @@
       "@schema-data-table-kit/core": ["../schema-data-table-kit/src/core/index.ts"],
       "@schema-data-table-kit/angular": ["../schema-data-table-kit/src/angular/index.ts"],
       "@crud-factory-kit/core": ["../crud-factory-kit/src/core/index.ts"],
-      "@crud-factory-kit/express": ["../crud-factory-kit/src/express/index.ts"]
+      "@crud-factory-kit/express": ["../crud-factory-kit/src/express/index.ts"],
+      "@photo-uploader-kit/core": ["../photo-uploader-kit/src/core/index.ts"],
+      "@photo-uploader-kit/angular": ["../photo-uploader-kit/src/angular/index.ts"],
+      "@placeholder-kit/core": ["../placeholder-kit/src/core/index.ts"],
+      "@placeholder-kit/angular": ["../placeholder-kit/src/angular/index.ts"],
+      "@document-canvas-kit/core": ["../document-canvas-kit/src/core/index.ts"],
+      "@document-canvas-kit/angular": ["../document-canvas-kit/src/angular/index.ts"]
     }
   },
   "angularCompilerOptions": {

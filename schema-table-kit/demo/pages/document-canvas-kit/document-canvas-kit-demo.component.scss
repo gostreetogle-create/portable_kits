@@ -1,0 +1,46 @@
+.demo-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.demo-back {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--st-text-tertiary);
+  text-decoration: none;
+}
+
+.demo-lead {
+  color: var(--st-text-secondary);
+}
+
+.demo-actions {
+  margin-bottom: 1rem;
+}
+
+.demo-actions button {
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--st-border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.demo-json {
+  margin-top: 1.5rem;
+  font-size: 0.8125rem;
+
+  pre {
+    overflow: auto;
+    padding: 0.75rem;
+    background: #f3f4f6;
+    border-radius: 6px;
+  }
+
+  h3 {
+    font-size: 0.875rem;
+    margin: 1rem 0 0.375rem;
+  }
+}
