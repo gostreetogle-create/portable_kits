@@ -1,0 +1,241 @@
+.demo {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+.demo__header {
+  margin-bottom: 24px;
+}
+
+.demo__back {
+  display: inline-block;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--st-text-tertiary);
+  text-decoration: none;
+}
+
+.demo__back:hover {
+  color: var(--st-primary);
+}
+
+.demo__header h1 {
+  margin: 0 0 4px;
+  font-size: 24px;
+}
+
+.demo__header p {
+  margin: 0;
+  color: var(--st-text-secondary);
+}
+
+.demo__layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 800px) {
+  .demo__layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.demo__aside {
+  border: 1px solid var(--st-border);
+  border-radius: 8px;
+  padding: 12px;
+  background: var(--st-surface);
+  height: fit-content;
+}
+
+.demo__aside h2 {
+  margin: 0 0 12px;
+  font-size: 14px;
+}
+
+.demo__saved-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--st-border);
+  background: var(--st-surface-hover);
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.demo__saved-item span {
+  color: var(--st-text-tertiary);
+  font-size: 11px;
+}
+
+.demo__quick {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.demo__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.demo__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--st-text-secondary);
+}
+
+.demo__input {
+  padding: 8px 10px;
+  border: 1px solid var(--st-border);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.demo__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.demo__btn {
+  border: 1px solid var(--st-border);
+  background: var(--st-surface);
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.demo__btn--primary {
+  background: var(--st-primary);
+  color: #fff;
+  border-color: var(--st-primary);
+}
+
+.demo__btn--ghost {
+  background: transparent;
+}
+
+.demo__issues {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12px;
+  color: #b91c1c;
+}
+
+.demo__issue--warn {
+  color: #92400e;
+}
+
+.demo__results {
+  margin-top: 28px;
+  border: 1px solid var(--st-border);
+  border-radius: 8px;
+  padding: 16px;
+  background: var(--st-surface);
+}
+
+.demo__results-title {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.demo__results-hint {
+  margin: 0 0 16px;
+  font-size: 12px;
+}
+
+.demo__preview-empty {
+  border: 1px dashed var(--st-border);
+  border-radius: 8px;
+  padding: 24px 16px;
+  text-align: center;
+  background: var(--st-surface-hover);
+  margin-bottom: 16px;
+}
+
+.demo__preview-empty p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--st-text-tertiary);
+}
+
+.demo__table-wrap {
+  overflow-x: auto;
+  margin-bottom: 16px;
+  border: 1px solid var(--st-border);
+  border-radius: 8px;
+}
+
+.demo__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.demo__table th,
+.demo__table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--st-border);
+  white-space: nowrap;
+}
+
+.demo__table th {
+  background: var(--st-surface-hover);
+  font-weight: 600;
+  color: var(--st-text-secondary);
+  font-size: 12px;
+  text-transform: none;
+}
+
+.demo__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.demo__table tbody tr:hover {
+  background: var(--st-surface-hover);
+}
+
+.demo__orphan-badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 5px;
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--st-warning);
+  background: var(--st-warning-bg);
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.demo__json {
+  border: 1px solid var(--st-border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: #f8fafc;
+}
+
+.demo__json pre {
+  margin: 8px 0 0;
+  font-size: 11px;
+  overflow: auto;
+}
+
+.demo__muted {
+  font-size: 12px;
+  color: var(--st-text-tertiary);
+}

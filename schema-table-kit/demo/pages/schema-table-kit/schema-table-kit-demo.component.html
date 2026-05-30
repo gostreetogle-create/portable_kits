@@ -1,0 +1,116 @@
+<div class="demo">
+  <header class="demo__header">
+    <div>
+      <a class="demo__back" routerLink="/">← На главную</a>
+      <h1>Schema Table Kit — demo</h1>
+      <p>Конструктор колонок · режим: <strong>{{ modeLabel }}</strong>
+        @if (providerStatus()) {
+          · провайдер: <strong>{{ providerStatus() }}</strong>
+        }
+      </p>
+    </div>
+  </header>
+
+  <div class="demo__layout">
+    <aside class="demo__aside">
+      <h2>Сохранённые</h2>
+      @if (saved().length === 0) {
+        <p class="demo__muted">Пока пусто — сохраните таблицу.</p>
+      }
+      @for (item of saved(); track item.key) {
+        <button type="button" class="demo__saved-item" (click)="openSaved(item)">
+          <strong>{{ item.label }}</strong>
+          <span>{{ item.key }}</span>
+        </button>
+      }
+
+      <div class="demo__quick">
+        <button type="button" class="demo__btn demo__btn--ghost" (click)="loadExample()">
+          Загрузить пример
+        </button>
+        <button type="button" class="demo__btn demo__btn--ghost" (click)="loadOrphanExample()">
+          Симулировать orphan
+        </button>
+      </div>
+    </aside>
+
+    <main class="demo__main">
+      <form class="demo__form" [formGroup]="form" (ngSubmit)="save()">
+        <label class="demo__field">
+          <span>Код (key)</span>
+          <input class="demo__input" formControlName="key" placeholder="product-list-basic" />
+        </label>
+
+        <label class="demo__field">
+          <span>Название таблицы</span>
+          <input class="demo__input" formControlName="label" placeholder="Товарная таблица" />
+        </label>
+
+        <st-schema-column-builder
+          formControlName="builder"
+          (validationChange)="onValidation($event)"
+          (providerStatusChange)="onProviderStatus($event)"
+        />
+
+        @if (validationIssues().length) {
+          <ul class="demo__issues">
+            @for (issue of validationIssues(); track $index) {
+              <li [class.demo__issue--warn]="issue.severity === 'warning'">
+                {{ issue.message }}
+              </li>
+            }
+          </ul>
+        }
+
+        <div class="demo__actions">
+          <button type="submit" class="demo__btn demo__btn--primary">Сохранить</button>
+          <button type="button" class="demo__btn" (click)="clearForm()">Очистить</button>
+        </div>
+      </form>
+
+      <section class="demo__results">
+        <h2 class="demo__results-title">Результат</h2>
+        <p class="demo__results-hint demo__muted">
+          Предпросмотр обновляется при изменении формы. Данные в строках — демо-заглушки.
+        </p>
+
+        @if (tablePreview().columns.length === 0) {
+          <div class="demo__preview-empty">
+            <p>Добавьте колонки в конструкторе — здесь появится таблица с примером строк.</p>
+          </div>
+        } @else {
+          <div class="demo__table-wrap">
+            <table class="demo__table">
+              <thead>
+                <tr>
+                  @for (col of tablePreview().columns; track col.field + $index) {
+                    <th [style.width]="col.width || null">
+                      {{ col.header || col.field || '—' }}
+                      @if (col.isOrphan) {
+                        <span class="demo__orphan-badge" title="Поле отсутствует в схеме">orphan</span>
+                      }
+                    </th>
+                  }
+                </tr>
+              </thead>
+              <tbody>
+                @for (row of tablePreview().rows; track $index) {
+                  <tr>
+                    @for (cell of row; track $index) {
+                      <td>{{ cell }}</td>
+                    }
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+
+        <details class="demo__json">
+          <summary>JSON preview</summary>
+          <pre>{{ jsonPreview() }}</pre>
+        </details>
+      </section>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+{
+  "name": "crud-factory-kit",
+  "version": "0.0.0-scaffold",
+  "private": true,
+  "description": "Portable kit: crud-factory-kit (scaffold)",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.0",
+    "vitest": "^3.0.0"
+  }
+}

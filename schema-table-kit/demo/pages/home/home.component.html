@@ -1,0 +1,29 @@
+<div class="home">
+  <header class="home__header">
+    <h1>Portable Kits</h1>
+    <p>Набор переносимых Angular-модулей для быстрой интеграции в проекты.</p>
+  </header>
+
+  <section class="home__modules">
+    <h2>Модули</h2>
+    <div class="home__grid">
+      @for (mod of modules; track mod.id) {
+        @if (mod.available) {
+          <a class="home__card home__card--active" [routerLink]="mod.route">
+            <span class="home__card-title">{{ mod.title }}</span>
+            <span class="home__card-subtitle">{{ mod.subtitle }}</span>
+            <span class="home__card-desc">{{ mod.description }}</span>
+            <span class="home__card-action">Открыть →</span>
+          </a>
+        } @else {
+          <article class="home__card home__card--in-dev">
+            <span class="home__card-title">{{ mod.title }}</span>
+            <span class="home__card-subtitle">{{ mod.subtitle }}</span>
+            <span class="home__card-desc">{{ mod.description }}</span>
+            <span class="home__card-badge">В разработке</span>
+          </article>
+        }
+      }
+    </div>
+  </section>
+</div>

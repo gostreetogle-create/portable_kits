@@ -1,0 +1,80 @@
+<div class="st-builder">
+  @if (providerStatus() === 'loading') {
+    <div class="st-banner st-banner--info">{{ labels().providerLoading }}</div>
+  }
+  @if (providerStatus() === 'error') {
+    <div class="st-banner st-banner--error">
+      {{ labels().providerError }}
+      <button type="button" class="st-btn st-btn--link" (click)="loadEntities()">
+        {{ labels().providerRetry }}
+      </button>
+    </div>
+  }
+
+  @if (driftWarning()) {
+    <div class="st-banner st-banner--warn">{{ labels().schemaDriftBanner }}</div>
+  }
+
+  <st-entity-select
+    [label]="labels().entityLabel"
+    [placeholder]="labels().entityPlaceholder"
+    [value]="value().entityKey"
+    [entities]="entities()"
+    [disabled]="isDisabled()"
+    (valueChange)="onEntityChange($event)"
+  />
+
+  <div class="st-builder__columns">
+    <div class="st-builder__columns-head">Колонки таблицы</div>
+
+    @if (!value().entityKey) {
+      <div class="st-empty">{{ labels().emptySelectEntity }}</div>
+    } @else if (value().columns.length === 0) {
+      <div class="st-empty">{{ labels().emptyNoColumns }}</div>
+    } @else {
+      @for (col of value().columns; track $index) {
+        <st-column-row
+          [column]="col"
+          [availableFields]="availableFieldsForRow($index)"
+          [columnTypes]="columnTypeRegistry"
+          [fieldLabel]="labels().fieldLabel"
+          [fieldPlaceholder]="labels().fieldPlaceholder"
+          [headerLabel]="labels().headerLabel"
+          [typeLabel]="labels().typeLabel"
+          [widthLabel]="labels().widthLabel"
+          [orphanBadge]="labels().orphanBadge"
+          [moveUpLabel]="labels().moveUp"
+          [moveDownLabel]="labels().moveDown"
+          [removeLabel]="labels().removeColumn"
+          (fieldChange)="onFieldChange($index, $event)"
+          (headerChange)="patchColumn($index, { header: $event })"
+          (typeChange)="patchColumn($index, { type: $event })"
+          (widthChange)="patchColumn($index, { width: $event || undefined })"
+          (moveUp)="moveColumn($index, -1)"
+          (moveDown)="moveColumn($index, 1)"
+          (remove)="removeColumn($index)"
+        />
+      }
+    }
+
+    <div class="st-builder__toolbar">
+      <button
+        type="button"
+        class="st-btn st-btn--primary"
+        [disabled]="isDisabled() || !value().entityKey"
+        (click)="addColumn()"
+      >
+        + {{ labels().addColumn }}
+      </button>
+      <button
+        type="button"
+        class="st-btn"
+        [disabled]="isDisabled() || value().columns.length === 0"
+        (click)="clearColumns()"
+      >
+        {{ labels().clearColumns }}
+      </button>
+      <span class="st-builder__count">{{ labels().columnsCount(value().columns.length) }}</span>
+    </div>
+  </div>
+</div>

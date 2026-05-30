@@ -1,0 +1,14 @@
+{
+  "name": "crud-page-kit",
+  "version": "0.0.0-scaffold",
+  "private": true,
+  "description": "Portable kit: crud-page-kit (scaffold)",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.0",
+    "vitest": "^3.0.0"
+  }
+}
