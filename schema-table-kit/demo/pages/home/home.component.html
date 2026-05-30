@@ -10,17 +10,25 @@
       @for (mod of modules; track mod.id) {
         <a
           class="home__card"
-          [class.home__card--active]="mod.hasDemo"
-          [class.home__card--in-dev]="!mod.hasDemo"
+          [class.home__card--ready]="mod.readiness === 'ready'"
+          [class.home__card--stub]="mod.readiness === 'stub'"
+          [class.home__card--scaffold]="mod.readiness === 'scaffold'"
           [routerLink]="mod.route"
         >
           <span class="home__card-title">{{ mod.title }}</span>
           <span class="home__card-subtitle">{{ mod.subtitle }}</span>
           <span class="home__card-desc">{{ mod.description }}</span>
-          @if (mod.hasDemo) {
-            <span class="home__card-action">Открыть →</span>
-          } @else {
-            <span class="home__card-badge">В разработке</span>
+          @switch (mod.readiness) {
+            @case ('ready') {
+              <span class="home__card-badge home__card-badge--ready">Готово</span>
+              <span class="home__card-action">Открыть →</span>
+            }
+            @case ('stub') {
+              <span class="home__card-badge home__card-badge--stub">Заглушка</span>
+            }
+            @case ('scaffold') {
+              <span class="home__card-badge home__card-badge--scaffold">Scaffold</span>
+            }
           }
         </a>
       }

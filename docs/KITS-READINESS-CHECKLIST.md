@@ -33,7 +33,7 @@ Last updated: 2026-05-30
 | G4 | `vitest.config.ts` aliases for kit core | ✅ | |
 | G5 | Shared `node_modules` via hub | ✅ | |
 | G6 | Home hub reflects `hasDemo` | ✅ | |
-| G7 | Root `README.md` catalog matches STATUS | ☐ | |
+| G7 | Root `README.md` catalog matches STATUS | ✅ | Updated 2026-05-30 |
 | G8 | `tools/scaffold-kits.mjs` | ✅ | |
 | G9 | CI: `npm test && npm run build` | ☐ | |
 

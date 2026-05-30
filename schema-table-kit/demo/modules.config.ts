@@ -1,3 +1,5 @@
+export type KitReadiness = 'ready' | 'stub' | 'scaffold';
+
 export interface DemoModule {
   id: string;
   /** Русское название модуля (заголовок карточки) */
@@ -10,6 +12,8 @@ export interface DemoModule {
   available: boolean;
   /** true — есть рабочее demo; false — страница-заглушка «в разработке» */
   hasDemo?: boolean;
+  /** ready = рабочий src + demo; stub = заглушка в hub; scaffold = export {} в src/ */
+  readiness: KitReadiness;
 }
 
 /** Реестр demo-модулей. Чтобы добавить новый — допишите объект в массив и зарегистрируйте route в app.routes.ts */
@@ -23,6 +27,7 @@ export const DEMO_MODULES: DemoModule[] = [
     route: '/modules/schema-table-kit',
     available: true,
     hasDemo: true,
+    readiness: 'ready',
   },
   {
     id: 'schema-data-table-kit',
@@ -33,6 +38,7 @@ export const DEMO_MODULES: DemoModule[] = [
     route: '/modules/schema-data-table-kit',
     available: true,
     hasDemo: true,
+    readiness: 'ready',
   },
   {
     id: 'entity-picker-kit',
@@ -43,6 +49,7 @@ export const DEMO_MODULES: DemoModule[] = [
     route: '/modules/entity-picker-kit',
     available: true,
     hasDemo: true,
+    readiness: 'ready',
   },
   {
     id: 'document-canvas-kit',
@@ -53,6 +60,7 @@ export const DEMO_MODULES: DemoModule[] = [
     route: '/modules/document-canvas-kit',
     available: true,
     hasDemo: true,
+    readiness: 'ready',
   },
   {
     id: 'photo-uploader-kit',
@@ -62,16 +70,18 @@ export const DEMO_MODULES: DemoModule[] = [
     route: '/modules/photo-uploader-kit',
     available: true,
     hasDemo: true,
+    readiness: 'ready',
   },
   {
     id: 'sortable-kit',
     title: 'Сортируемые списки',
     subtitle: 'sortable-kit',
     description:
-      'Drag-and-drop списки без Angular CDK: soSortableList, soSortableItem, soSortableHandle, moveSortableItems()',
+      'Drag-and-drop списки на @angular/cdk/drag-drop: soSortableList, soSortableItem, soSortableHandle, moveSortableItems()',
     route: '/modules/sortable-kit',
     available: true,
     hasDemo: true,
+    readiness: 'ready',
   },
   {
     id: 'placeholder-kit',
@@ -82,6 +92,7 @@ export const DEMO_MODULES: DemoModule[] = [
     route: '/modules/placeholder-kit',
     available: true,
     hasDemo: true,
+    readiness: 'ready',
   },
   {
     id: 'crud-page-kit',
@@ -92,6 +103,7 @@ export const DEMO_MODULES: DemoModule[] = [
     route: '/modules/crud-page-kit',
     available: true,
     hasDemo: false,
+    readiness: 'stub',
   },
   {
     id: 'crud-factory-kit',
@@ -102,6 +114,7 @@ export const DEMO_MODULES: DemoModule[] = [
     route: '/modules/crud-factory-kit',
     available: true,
     hasDemo: true,
+    readiness: 'ready',
   },
   {
     id: 'options-resolver-kit',
@@ -112,6 +125,7 @@ export const DEMO_MODULES: DemoModule[] = [
     route: '/modules/options-resolver-kit',
     available: true,
     hasDemo: true,
+    readiness: 'ready',
   },
   {
     id: 'ui-primeng-kit',
@@ -122,6 +136,7 @@ export const DEMO_MODULES: DemoModule[] = [
     route: '/modules/ui-primeng-kit',
     available: true,
     hasDemo: false,
+    readiness: 'stub',
   },
   {
     id: 'auth-rbac-kit',
@@ -132,6 +147,7 @@ export const DEMO_MODULES: DemoModule[] = [
     route: '/modules/auth-rbac-kit',
     available: true,
     hasDemo: false,
+    readiness: 'stub',
   },
   {
     id: 'eav-kit',
@@ -142,6 +158,7 @@ export const DEMO_MODULES: DemoModule[] = [
     route: '/modules/eav-kit',
     available: true,
     hasDemo: false,
+    readiness: 'stub',
   },
   {
     id: 'quotation-editor',
@@ -152,6 +169,7 @@ export const DEMO_MODULES: DemoModule[] = [
     route: '/modules/quotation-editor',
     available: true,
     hasDemo: false,
+    readiness: 'stub',
   },
   {
     id: 'layout-shell-kit',
@@ -162,6 +180,7 @@ export const DEMO_MODULES: DemoModule[] = [
     route: '/modules/layout-shell-kit',
     available: true,
     hasDemo: false,
+    readiness: 'stub',
   },
 ];
 
