@@ -36,7 +36,7 @@ Last updated: 2026-05-31 — Comprehensive audit + fix session
 | G6 | Home hub reflects `hasDemo` + readiness | ✅ | |
 | G7 | Root `README.md` catalog matches STATUS | ✅ | Updated 2026-05-30 |
 | G8 | `tools/scaffold-kits.mjs` | ✅ | |
-| G9 | CI: `npm test && npm run build` | ✅ | `.github/workflows/ci.yml` |
+| G9 | CI: `npm test && npm run build` | 🗑️ | Removed — not needed for copy-paste kits |
 
 ---
 

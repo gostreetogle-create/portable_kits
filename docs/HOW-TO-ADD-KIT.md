@@ -62,8 +62,6 @@ Add a row to the "Kits catalog" table:
 | Build demo | `cd schema-table-kit && npm run build` |
 | Dev server | `cd schema-table-kit && ng serve demo --port 4201` |
 
-CI (`.github/workflows/ci.yml`): `npm ci` in root → `npm test` + `npm run build` in `schema-table-kit`.
-
 ## 8. Register in hub
 
 After creating `src/`, register the kit in **schema-table-kit** (dev shell) so that demo and vitest work without consumer project:

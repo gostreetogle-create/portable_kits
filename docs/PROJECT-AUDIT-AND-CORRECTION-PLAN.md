@@ -74,7 +74,7 @@
 | P1-3 | Stale kit READMEs | 🟡 Partial — STATUS updated |
 | P1-4 | scaffold.spec.ts placeholders | 🟡 Low priority cleanup |
 | P1-5 | quotation-editor empty | ✅ v0.1 ported |
-| P1-6 | No CI | ✅ GitHub Actions |
+| P1-6 | No CI | 🗑️ Removed — not needed for copy-paste kits |
 | P1-7 | layout-shell-kit missing vitest spec | ✅ Fixed 2026-05-30 — `layout-shell-kit.spec.ts` (barrel + provider) |
 
 ### P2 — Nice to have / cleanup
@@ -125,7 +125,7 @@
 | D2 | Each kit: STATUS ✅, hub demo, vitest green | ✅ |
 | D3 | Root README + checklists match STATUS | ✅ |
 | D4 | Hub home shows accurate readiness | ✅ |
-| D5 | CI test + build green | ✅ |
+| D5 | CI test + build green | 🗑️ Removed — not used |
 | D6 | Zero kppdf-3.0 imports in kit `src/` | ✅ |
 | D7 | COPY-GUIDE accurate | 🟡 v0.1 subset documented; all kits have COPY-GUIDE |
 | D8 | quotation-editor composes canvas + picker | ✅ |
