@@ -5,7 +5,7 @@
 ## Done
 
 - [x] `<sdt-schema-data-table [columns]="..." [rows]="..." />`
-- [x] `formatSchemaCell()` using `@schema-table-kit/core` `getFieldValue`
+- [x] `formatSchemaCell()` with local `getFieldValue` (no cross-kit dependency)
 - [x] `provideSchemaDataTableKit(config)`
 - [x] Demo in `schema-table-kit/demo/pages/schema-data-table-kit/`
 - [x] Unit tests
@@ -14,6 +14,7 @@
 
 - KPPDF has no standalone schema-data-table — tables rendered via `kp-table` + column config.
 - v0.1: plain HTML table; sorting/pagination deferred to ui-primeng-kit / crud-page-kit.
+- Self-contained: no imports from other kits.
 
 ## Next
 

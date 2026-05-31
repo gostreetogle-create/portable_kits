@@ -1,20 +1,20 @@
 # COPY-GUIDE — options-resolver-kit
 
-## Copy в consumer
+## Copy to consumer
 
 1. `options-resolver-kit/src/` → `packages/options-resolver-kit/src/`
-2. Path alias в tsconfig consumer
-3. Свой config (см. README)
-4. Подключить public API: provideOptionsResolver(config), OptionsResolver.getOptions(entityKey)
+2. Path alias in tsconfig consumer
+3. Configure (see README)
+4. Wire public API: provideOptionsResolver(config), OptionsResolver.getOptions(entityKey)
 
-## Не копировать
+## Do not copy
 
 - `demo/`, `tests/`, `node_modules/`, scaffold-only files
 
-## Паттерн **D**
+## Pattern **D**
 
-| Copy | Папки |
-|------|--------|
+| Copy | Folders |
+|------|---------|
 | Consumer | `src/` |
 
-См. [docs/KPPDF-MODULES-CHECKLIST.md](../docs/KPPDF-MODULES-CHECKLIST.md)
+See [docs/KPPDF-MODULES-CHECKLIST.md](../docs/KPPDF-MODULES-CHECKLIST.md)

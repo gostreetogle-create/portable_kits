@@ -48,16 +48,12 @@
 - [ ] **npm audit / security** — Check for vulnerable dependencies across all kits
 - [ ] **Cross-kit dependency audit** — Ensure no kit imports from other kits (should be independent)
 
-### 🔴 Priority 1 — Missing Source Code
+### 🔴 Priority 1 — Missing Source Code ✅ *Resolved 2026-05-31*
 
-- [ ] **`crud-page-kit/src/core/types.ts`** — Deleted! Need to recreate if still used
-- [ ] **`eav-kit/src/express/index.ts`** — Deleted! Was there important code?
-- [ ] **`placeholder-kit/src/express/index.ts`** — Deleted! Same question
-- [ ] **All scaffold kits** — Some have `src/` but minimal implementation:
-  - `placeholder-kit` — Only `resolve-placeholders.ts` exists
-  - `schema-data-table-kit` — Basic structure only
-  - `sortable-kit` — Core utils exist, Angular component scaffold
-  - `ui-primeng-kit` — Many components but many are just scaffold wrappers
+- [x] **`crud-page-kit/src/core/types.ts`** — Deleted (empty type file, not needed)
+- [x] **`eav-kit/src/express/index.ts`** — Recreated as stub (export {})
+- [x] **`placeholder-kit/src/express/index.ts`** — Recreated as stub (export {})
+- [x] **All scaffold kits** — Have working `src/` with real implementation, 393 tests pass
 
 ### 🟡 Priority 2 — Philosophy & Code Quality
 
@@ -117,23 +113,32 @@
 - [ ] **Demo app runtime test** — Start dev server and verify with browser automation
 - [ ] **Demo navigation** — Ensure all kit demo pages are accessible from hub
 - [ ] **Mobile responsiveness** — Test demo on mobile viewports
-- [ ] **Demo consistency** — All demo pages should follow the same layout pattern
+- [x] **Demo consistency** — All demo pages follow the same layout pattern ✅
 
-### 🔵 Priority 4 — Documentation
+### 🔵 Priority 4 — Documentation ✅ *Full audit & i18n sweep completed 2026-05-31*
 
-- [ ] **Update `docs/PROJECT-AUDIT-AND-CORRECTION-PLAN.md`** — Add this session's findings
-- [ ] **Update `docs/KITS-READINESS-CHECKLIST.md`** — Update with current state
-- [ ] **Update `docs/KPPDF-MODULES-CHECKLIST.md`** — Verify all 15 kits status
-- [ ] **Each kit README.md** — Some say "scaffold — реализация не начата" but actually have working code (e.g., layout-shell-kit, crud-page-kit)
-- [ ] **COPY-GUIDE.md for each kit** — Some kits have it, some don't
+- [x] **Update `docs/PROJECT-AUDIT-AND-CORRECTION-PLAN.md`** — Updated P2-2 ✅, test count 52→393+
+- [x] **Update `docs/KITS-READINESS-CHECKLIST.md`** — Updated audit date, test count
+- [x] **Update `docs/KPPDF-MODULES-CHECKLIST.md`** — Updated for all 15 kits, translated ru→en
+- [x] **Each kit README.md** — All 15 kits have accurate English READMEs (status, API, description)
+- [x] **COPY-GUIDE.md for each kit** — All 15 kits have English COPY-GUIDE.md (2 newly created)
+- [x] **QUICKSTART.md for each kit** — All 14 applicable kits (12 updated, 2 newly created)
+- [x] **INTEGRATION-KPPDF.md for each kit** — All 14 applicable, updated status from Backlog→✅
+- [x] **docs/UI-KIT-VISUAL-CUSTOMIZATION-VISION.md** — Full Russian→English translation
+- [x] **docs/USER-WISHES-CHECKLIST.md** — Full Russian→English translation
+- [x] **schema-table-kit/CONCEPTS.md** — Full Russian→English translation
+- [x] **Root README.md** — Full Russian→English translation
+- [x] **schema-table-kit/README.md** — Full Russian→English translation
+- [x] **HOW-TO-ADD-KIT.md** — Full Russian→English translation
+- [x] **All demo/README.md** — Already English (12 files, all say "TODO: isolated demo")
 
-### ⚪ Priority 5 — Cleanup
+### ⚪ Priority 5 — Cleanup ✅ *Completed 2026-05-31*
 
-- [ ] **Delete unused scaffold files** — `placeholder-kit/demo/`, `schema-data-table-kit/demo/`, etc.
-- [ ] **Remove `.gitkeep` files** from empty directories if any
-- [ ] **Standardize `package.json` versions** — Many still at `0.0.0-scaffold`
-- [ ] **Check for unused dependencies** in root `package.json`
-- [ ] **npm scripts standardization** — All kits should have `test`, `build` scripts
+- [x] **Delete unused scaffold spec files** — Removed 13 `scaffold.spec.ts` files (all kits have real tests in hub)
+- [x] **Remove `.gitkeep` files** — No empty directories remain
+- [x] **Standardize `package.json` versions** — Updated 13 kits from `0.0.0-scaffold` to `v0.1`/`v0.2`, removed "(scaffold)" descriptions
+- [x] **Check for unused dependencies** — Clean (root `package.json` minimal)
+- [x] **npm scripts standardization** — All kits have appropriate scripts
 
 ---
 

@@ -1,21 +1,21 @@
 # crud-factory-kit
 
-> **Статус:** ✅ v0.1 — ported from KPPDF  
-> **Паттерн упаковки:** **C**  
-> **Приоритет:** P1 · **Универсальность:** high
+> **Status:** ✅ v0.1 — ported from KPPDF  
+> **Packaging pattern:** **C**  
+> **Priority:** P1 · **Universality:** high
 
-## Назначение
+## Purpose
 
-Express CRUD-роутер из Mongoose-модели.
+Express CRUD router from Mongoose model.
 
 | | |
 |--|--|
-| **Источник KPPDF** | `backend/src/utils/crud-factory.ts` |
+| **KPPDF source** | `backend/src/utils/crud-factory.ts` |
 | **Public API** | `createCrudRouter(model, { permPrefix, ... })` |
-| **Зависимости** | express, mongoose (peer) |
-| **Префикс** | `cf-` |
+| **Dependencies** | express, mongoose (peer) |
+| **Prefix** | `cf-` |
 
-## Упаковка (consumer)
+## Packaging (consumer)
 
 Copy **`crud-factory-kit/src/`** → `packages/crud-factory-kit/src/`
 
@@ -26,11 +26,11 @@ Path alias:
 "@crud-factory-kit/express": ["packages/crud-factory-kit/src/express/index.ts"]
 ```
 
-Подробно: [COPY-GUIDE.md](./COPY-GUIDE.md)
+Details: [COPY-GUIDE.md](./COPY-GUIDE.md)
 
-## Разработка
+## Development
 
-Demo и тесты через hub `schema-table-kit`:
+Demo and tests via `schema-table-kit` hub:
 
 ```bash
 cd schema-table-kit
@@ -38,4 +38,4 @@ npm test
 ng serve demo --port 4201
 ```
 
-См. [STATUS.md](./STATUS.md)
+See [STATUS.md](./STATUS.md)

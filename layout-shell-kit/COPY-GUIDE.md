@@ -1,17 +1,17 @@
-# COPY-GUIDE — crud-page-kit
+# COPY-GUIDE — layout-shell-kit
 
 ## Copy to consumer
 
-1. `crud-page-kit/src/` → `packages/crud-page-kit/src/`
+1. `layout-shell-kit/src/` → `packages/layout-shell-kit/src/`
 2. Path alias in tsconfig consumer
 3. Configure (see README)
-4. Wire public API: <cp-crud-page [config]="cfg" />, CrudStore, provideCrudPageKit()
+4. Wire public API: <ls-layout-shell [navItems]="..." [appTitle]="..." />, provideLayoutShellKit({ appTitle, navItems })
 
 ## Do not copy
 
 - `demo/`, `tests/`, `node_modules/`, scaffold-only files
 
-## Pattern **D**
+## Pattern **B**
 
 | Copy | Folders |
 |------|---------|

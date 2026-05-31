@@ -1,20 +1,20 @@
 # COPY-GUIDE — crud-factory-kit
 
-## Copy в consumer
+## Copy to consumer
 
 1. `crud-factory-kit/src/` → `packages/crud-factory-kit/src/`
-2. Path alias в tsconfig consumer
-3. Свой config (см. README)
-4. Подключить public API: createCrudRouter(model, { permPrefix, ... })
+2. Path alias in tsconfig consumer
+3. Configure (see README)
+4. Wire public API: createCrudRouter(model, { permPrefix, ... })
 
-## Не копировать
+## Do not copy
 
 - `demo/`, `tests/`, `node_modules/`, scaffold-only files
 
-## Паттерн **C**
+## Pattern **C**
 
-| Copy | Папки |
-|------|--------|
+| Copy | Folders |
+|------|---------|
 | Consumer | `src/` |
 
-См. [docs/KPPDF-MODULES-CHECKLIST.md](../docs/KPPDF-MODULES-CHECKLIST.md)
+See [docs/KPPDF-MODULES-CHECKLIST.md](../docs/KPPDF-MODULES-CHECKLIST.md)

@@ -1,20 +1,20 @@
 # COPY-GUIDE — schema-data-table-kit
 
-## Copy в consumer
+## Copy to consumer
 
 1. `schema-data-table-kit/src/` → `packages/schema-data-table-kit/src/`
-2. Path alias в tsconfig consumer
-3. Свой config (см. README)
-4. Подключить public API: <sdt-schema-data-table tableKey="..." [rows]="..." />
+2. Path alias in tsconfig consumer
+3. Configure (see README)
+4. Wire public API: <sdt-schema-data-table tableKey="..." [rows]="..." />
 
-## Не копировать
+## Do not copy
 
 - `demo/`, `tests/`, `node_modules/`, scaffold-only files
 
-## Паттерн **A**
+## Pattern **A**
 
-| Copy | Папки |
-|------|--------|
+| Copy | Folders |
+|------|---------|
 | Consumer | `src/` |
 
-См. [docs/KPPDF-MODULES-CHECKLIST.md](../docs/KPPDF-MODULES-CHECKLIST.md)
+See [docs/KPPDF-MODULES-CHECKLIST.md](../docs/KPPDF-MODULES-CHECKLIST.md)

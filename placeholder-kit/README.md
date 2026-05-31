@@ -1,21 +1,21 @@
 # placeholder-kit
 
-> **Статус:** ✅ v0.1 — ported from KPPDF  
-> **Паттерн упаковки:** **A**  
-> **Приоритет:** P1 · **Универсальность:** domain
+> **Status:** ✅ v0.1 — ported from KPPDF  
+> **Packaging pattern:** **A**  
+> **Priority:** P1 · **Universality:** domain
 
-## Назначение
+## Purpose
 
-Подстановка плейсхолдеров в текст и UI-пикер.
+Placeholder resolution engine and UI picker.
 
 | | |
 |--|--|
-| **Источник KPPDF** | `shared/placeholder/`, `kp-placeholder-picker` |
+| **KPPDF source** | `shared/placeholder/`, `kp-placeholder-picker` |
 | **Public API** | `resolvePlaceholders(text, ctx)`, `<ph-placeholder-picker />` |
-| **Зависимости** | core dot-path |
-| **Префикс** | `ph-` |
+| **Dependencies** | core dot-path |
+| **Prefix** | `ph-` |
 
-## Упаковка (consumer)
+## Packaging (consumer)
 
 Copy **`placeholder-kit/src/`** → `packages/placeholder-kit/src/`
 
@@ -26,11 +26,11 @@ Path alias:
 "@placeholder-kit/angular": ["packages/placeholder-kit/src/angular/index.ts"]
 ```
 
-Подробно: [COPY-GUIDE.md](./COPY-GUIDE.md)
+Details: [COPY-GUIDE.md](./COPY-GUIDE.md)
 
-## Разработка
+## Development
 
-Demo и тесты через hub `schema-table-kit`:
+Demo and tests via `schema-table-kit` hub:
 
 ```bash
 cd schema-table-kit
@@ -38,4 +38,4 @@ npm test
 ng serve demo --port 4201
 ```
 
-См. [STATUS.md](./STATUS.md)
+See [STATUS.md](./STATUS.md)

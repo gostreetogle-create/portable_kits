@@ -1,21 +1,21 @@
 # ui-primeng-kit
 
-> **Статус:** ✅ v0.1 — KpButton, KpInput, KpDialog  
-> **Паттерн упаковки:** **B**  
-> **Приоритет:** P2 · **Универсальность:** high
+> **Status:** ✅ v0.1 — KpButton, KpInput, KpDialog, KpTable, KpPaginator + 16 more components  
+> **Packaging pattern:** **B**  
+> **Priority:** P2 · **Universality:** high
 
-## Назначение
+## Purpose
 
-Обёртки PrimeNG в стиле KPPDF (premium buttons, поля, диалоги).
+PrimeNG wrappers in KPPDF style (premium buttons, inputs, dialogs, tables, etc.).
 
 | | |
 |--|--|
-| **Источник KPPDF** | `shared/ui/kp-button`, `kp-input`, `kp-dialog` |
-| **Public API** | `<up-kp-button>`, `<up-kp-input>`, `<up-kp-dialog>`, `provideUiPrimengKit()` |
-| **Зависимости** | primeng, primeicons, `@primeuix/themes`, `provideAnimations()` |
-| **Префикс** | `up-kp-` |
+| **KPPDF source** | `shared/ui/kp-button`, `kp-input`, `kp-dialog`, `kp-table`, `kp-paginator` |
+| **Public API** | 21 components: `<up-kp-button>`, `<up-kp-input>`, `<up-kp-dialog>`, `<up-kp-table>`, `provideUiPrimengKit()` |
+| **Dependencies** | primeng, primeicons, `@primeuix/themes`, `provideAnimations()` |
+| **Prefix** | `up-kp-` |
 
-## Упаковка (consumer)
+## Packaging (consumer)
 
 Copy **`ui-primeng-kit/src/`** → `packages/ui-primeng-kit/src/`
 
@@ -26,13 +26,13 @@ Path alias:
 "@ui-primeng-kit/angular": ["packages/ui-primeng-kit/src/angular/index.ts"]
 ```
 
-Consumer также подключает `providePrimeNG()` и CSS tokens из kit (`styles/_tokens.scss`).
+Consumer also needs `providePrimeNG()` and CSS tokens from kit (`styles/_tokens.scss`).
 
-Подробно: [COPY-GUIDE.md](./COPY-GUIDE.md)
+Details: [COPY-GUIDE.md](./COPY-GUIDE.md) (detailed consumer guide with examples)
 
-## Разработка
+## Development
 
-Demo и тесты через hub `schema-table-kit`:
+Demo and tests via `schema-table-kit` hub:
 
 ```bash
 cd schema-table-kit
@@ -40,4 +40,4 @@ npm test
 ng serve demo --port 4201
 ```
 
-См. [STATUS.md](./STATUS.md)
+See [STATUS.md](./STATUS.md)

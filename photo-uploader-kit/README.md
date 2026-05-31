@@ -1,21 +1,21 @@
 # photo-uploader-kit
 
-> **Статус:** ✅ v0.1 — ported from KPPDF  
-> **Паттерн упаковки:** **B**  
-> **Приоритет:** P1 · **Универсальность:** high
+> **Status:** ✅ v0.1 — ported from KPPDF  
+> **Packaging pattern:** **B**  
+> **Priority:** P1 · **Universality:** high
 
-## Назначение
+## Purpose
 
-Загрузка и управление фотографиями (plain HTML v0.1, без PrimeNG).
+Photo upload and management (plain HTML v0.1, no PrimeNG).
 
 | | |
 |--|--|
-| **Источник KPPDF** | `shared/ui/kp-photo-uploader.component.ts` |
+| **KPPDF source** | `shared/ui/kp-photo-uploader.component.ts` |
 | **Public API** | `<pu-photo-uploader [(photos)]="photos" />` |
-| **Зависимости** | `@angular/core`, `@angular/forms` |
-| **Префикс** | `pu-` |
+| **Dependencies** | `@angular/core`, `@angular/forms` |
+| **Prefix** | `pu-` |
 
-## Упаковка (consumer)
+## Packaging (consumer)
 
 Copy **`photo-uploader-kit/src/`** → `packages/photo-uploader-kit/src/`
 
@@ -26,11 +26,11 @@ Path alias:
 "@photo-uploader-kit/angular": ["packages/photo-uploader-kit/src/angular/index.ts"]
 ```
 
-Подробно: [COPY-GUIDE.md](./COPY-GUIDE.md)
+Details: [COPY-GUIDE.md](./COPY-GUIDE.md)
 
-## Разработка
+## Development
 
-Demo и тесты через hub `schema-table-kit`:
+Demo and tests via `schema-table-kit` hub:
 
 ```bash
 cd schema-table-kit
@@ -38,4 +38,4 @@ npm test
 ng serve demo --port 4201
 ```
 
-См. [STATUS.md](./STATUS.md)
+See [STATUS.md](./STATUS.md)

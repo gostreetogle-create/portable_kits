@@ -1,106 +1,106 @@
-# Чек-лист пожеланий для дальнейшего рассуждения
+# Wishes checklist for further discussion
 
-> **Назначение:** свод всех зафиксированных пожеланий по portable_kits / demo-hub / ui-primeng-kit из обсуждения.  
-> **Не является планом работ** — для приоритизации, споров и решений «делать / не делать».  
-> **Обновлено:** 2026-05-30
+> **Purpose:** summary of all recorded wishes for portable_kits / demo-hub / ui-primeng-kit from discussions.  
+> **Not a work plan** — for prioritization, debate, and "do / don't" decisions.  
+> **Updated:** 2026-05-30
 
-**Связанные документы:**
+**Related documents:**
 
-- [UI-KIT-VISUAL-CUSTOMIZATION-VISION.md](./UI-KIT-VISUAL-CUSTOMIZATION-VISION.md) — архитектурный аудит (персистенция, playground, anti-patterns)
-- [ui-primeng-kit/STATUS.md](../ui-primeng-kit/STATUS.md) — статус kit и backlog kp-*
-- [schema-table-kit/demo/modules.config.ts](../schema-table-kit/demo/modules.config.ts) — tier home (кирпичики → составные → приложения)
-
----
-
-## 1. Философия проекта
-
-| Приоритет | Пожелание |
-|-----------|-----------|
-| — | portable_kits — **отдельный проект**, независимый от KPPDF; KPPDF только как **источник для порта** кода |
-
-- [x] **P0** — Репозиторий portable_kits автономен: kits не импортируют KPPDF в runtime *(модель copy-paste `src/`, см. HOW-TO-ADD-KIT)*
-- [x] **P0** — Нет runtime-связки с KPPDF: consumer копирует `kit/src/` в свой проект, без общего npm/workspace с kppdf-3.0
-- [ ] **P2** — Явно задокументировать в README/COPY-GUIDE границу «порт из KPPDF ≠ зависимость от KPPDF» для новых контрибьюторов
+- [UI-KIT-VISUAL-CUSTOMIZATION-VISION.md](./UI-KIT-VISUAL-CUSTOMIZATION-VISION.md) — architectural audit (persistence, playground, anti-patterns)
+- [ui-primeng-kit/STATUS.md](../ui-primeng-kit/STATUS.md) — kit status and kp-* backlog
+- [schema-table-kit/demo/modules.config.ts](../schema-table-kit/demo/modules.config.ts) — tier home (bricks → composite → apps)
 
 ---
 
-## 2. Demo hub — главная страница
+## 1. Project philosophy
 
-- [x] **P1** — Три колонки на home: **кирпичики (слева)** → **составные (центр)** → **приложения (справа)**, по возрастанию сложности (`DEMO_MODULE_TIER_SECTIONS`, `home__tier-columns`)
-- [ ] **P3** — Подписи/иконки tier-колонок уточнить по UX (если понадобится после наполнения каталога)
+| Priority | Wish |
+|----------|------|
+| — | portable_kits — **separate project**, independent from KPPDF; KPPDF is only a **source for porting** code |
 
----
-
-## 3. UI-кит — каталог и навигация (ui-primeng-kit)
-
-- [x] **P1** — Отдельный hub/вкладка для мелких UI-кирпичей: **таблица типов** → клик по типу → **demo всех вариантов** (`/modules/ui-primeng-kit`, `/button|input|dialog`, planned → заглушка)
-- [x] **P2** — Переименовать hub в пользовательском UI на **«UI-кит»** (каталог, breadcrumbs, карточка на home в `modules.config.ts`)
-- [ ] **P2** — Единообразие «UI-кит» во всех demo-страницах и в корневом README kit (сейчас mix: `ui-primeng-kit` как folder name — ок)
+- [x] **P0** — portable_kits repo is autonomous: kits do not import KPPDF at runtime *(copy-paste `src/` model, see HOW-TO-ADD-KIT)*
+- [x] **P0** — No runtime coupling with KPPDF: consumer copies `kit/src/` into their project, no shared npm/workspace with kppdf-3.0
+- [ ] **P2** — Explicitly document boundary "port from KPPDF ≠ dependency on KPPDF" in README/COPY-GUIDE for new contributors
 
 ---
 
-## 4. UI-кит — визуальная кастомизация (playground)
+## 2. Demo hub — home page
 
-Детальный roadmap: [UI-KIT-VISUAL-CUSTOMIZATION-VISION.md](./UI-KIT-VISUAL-CUSTOMIZATION-VISION.md) §5 (v0.2–v0.4).
-
-- [x] **P1** — **Конструктор UI-кита v0.1** (`/modules/ui-kit-composer`): палитра + canvas + properties, button/input, localStorage draft, export JSON
-- [ ] **P1** — Боковая панель на demo-странице **кнопки** (отдельная от composer — опционально, частично покрыто composer)
-- [x] **P1** — Действие **«Сохранить»** / Export → JSON preset (ручное размещение в `ui-primeng-kit/variants/presets/`)
-- [ ] **P2** — Export SCSS snippet, TS preset → clipboard помимо JSON
-- [ ] **P2** — `core/button-variants.types.ts` + `variants/button.presets.ts` с примерами approved-вариантов
-- [x] **P3** — Черновик настроек в localStorage (composer, ключ `kit-composer-draft-v1`)
-- [ ] **P3** — Dev-only persistence (gitignored drafts) — **только если** понадобится после export-flow
-
-**Заметки:** panel — инструмент hub/demo, не обязательный путь для consumer; primary path — правка `_tokens.scss` / override CSS vars.
+- [x] **P1** — Three columns on home: **bricks (left)** → **composite (center)** → **apps (right)**, by complexity (`DEMO_MODULE_TIER_SECTIONS`, `home__tier-columns`)
+- [ ] **P3** — Tier column labels/icons refine by UX (if needed after catalog is populated)
 
 ---
 
-## 5. UI-кит — стили, «папка кирпичей», персистенция
+## 3. UI-kit — catalog and navigation (ui-primeng-kit)
 
-- [x] **P1** — Решение по персистенции: **git + SCSS/design tokens**, не БД для portable_kits *(зафиксировано в vision doc §3.2)*
-- [ ] **P1** — Конечное состояние: **одна папка стилей** для мелких кирпичей (`ui-primeng-kit/src/angular/styles/`), подключаемая при импорте составных модулей *(частично есть: `_tokens`, `_kp-button`, `_kp-field`; composite kits ещё не документированы на потребление)*
-- [ ] **P2** — Consumer COPY-GUIDE: один раз `@include kp-light-tokens-on-root` + импорт kp-компонентов; без runtime HTTP/CSS-папки
-- [ ] **P2** — Composite kits (crud-page, layout-shell, …) используют `<up-kp-*>` + documented token setup в demo и docs
-- [ ] **P3** — `provideUiPrimengKit({ tokenOverrides })` — runtime CSS vars для white-label без rebuild (vision v1.0)
-
-**Заметки:** «jQuery-папка» в обсуждении = папка SCSS/UI-kit стилей, не библиотека jQuery.
+- [x] **P1** — Separate hub/tab for small UI bricks: **type table** → click type → **demo all variants** (`/modules/ui-primeng-kit`, `/button|input|dialog`, planned → placeholder)
+- [x] **P2** — Rename hub in user UI to **"UI-kit"** (catalog, breadcrumbs, home card in `modules.config.ts`)
+- [ ] **P2** — Consistency of "UI-kit" across all demo pages and root README of kit (currently mixed: `ui-primeng-kit` as folder name — OK)
 
 ---
 
-## 6. UI-кит — порт kp-* из KPPDF
+## 4. UI-kit — visual customization (playground)
 
-- [x] **P1** — Исправление/стабилизация **KpButton** (premium/flat, severity, demo-матрица)
-- [ ] **P1** — Полный порт **~22 kp-* компонентов** из KPPDF `shared/ui/*`; **следующий приоритет: select/dropdown** (KpSelect)
-- [ ] **P1** — KpTable, KpPaginator — после select (см. STATUS.md Next)
-- [ ] **P2** — KppdfPreset / theme override helper в `provideUiPrimengKit()`
-- [ ] **P3** — Standalone demo app в `ui-primeng-kit/demo/` (сейчас demo только в schema-table-kit hub)
+Detailed roadmap: [UI-KIT-VISUAL-CUSTOMIZATION-VISION.md](./UI-KIT-VISUAL-CUSTOMIZATION-VISION.md) §5 (v0.2–v0.4).
 
-**Заметки:** селекторы `up-kp-*` vs KPPDF `app-kp-*`; 19+ компонентов в каталоге как planned.
+- [x] **P1** — **UI-kit composer v0.1** (`/modules/ui-kit-composer`): palette + canvas + properties, button/input, localStorage draft, export JSON
+- [ ] **P1** — Side panel on **button** demo page (separate from composer — optional, partially covered by composer)
+- [x] **P1** — **Save** / Export → JSON preset (manual placement in `ui-primeng-kit/variants/presets/`)
+- [ ] **P2** — Export SCSS snippet, TS preset → clipboard besides JSON
+- [ ] **P2** — `core/button-variants.types.ts` + `variants/button.presets.ts` with approved variant examples
+- [x] **P3** — Draft settings in localStorage (composer, key `kit-composer-draft-v1`)
+- [ ] **P3** — Dev-only persistence (gitignored drafts) — **only if** needed after export-flow
+
+**Notes:** panel — hub/demo tool, not mandatory consumer path; primary path — edit `_tokens.scss` / override CSS vars.
 
 ---
 
-## 7. Документация и аудит (уже сделано)
+## 5. UI-kit — styles, "bricks folder", persistence
 
-- [x] **P1** — Аудит vision: [UI-KIT-VISUAL-CUSTOMIZATION-VISION.md](./UI-KIT-VISUAL-CUSTOMIZATION-VISION.md) (as-is / to-be / phased roadmap)
-- [x] **P1** — Каталог hub: таблица + per-type routes + тесты catalog
+- [x] **P1** — Persistence decision: **git + SCSS/design tokens**, not DB for portable_kits *(recorded in vision doc §3.2)*
+- [ ] **P1** — End state: **one styles folder** for small bricks (`ui-primeng-kit/src/angular/styles/`), included when composite modules import *(partially exists: `_tokens`, `_kp-button`, `_kp-field`; composite kits not yet documented for consumption)*
+- [ ] **P2** — Consumer COPY-GUIDE: one `@include kp-light-tokens-on-root` + import kp-components; no runtime HTTP/CSS-folder
+- [ ] **P2** — Composite kits (crud-page, layout-shell, …) use `<up-kp-*>` + documented token setup in demo and docs
+- [ ] **P3** — `provideUiPrimengKit({ tokenOverrides })` — runtime CSS vars for white-label without rebuild (vision v1.0)
+
+**Notes:** "jQuery-folder" in discussion = SCSS/UI-kit styles folder, not jQuery library.
+
+---
+
+## 6. UI-kit — port kp-* from KPPDF
+
+- [x] **P1** — Fix/stabilize **KpButton** (premium/flat, severity, demo matrix)
+- [ ] **P1** — Full port **~22 kp-* components** from KPPDF `shared/ui/*`; **next priority: select/dropdown** (KpSelect)
+- [ ] **P1** — KpTable, KpPaginator — after select (see STATUS.md Next)
+- [ ] **P2** — KppdfPreset / theme override helper in `provideUiPrimengKit()`
+- [ ] **P3** — Standalone demo app in `ui-primeng-kit/demo/` (currently demo only in schema-table-kit hub)
+
+**Notes:** selectors `up-kp-*` vs KPPDF `app-kp-*`; 19+ components in catalog as planned.
+
+---
+
+## 7. Documentation and audit (completed)
+
+- [x] **P1** — Vision audit: [UI-KIT-VISUAL-CUSTOMIZATION-VISION.md](./UI-KIT-VISUAL-CUSTOMIZATION-VISION.md) (as-is / to-be / phased roadmap)
+- [x] **P1** — Hub catalog: table + per-type routes + tests catalog
 - [x] **P1** — Home three-tier columns
-- [x] **P1** — KpButton fix + статичная витрина вариантов на `/modules/ui-primeng-kit/button`
-- [x] **P1** — Аудит чек-листов 2026-05-30 (KPPDF-MODULES, KITS-READINESS, STATUS, HOW-TO-ADD-KIT §8)
+- [x] **P1** — KpButton fix + static variant showcase on `/modules/ui-primeng-kit/button`
+- [x] **P1** — Checklist audit 2026-05-30 (KPPDF-MODULES, KITS-READINESS, STATUS, HOW-TO-ADD-KIT §8)
 
 ---
 
-## Сводка по приоритетам (для обсуждения)
+## Priority summary (for discussion)
 
-| P | Открытые темы |
-|---|----------------|
-| **P1** | Style playground + Save/export; папка стилей + composite integration; KpSelect и остальной порт kp-* |
-| **P2** | Export presets; COPY-GUIDE; единообразие UI-кит в docs |
+| P | Open topics |
+|---|-------------|
+| **P1** | Style playground + Save/export; styles folder + composite integration; KpSelect and remaining kp-* port |
+| **P2** | Export presets; COPY-GUIDE; UI-kit consistency in docs |
 | **P3** | localStorage drafts; standalone ui-primeng demo; dev-only draft API |
 
 ---
 
-## Как пользоваться чек-листом
+## How to use this checklist
 
-1. Обсуждение пункта → решение в vision doc или STATUS.md.
-2. Реализация → перенос пункта в roadmap kit / Phase log в [KITS-READINESS-CHECKLIST.md](./KITS-READINESS-CHECKLIST.md).
-3. Готовое → `[x]` здесь + запись в STATUS «Done».
+1. Discuss item → decision in vision doc or STATUS.md.
+2. Implementation → move item to kit roadmap / Phase log in [KITS-READINESS-CHECKLIST.md](./KITS-READINESS-CHECKLIST.md).
+3. Done → `[x]` here + note in STATUS "Done".

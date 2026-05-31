@@ -1,11 +1,18 @@
-# COPY-GUIDE — photo-uploader-kit
+# COPY-GUIDE — quotation-editor
 
 ## Copy to consumer
 
-1. `photo-uploader-kit/src/` → `packages/photo-uploader-kit/src/`
+1. `quotation-editor/src/` → `packages/quotation-editor/src/`
 2. Path alias in tsconfig consumer
 3. Configure (see README)
-4. Wire public API: <pu-photo-uploader [(photos)]="photos" />
+4. Wire public API: <qe-quotation-editor [(blocks)]="..." />, provideQuotationEditorKit()
+
+## Dependencies (also copy)
+
+- document-canvas-kit
+- entity-picker-kit
+- placeholder-kit
+- sortable-kit
 
 ## Do not copy
 

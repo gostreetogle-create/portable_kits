@@ -1,20 +1,20 @@
 # COPY-GUIDE — entity-picker-kit
 
-## Copy в consumer
+## Copy to consumer
 
 1. `entity-picker-kit/src/` → `packages/entity-picker-kit/src/`
-2. Path alias в tsconfig consumer
-3. Свой config (см. README)
-4. Подключить public API: <ep-entity-picker entityKey="products" [(visible)]="v" (selected)="onPick($event)" />
+2. Path alias in tsconfig consumer
+3. Configure (see README)
+4. Wire public API: <ep-entity-picker entityKey="products" [(visible)]="v" (selected)="onPick($event)" />
 
-## Не копировать
+## Do not copy
 
 - `demo/`, `tests/`, `node_modules/`, scaffold-only files
 
-## Паттерн **BD**
+## Pattern **BD**
 
-| Copy | Папки |
-|------|--------|
+| Copy | Folders |
+|------|---------|
 | Consumer | `src/` |
 
-См. [docs/KPPDF-MODULES-CHECKLIST.md](../docs/KPPDF-MODULES-CHECKLIST.md)
+See [docs/KPPDF-MODULES-CHECKLIST.md](../docs/KPPDF-MODULES-CHECKLIST.md)

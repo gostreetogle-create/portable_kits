@@ -1,26 +1,26 @@
 # Schema Table Kit
 
-Переиспользуемый модуль: единый config таблиц БД + конструктор колонок для Angular (+ optional Express schema API).
+Reusable module: unified DB table schema config + column builder for Angular (+ optional Express schema API).
 
-Часть repo **[portable-kits](../README.md)** — склад переносимых модулей. KPPDF и другие apps — consumers.
+Part of **[portable-kits](../README.md)** — a portable modules warehouse. KPPDF and other apps are consumers.
 
-> **Разработка vs перенос:** эта папка — demo + тесты kit.  
-> В consumer копируете **только `src/`** + свой `schema-tables.config.ts`.  
-> Подробно: **[COPY-GUIDE.md](./COPY-GUIDE.md)**.
+> **Dev vs consumer:** this folder is the demo + tests shell for the kit.  
+> Consumer copies **only `src/`** + their own `schema-tables.config.ts`.  
+> Details: **[COPY-GUIDE.md](./COPY-GUIDE.md)**.
 
-## Концепция (кратко)
+## Concept (brief)
 
-**Один `<st-schema-column-builder>` на весь проект** — для каждой новой сущности БД компонент **не копируется**.
+**One `<st-schema-column-builder>` per project** — for each new DB entity, the component is **not copied**.
 
-| Кто | Действие |
-|-----|----------|
-| **Разработчик** | Добавляет `EntitySchema` в `schema-tables.config.ts` (поля, русские подписи, `schemaVersion`) |
-| **Админ** | В UI создаёт **определение таблицы**: key, label, выбор колонок из dropdown → save |
+| Role | Action |
+|------|--------|
+| **Developer** | Adds `EntitySchema` in `schema-tables.config.ts` (fields, labels, `schemaVersion`) |
+| **Admin** | In UI creates **table definition**: key, label, column selection from dropdown → save |
 
-- **Config** — «что есть в БД» (все поля `products`, `orders`, …)
-- **TableDefinition** — «какие колонки показать» (можно несколько таблиц на одну сущность)
+- **Config** — "what exists in DB" (all fields for `products`, `orders`, …)
+- **TableDefinition** — "which columns to show" (multiple tables per entity possible)
 
-Подробно: **[CONCEPTS.md](./CONCEPTS.md)** — уровни данных, FAQ, как добавить сущность, roadmap v2.
+Details: **[CONCEPTS.md](./CONCEPTS.md)** — data levels, FAQ, adding entities, roadmap v2.
 
 ## Quick Start
 
@@ -31,58 +31,58 @@ npm install
 npm start
 ```
 
-Откройте http://localhost:4200
+Open http://localhost:4200
 
-### HTTP-режим (smoke test)
+### HTTP mode (smoke test)
 
 ```bash
-# терминал 1
+# terminal 1
 npm run demo:server
 
 # demo/environment.ts → provider: 'http'
 npm start
 ```
 
-Подробный чеклист: [QUICKSTART.md](./QUICKSTART.md)
+Detailed checklist: [QUICKSTART.md](./QUICKSTART.md)
 
-## Структура
+## Structure
 
 ```
 src/core/          — types, validation, presets (zero Angular)
 src/angular/       — st-schema-column-builder + provideSchemaTableKit()
 src/express/       — createSchemaRouter()
-demo/              — demo-приложение «Создать таблицу»
+demo/              — demo app "Create table"
 demo-server/       — mock API :3333
 tests/             — vitest (core, express, angular)
 ```
 
-## COPY-GUIDE — перенос в свой проект
+## COPY-GUIDE — port to your project
 
-**Кратко:** копируете **`src/`**, не всю папку kit.
+**Short version:** copy **`src/`**, not the whole kit folder.
 
-| Копируете | Не копируете |
-|-----------|--------------|
+| Copy | Do not copy |
+|------|-------------|
 | `src/core`, `src/angular`, `src/express` | `demo/`, `demo-server/`, `tests/`, `node_modules/` |
 
-Полная инструкция: **[COPY-GUIDE.md](./COPY-GUIDE.md)** — alias, config, app.config, Express, чеклист.
+Full instructions: **[COPY-GUIDE.md](./COPY-GUIDE.md)** — alias, config, app.config, Express, checklist.
 
-### В двух словах
+### In a nutshell
 
-1. `src/` → `packages/schema-table-kit/src/` (или submodule)
-2. Path alias в `tsconfig.json`
-3. Свой `schema-tables.config.ts` в consumer (demo/mock — только образец)
+1. `src/` → `packages/schema-table-kit/src/` (or submodule)
+2. Path alias in `tsconfig.json`
+3. Your own `schema-tables.config.ts` in consumer (demo/mock is sample only)
 4. `provideSchemaTableKit(config)` + `<st-schema-column-builder>`
-5. (optional) `createSchemaRouter(config)` на backend
+5. (optional) `createSchemaRouter(config)` on backend
 
 ## schemaVersion
 
-- Задаётся **вручную** на каждой сущности: `EntitySchema.schemaVersion` (напр. `'1.0.0'`).
-- При save consumer записывает `savedSchemaVersion` из текущей entity.
-- Если версии не совпадают — banner «Схема обновилась», **save не блокируется**.
+- Set **manually** per entity: `EntitySchema.schemaVersion` (e.g., `'1.0.0'`).
+- On save, consumer writes `savedSchemaVersion` from current entity.
+- If versions mismatch — banner "Schema updated", **save is not blocked**.
 
 ## Orphan fields
 
-Поле удалено из config, но осталось в сохранённых колонках → badge «Устарело», warning `orphan_field`.
+Field removed from config but still in saved columns → badge "Outdated", warning `orphan_field`.
 
 ## HttpSchemaProvider
 
@@ -93,12 +93,12 @@ provideSchemaTableKit({
 })
 ```
 
-Компонент эмитит `providerStatusChange`: `'idle' | 'loading' | 'ready' | 'error'`. При error — кнопка «Повторить».
+Component emits `providerStatusChange`: `'idle' | 'loading' | 'ready' | 'error'`. On error — "Retry" button.
 
 ## Public API
 
-| Export | Описание |
-|--------|----------|
+| Export | Description |
+|--------|-------------|
 | `provideSchemaTableKit(config)` | DI providers |
 | `SchemaColumnBuilderComponent` | `<st-schema-column-builder>` (CVA) |
 | `src/core` | types, `validateColumns`, `getFieldValue`, `applyPreset` |
@@ -106,22 +106,22 @@ provideSchemaTableKit({
 
 ## Mock data
 
-Demo использует поля **«Товары»** из KPPDF (`IProduct` / products-page) — скопировано в `demo/mock-data/`, без import из KPPDF.
+Demo uses **"Products"** fields from KPPDF (`IProduct` / products-page) — copied to `demo/mock-data/`, no import from KPPDF.
 
-## Документация
+## Documentation
 
-| Файл | Содержание |
-|------|------------|
-| [COPY-GUIDE.md](./COPY-GUIDE.md) | **Что копировать в новый проект и как подключить** |
-| [CONCEPTS.md](./CONCEPTS.md) | Концепция, роли, FAQ, добавление сущности |
-| [QUICKSTART.md](./QUICKSTART.md) | Clone → demo за 2 мин |
-| [INTEGRATION-KPPDF.md](./INTEGRATION-KPPDF.md) | Подключение к KPPDF (backlog) |
+| File | Contents |
+|------|----------|
+| [COPY-GUIDE.md](./COPY-GUIDE.md) | **What to copy to consumer and how to wire** |
+| [CONCEPTS.md](./CONCEPTS.md) | Concept, roles, FAQ, adding entities |
+| [QUICKSTART.md](./QUICKSTART.md) | Clone → demo in 2 min |
+| [INTEGRATION-KPPDF.md](./INTEGRATION-KPPDF.md) | KPPDF integration (backlog) |
 
 ## Scripts
 
-| Команда | Описание |
-|---------|----------|
+| Command | Description |
+|---------|-------------|
 | `npm start` | Demo :4200 |
 | `npm run demo:server` | Mock schema API :3333 |
 | `npm test` | Vitest |
-| `npm run build` | Production build demo |
+| `npm run build` | Production bundle |

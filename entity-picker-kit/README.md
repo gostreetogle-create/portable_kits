@@ -1,21 +1,21 @@
 # entity-picker-kit
 
-> **Статус:** ✅ v0.1 — ported from KPPDF (simplified)  
-> **Паттерн упаковки:** **BD**  
-> **Приоритет:** P1 · **Универсальность:** high
+> **Status:** ✅ v0.1 — ported from KPPDF (simplified)  
+> **Packaging pattern:** **BD**  
+> **Priority:** P1 · **Universality:** high
 
-## Назначение
+## Purpose
 
-Модальное окно выбора сущности по ключу (single-select v0.1).
+Modal entity picker by key (single-select and multi-select).
 
 | | |
 |--|--|
-| **Источник KPPDF** | `shared/ui/kp-product-picker/` |
+| **KPPDF source** | `shared/ui/kp-product-picker/` |
 | **Public API** | `<ep-entity-picker entityKey="..." [(visible)]="v" (selected)="onPick($event)" />` |
-| **Зависимости** | `@angular/core`, `@angular/forms` |
-| **Префикс** | `ep-` |
+| **Dependencies** | `@angular/core`, `@angular/forms` |
+| **Prefix** | `ep-` |
 
-## Упаковка (consumer)
+## Packaging (consumer)
 
 Copy **`entity-picker-kit/src/`** → `packages/entity-picker-kit/src/`
 
@@ -26,11 +26,11 @@ Path alias:
 "@entity-picker-kit/angular": ["packages/entity-picker-kit/src/angular/index.ts"]
 ```
 
-Подробно: [COPY-GUIDE.md](./COPY-GUIDE.md)
+Details: [COPY-GUIDE.md](./COPY-GUIDE.md)
 
-## Разработка
+## Development
 
-Demo и тесты через hub `schema-table-kit`:
+Demo and tests via `schema-table-kit` hub:
 
 ```bash
 cd schema-table-kit
@@ -38,4 +38,4 @@ npm test
 ng serve demo --port 4201
 ```
 
-См. [STATUS.md](./STATUS.md)
+See [STATUS.md](./STATUS.md)

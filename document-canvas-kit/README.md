@@ -1,21 +1,21 @@
 # document-canvas-kit
 
-> **Статус:** ✅ v0.1 — ported from KPPDF (text blocks)  
-> **Паттерн упаковки:** **B**  
-> **Приоритет:** P1 · **Универсальность:** domain
+> **Status:** ✅ v0.1 — ported from KPPDF (text blocks)  
+> **Packaging pattern:** **B**  
+> **Priority:** P1 · **Universality:** domain
 
-## Назначение
+## Purpose
 
-Редактор блоков документа (шаблон или экземпляр).
+Document block editor (template or instance mode).
 
 | | |
 |--|--|
-| **Источник KPPDF** | `shared/ui/kp-document-block-editor/` |
+| **KPPDF source** | `shared/ui/kp-document-block-editor/` |
 | **Public API** | `<dc-document-canvas mode="instance|template" [(blocks)]="blocks" />` |
-| **Зависимости** | sortable-kit, placeholder-kit (optional hook) |
-| **Префикс** | `dc-` |
+| **Dependencies** | sortable-kit, placeholder-kit (optional hook) |
+| **Prefix** | `dc-` |
 
-## Упаковка (consumer)
+## Packaging (consumer)
 
 Copy **`document-canvas-kit/src/`** → `packages/document-canvas-kit/src/`
 
@@ -26,11 +26,11 @@ Path alias:
 "@document-canvas-kit/angular": ["packages/document-canvas-kit/src/angular/index.ts"]
 ```
 
-Подробно: [COPY-GUIDE.md](./COPY-GUIDE.md)
+Details: [COPY-GUIDE.md](./COPY-GUIDE.md)
 
-## Разработка
+## Development
 
-Demo и тесты через hub `schema-table-kit`:
+Demo and tests via `schema-table-kit` hub:
 
 ```bash
 cd schema-table-kit
@@ -38,4 +38,4 @@ npm test
 ng serve demo --port 4201
 ```
 
-См. [STATUS.md](./STATUS.md)
+See [STATUS.md](./STATUS.md)

@@ -1,20 +1,20 @@
 # COPY-GUIDE — document-canvas-kit
 
-## Copy в consumer
+## Copy to consumer
 
 1. `document-canvas-kit/src/` → `packages/document-canvas-kit/src/`
-2. Path alias в tsconfig consumer
-3. Свой config (см. README)
-4. Подключить public API: <dc-document-canvas mode="instance|template" [(blocks)]="blocks" />
+2. Path alias in tsconfig consumer
+3. Configure (see README)
+4. Wire public API: <dc-document-canvas mode="instance|template" [(blocks)]="blocks" />
 
-## Не копировать
+## Do not copy
 
 - `demo/`, `tests/`, `node_modules/`, scaffold-only files
 
-## Паттерн **B**
+## Pattern **B**
 
-| Copy | Папки |
-|------|--------|
+| Copy | Folders |
+|------|---------|
 | Consumer | `src/` |
 
-См. [docs/KPPDF-MODULES-CHECKLIST.md](../docs/KPPDF-MODULES-CHECKLIST.md)
+See [docs/KPPDF-MODULES-CHECKLIST.md](../docs/KPPDF-MODULES-CHECKLIST.md)

@@ -1,21 +1,21 @@
 # sortable-kit
 
-> **Статус:** ✅ v0.1 — ported from KPPDF  
-> **Паттерн упаковки:** **B**  
-> **Приоритет:** P1 · **Универсальность:** high
+> **Status:** ✅ v0.1 — ported from KPPDF  
+> **Packaging pattern:** **B**  
+> **Priority:** P1 · **Universality:** high
 
-## Назначение
+## Purpose
 
-Drag-and-drop списки на `@angular/cdk/drag-drop`.
+Drag-and-drop lists via `@angular/cdk/drag-drop`.
 
 | | |
 |--|--|
-| **Источник KPPDF** | `shared/ui/kp-sortable/*` |
+| **KPPDF source** | `shared/ui/kp-sortable/*` |
 | **Public API** | `soSortableList`, `soSortableItem`, `soSortableHandle`, `moveSortableItems()` |
-| **Зависимости** | `@angular/cdk/drag-drop`, `provideAnimations()` |
-| **Префикс** | `so-` (директивы / CSS vars) |
+| **Dependencies** | `@angular/cdk/drag-drop`, `provideAnimations()` |
+| **Prefix** | `so-` (directives / CSS vars) |
 
-## Упаковка (consumer)
+## Packaging (consumer)
 
 Copy **`sortable-kit/src/`** → `packages/sortable-kit/src/`
 
@@ -25,11 +25,11 @@ Path alias:
 "@sortable-kit/angular": ["packages/sortable-kit/src/angular/index.ts"]
 ```
 
-Подробно: [COPY-GUIDE.md](./COPY-GUIDE.md)
+Details: [COPY-GUIDE.md](./COPY-GUIDE.md)
 
-## Разработка
+## Development
 
-Demo и тесты через hub `schema-table-kit`:
+Demo and tests via `schema-table-kit` hub:
 
 ```bash
 cd schema-table-kit
@@ -37,4 +37,4 @@ npm test
 ng serve demo --port 4201
 ```
 
-См. [STATUS.md](./STATUS.md)
+See [STATUS.md](./STATUS.md)

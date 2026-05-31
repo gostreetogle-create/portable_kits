@@ -6,7 +6,7 @@
 
 - [x] `resolvePlaceholders()`, `resolvePlaceholderBlock()`, `extractPlaceholderTokens()`, `resolvePlaceholderToken()`
 - [x] `TemplatePlaceholderService` (Angular)
-- [x] `wrapPlaceholderDisplay()`, `escapeHtml()`, `formatRuDate()`
+- [x] `wrapPlaceholderDisplay()`, `escapeHtml()`, `formatDate()`
 - [x] `DEFAULT_PLACEHOLDER_REGISTRY`, `buildPlaceholderGroups()`
 - [x] `<ph-placeholder-picker [(visible)]="v" (placeholderSelected)="onPick($event)" />`
 - [x] `providePlaceholderKit(config)` — custom registry, field aliases

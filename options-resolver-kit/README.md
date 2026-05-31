@@ -1,21 +1,21 @@
 # options-resolver-kit
 
-> **Статус:** ✅ v0.1 — ported from KPPDF  
-> **Паттерн упаковки:** **D**  
-> **Приоритет:** P1 · **Универсальность:** high
+> **Status:** ✅ v0.1 — ported from KPPDF  
+> **Packaging pattern:** **D**  
+> **Priority:** P1 · **Universality:** high
 
-## Назначение
+## Purpose
 
-Кэш и загрузка опций для select/autocomplete.
+Options cache and loader for select/autocomplete.
 
 | | |
 |--|--|
-| **Источник KPPDF** | `shared/services/*-options.service.ts` |
+| **KPPDF source** | `shared/services/*-options.service.ts` |
 | **Public API** | `provideOptionsResolver(config)`, `OptionsResolver.getOptions(entityKey)` |
-| **Зависимости** | `@angular/core`, HttpClient optional |
-| **Префикс** | `or-` |
+| **Dependencies** | `@angular/core`, HttpClient optional |
+| **Prefix** | `or-` |
 
-## Упаковка (consumer)
+## Packaging (consumer)
 
 Copy **`options-resolver-kit/src/`** → `packages/options-resolver-kit/src/`
 
@@ -26,11 +26,11 @@ Path alias:
 "@options-resolver-kit/angular": ["packages/options-resolver-kit/src/angular/index.ts"]
 ```
 
-Подробно: [COPY-GUIDE.md](./COPY-GUIDE.md)
+Details: [COPY-GUIDE.md](./COPY-GUIDE.md)
 
-## Разработка
+## Development
 
-Demo и тесты через hub `schema-table-kit`:
+Demo and tests via `schema-table-kit` hub:
 
 ```bash
 cd schema-table-kit
@@ -38,4 +38,4 @@ npm test
 ng serve demo --port 4201
 ```
 
-См. [STATUS.md](./STATUS.md)
+See [STATUS.md](./STATUS.md)

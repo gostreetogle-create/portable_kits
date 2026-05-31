@@ -1,55 +1,55 @@
-# Аудит: визуальная кастомизация ui-primeng-kit
+# Audit: visual customization of ui-primeng-kit
 
-> **Дата:** 2026-05-30  
-> **Статус:** vision / architectural guidance (без реализации)  
-> **Область:** `ui-primeng-kit`, demo-hub `schema-table-kit`, модель portable kits
-
----
-
-## 1. Видение пользователя (зафиксировано как требования)
-
-| # | Пожелание |
-|---|-----------|
-| V1 | На demo-странице кнопки — **боковая панель** (слева или справа) для настройки/стилизации кнопок через **CSS или SCSS** |
-| V2 | После визуальной настройки — действие **«Сохранить»** → результат становится **подтверждённым вариантом ui-kit** («approved variant») |
-| V3 | Вопрос: **как персистить** настройки — база данных, CSS-файлы, структурированный формат? |
-| V4 | **Конечное состояние:** одна папка со стилями для мелких UI-кирпичей (кнопки и т.д.), которая **подгружается** вместе с более крупными составными модулями при их импорте |
-| V5 | Сомнение: **так ли это делают** в индустрии, или лучше править код напрямую и не усложнять? |
-
-### Уточнение терминологии
-
-Пользователь упоминал «**jQuery-папку**» — скорее всего имелась в виду **папка CSS/UI-kit стилей** (design tokens, SCSS-миксины, пресеты вариантов), а не библиотека jQuery. В portable_kits jQuery не используется; стилизация — **SCSS + CSS custom properties**.
+> **Date:** 2026-05-30  
+> **Status:** vision / architectural guidance (no implementation)  
+> **Scope:** `ui-primeng-kit`, demo-hub `schema-table-kit`, portable kits model
 
 ---
 
-## 2. Текущее состояние (as-is)
+## 1. User vision (recorded as requirements)
 
-### 2.1 Модель portable kits
+| # | Wish |
+|---|------|
+| V1 | On the **button** demo page — a **side panel** (left or right) for configuring/styling buttons via **CSS or SCSS** |
+| V2 | After visual configuration — a **"Save"** action → result becomes an **approved ui-kit variant** ("approved variant") |
+| V3 | Question: **how to persist** settings — database, CSS files, structured format? |
+| V4 | **End state:** one styles folder for small UI bricks (buttons, etc.) that **loads** together with larger composite modules when imported |
+| V5 | Doubt: **is this how it's done** in the industry, or is it better to edit code directly without overcomplicating? |
 
-Согласно [HOW-TO-ADD-KIT.md](./HOW-TO-ADD-KIT.md):
+### Terminology clarification
 
-- Consumer **копирует только `src/`** kit-а в свой проект (copy-paste, не npm-пакет).
-- Kit **автономен**, не импортирует consumer (KPPDF и т.п.).
-- Demo и тесты живут в hub `schema-table-kit`; в consumer demo **не переносится**.
+The user mentioned "**jQuery folder**" — most likely referring to a **CSS/UI-kit styles folder** (design tokens, SCSS mixins, variant presets), not the jQuery library. portable_kits does not use jQuery; styling is **SCSS + CSS custom properties**.
 
-`ui-primeng-kit` — **паттерн B**: копируется `ui-primeng-kit/src/` → `packages/ui-primeng-kit/src/`.
+---
 
-### 2.2 Стили ui-primeng-kit сегодня
+## 2. Current state (as-is)
+
+### 2.1 Portable kits model
+
+Per [HOW-TO-ADD-KIT.md](./HOW-TO-ADD-KIT.md):
+
+- Consumer **copies only `src/`** of the kit into their project (copy-paste, not npm package).
+- Kit is **autonomous**, does not import consumer (KPPDF, etc.).
+- Demo and tests live in hub `schema-table-kit`; demo is **not** copied to consumer.
+
+`ui-primeng-kit` — **pattern B**: copy `ui-primeng-kit/src/` → `packages/ui-primeng-kit/src/`.
+
+### 2.2 Styles ui-primeng-kit today
 
 ```
 ui-primeng-kit/src/angular/
 ├── styles/
-│   ├── _tokens.scss      ← CSS-переменные (--kp-primary, --kp-button-*)
-│   ├── _kp-button.scss   ← SCSS-миксины вариантов (premium/flat × severity)
+│   ├── _tokens.scss      ← CSS variables (--kp-primary, --kp-button-*)
+│   ├── _kp-button.scss   ← SCSS variant mixins (premium/flat × severity)
 │   └── _kp-field.scss
 ├── kp-button.component.ts
-└── kp-button.component.scss  ← @use './styles/kp-button'; применяет миксины по host-классам
+└── kp-button.component.scss  ← @use './styles/kp-button'; applies mixins by host classes
 ```
 
-**Токены** (`_tokens.scss`):
+**Tokens** (`_tokens.scss`):
 
-- Mixin `kp-light-tokens` задаёт design tokens как CSS custom properties.
-- В demo-hub подключаются глобально:
+- Mixin `kp-light-tokens` defines design tokens as CSS custom properties.
+- In demo-hub, included globally:
 
 ```scss
 // schema-table-kit/demo/styles.scss
@@ -59,86 +59,86 @@ ui-primeng-kit/src/angular/
 
 **KpButton** (`kp-button.component.ts`):
 
-- Inputs: `variant` (`premium` | `flat`), `severity`, `size`, модификаторы PrimeNG (`outlined`, `text`, …).
-- HostBinding-классы: `up-kp-button--variant-*`, `up-kp-button--severity-*`.
-- Стили вариантов — в SCSS через миксины, **не** через runtime-конфиг.
+- Inputs: `variant` (`premium` | `flat`), `severity`, `size`, PrimeNG modifiers (`outlined`, `text`, …).
+- HostBinding classes: `up-kp-button--variant-*`, `up-kp-button--severity-*`.
+- Variant styles in SCSS mixins, **not** runtime config.
 
 **provideUiPrimengKit()**:
 
-- Минимальный DI-провайдер; `UiPrimengKitConfig` зарезервирован (`cssPrefix?`).
-- Theme override helper — в [STATUS.md](../ui-primeng-kit/STATUS.md) помечен как «Next».
+- Minimal DI provider; `UiPrimengKitConfig` reserved (`cssPrefix?`).
+- Theme override helper — marked as "Next" in [STATUS.md](../ui-primeng-kit/STATUS.md).
 
-### 2.3 Demo кнопки сегодня
+### 2.3 Button demo today
 
-- Маршрут: `/modules/ui-primeng-kit/button`
-- Статичная витрина всех комбинаций severity / variant / modifiers.
-- **Нет** боковой панели, **нет** live-редактора CSS, **нет** Save/export.
+- Route: `/modules/ui-primeng-kit/button`
+- Static showcase of all severity / variant / modifier combinations.
+- **No** side panel, **no** live CSS editor, **no** Save/export.
 
-### 2.4 Загрузка стилей в составных модулях
+### 2.4 Style loading in composite modules
 
-Сейчас composite kits (crud-page-kit, layout-shell-kit и др.) **ещё не импортируют** ui-primeng-kit напрямую в коде repo. Hub demo подключает kit глобально через `app.config.ts` + `styles.scss`.
+Currently composite kits (crud-page-kit, layout-shell-kit, etc.) **do not yet import** ui-primeng-kit directly in the repo. Hub demo includes the kit globally via `app.config.ts` + `styles.scss`.
 
-При интеграции в consumer:
+When integrated into consumer:
 
-| Что | Как |
-|-----|-----|
-| Компонент `<up-kp-button>` | TypeScript import из `@ui-primeng-kit/angular` |
-| Стили компонента | Angular **бандлит** `styleUrl` каждого kp-* автоматически |
-| Глобальные токены | Consumer один раз: `@include kp-light-tokens-on-root` в `styles.scss` |
+| What | How |
+|------|-----|
+| `<up-kp-button>` component | TypeScript import from `@ui-primeng-kit/angular` |
+| Component styles | Angular **bundles** `styleUrl` of each kp-* automatically |
+| Global tokens | Consumer once: `@include kp-light-tokens-on-root` in `styles.scss` |
 | PrimeNG base | `providePrimeNG({ theme: { preset: Aura } })` + primeicons CSS |
 
-**Не** требуется отдельная «папка на сервере», которая подгружается runtime — всё собирается **на этапе build**.
+**No** separate server-side styles folder that loads at runtime — everything is **build-time bundled**.
 
 ---
 
-## 3. Архитектурная коррекция и рекомендации
+## 3. Architectural correction and recommendations
 
-### 3.1 Ответ на V5: «так делают или правят код?»
+### 3.1 Answer to V5: "is this how it's done, or edit code directly?"
 
-**Оба подхода сосуществуют**, но для разных ролей:
+**Both approaches coexist**, but for different roles:
 
-| Роль | Стандартный путь |
+| Role | Standard approach |
 |------|------------------|
-| **Команда разработки**, фиксирует design system | Git + SCSS tokens + code review. Правки в `_tokens.scss`, `_kp-button.scss`, presets в TS. |
-| **Дизайнер / PM**, исследует варианты до коммита | Visual playground в **demo** (hub), без персистенции в prod. |
-| **Конечные пользователи SaaS**, меняют тему в продукте | БД / CMS / theme API — **другой продукт**, не portable_kits. |
+| **Dev team**, establishing design system | Git + SCSS tokens + code review. Edits to `_tokens.scss`, `_kp-button.scss`, presets in TS. |
+| **Designer / PM**, exploring variants before commit | Visual playground in **demo** (hub), no production persistence. |
+| **End users of SaaS**, changing theme in product | DB / CMS / theme API — **a different product**, not portable_kits. |
 
-Для **portable_kits** источник истины — **репозиторий (git)**, не БД.
+For **portable_kits**, the source of truth is **the repository (git)**, not a database.
 
-### 3.2 Ответ на V3: БД vs файлы vs design tokens
+### 3.2 Answer to V3: DB vs files vs design tokens
 
-| Вариант | Подходит для portable_kits? | Комментарий |
-|---------|----------------------------|-------------|
-| **База данных** | ❌ Нет (для kit-модели) | Нужна только если строите SaaS theme editor для end-users. Добавляет runtime-зависимость, усложняет copy-paste перенос kit. |
-| **Отдельные CSS-файлы «как есть»** | ⚠️ Частично | Плохо версионируются, дублируют логику миксинов, нет связи с TS API (`variant`, `severity`). |
-| **Design tokens (SCSS + CSS vars)** | ✅ Да | Уже реализовано в `_tokens.scss`. Consumer переопределяет `--kp-*` или форкает mixin. |
-| **Structured presets (JSON/TS + generated SCSS)** | ✅ Да (v0.3+) | Demo «Save» экспортирует артеfact → разработчик вставляет в repo и коммитит. |
+| Option | Suitable for portable_kits? | Comment |
+|--------|----------------------------|---------|
+| **Database** | ❌ No (for kit model) | Needed only if building a SaaS theme editor for end-users. Adds runtime dependency, complicates copy-paste kit portability. |
+| **Separate CSS files "as is"** | ⚠️ Partially | Poor versioning, duplicates mixin logic, no connection to TS API (`variant`, `severity`). |
+| **Design tokens (SCSS + CSS vars)** | ✅ Yes | Already implemented in `_tokens.scss`. Consumer overrides `--kp-*` or forks mixin. |
+| **Structured presets (JSON/TS + generated SCSS)** | ✅ Yes (v0.3+) | Demo "Save" exports artifact → developer inserts into repo and commits. |
 
-**Рекомендация:** персистенция = **файлы в git** (tokens, presets, variant map). Demo может использовать **localStorage** только для черновика сессии, не как prod-механизм.
+**Recommendation:** persistence = **files in git** (tokens, presets, variant map). Demo may use **localStorage** only for session drafts, not as production mechanism.
 
-### 3.3 Ответ на V4: «одна папка стилей для кирпичей»
+### 3.3 Answer to V4: "one styles folder for bricks"
 
-Видение **верное по смыслу**, но механизм другой:
+Vision **correct in concept**, but mechanism differs:
 
 ```
-ui-primeng-kit/src/angular/styles/   ← «папка кирпичей» (уже есть)
-├── _tokens.scss                       ← общие токены
-├── _kp-button.scss                    ← кирпич «кнопка»
-├── _kp-field.scss                     ← кирпич «поле»
-└── (будущие _kp-*.scss)
+ui-primeng-kit/src/angular/styles/   ← "bricks folder" (already exists)
+├── _tokens.scss                       ← common tokens
+├── _kp-button.scss                    ← "button" brick
+├── _kp-field.scss                     ← "field" brick
+└── (future _kp-*.scss)
 ```
 
-**Composite kit** (например, crud-page-kit) при использовании kp-компонентов:
+**Composite kit** (e.g., crud-page-kit) when using kp-components:
 
-1. Импортирует `<up-kp-button>` в TS.
-2. Подключает токены в **глобальном** `styles.scss` consumer (один раз).
-3. Стили каждого kp-* **едут в bundle** через Angular component styles.
+1. Imports `<up-kp-button>` in TS.
+2. Includes tokens in **global** `styles.scss` of consumer (once).
+3. Styles of each kp-* **travel in bundle** via Angular component styles.
 
-Не нужен отдельный HTTP-запрос или динамический import CSS-папки — **build-time bundling**.
+No separate HTTP request or dynamic CSS-folder import needed — **build-time bundling**.
 
-### 3.4 Паттерн «подтверждённый вариант кнопки» (V2)
+### 3.4 "Approved button variant" pattern (V2)
 
-Рекомендуемая схема **variant registry**:
+Recommended **variant registry**:
 
 ```
 ui-primeng-kit/src/
@@ -154,31 +154,31 @@ ui-primeng-kit/src/
 
 **Workflow:**
 
-1. Demo panel меняет CSS vars / token overrides → **live preview** на `<up-kp-button>`.
-2. «Save» → генерирует:
-   - **JSON** token overrides (`{ "--kp-primary": "#..." }`), и/или
-   - **SCSS snippet** для `_tokens.scss` / consumer override file, и/или
-   - **TS preset** для `button.presets.ts`.
-3. Разработчик **копирует в clipboard** или (dev-only) пишет файл → **git commit** = «confirmed».
+1. Demo panel changes CSS vars / token overrides → **live preview** on `<up-kp-button>`.
+2. "Save" → generates:
+   - **JSON** token overrides (`{ "--kp-primary": "#..." }`), and/or
+   - **SCSS snippet** for `_tokens.scss` / consumer override file, and/or
+   - **TS preset** for `button.presets.ts`.
+3. Developer **copies to clipboard** or (dev-only) writes file → **git commit** = "confirmed".
 
-«Confirmed» = **запись в репозитории**, прошедшая review, а не флаг в БД.
+"Confirmed" = **entry in the repository**, reviewed via PR, not a flag in DB.
 
-### 3.5 Visual builder в demo — не overkill, но с границами
+### 3.5 Visual builder in demo — not overkill, but with boundaries
 
-| ✅ Имеет смысл | ❌ Overkill для portable_kits |
+| ✅ Makes sense | ❌ Overkill for portable_kits |
 |---------------|------------------------------|
-| Боковая панель на demo **только в hub** | Полноценный WYSIWYG с записью в prod БД |
-| Редактирование **token overrides** (цвета, radius, padding) | Произвольный raw CSS без привязки к tokens |
-| Preview всех severity × variant | Drag-and-drop layout builder |
-| Export → clipboard / файл-шаблон | Auto-write в repo без review (CI не должен писать в git из браузера) |
+| Side panel on demo **only in hub** | Full WYSIWYG with production DB writes |
+| Editing **token overrides** (colors, radius, padding) | Arbitrary raw CSS without token system connection |
+| Preview all severity × variant | Drag-and-drop layout builder |
+| Export → clipboard / template file | Auto-write to repo without review (CI should not write to git from browser) |
 
-**Основной путь кастомизации для consumer** остаётся: форк `_tokens.scss` или override CSS vars в `:root` — **без demo panel**.
+**Primary consumer customization path** remains: fork `_tokens.scss` or override CSS vars in `:root` — **without demo panel**.
 
-Demo panel — **инструмент исследования и документирования**, не runtime-конфигуратор.
+Demo panel — **exploration and documentation tool**, not runtime configurator.
 
 ---
 
-## 4. Целевая архитектура (to-be) для monorepo
+## 4. Target architecture (to-be) for monorepo
 
 ```mermaid
 flowchart TB
@@ -210,21 +210,21 @@ flowchart TB
   kit -->|"copy src/"| consumer
 ```
 
-### Принципы
+### Principles
 
 1. **Single source of truth** — git, SCSS tokens, typed presets.
-2. **Demo ≠ prod** — playground не обязан жить в consumer copy.
-3. **No KPPDF coupling** — export format универсален; consumer сам решает, куда вставить snippet.
-4. **Расширяемость** — тот же паттерн для input, dialog, future kp-*.
+2. **Demo ≠ prod** — playground not required to live in consumer copy.
+3. **No KPPDF coupling** — export format universal; consumer decides where to insert snippet.
+4. **Extensibility** — same pattern for input, dialog, future kp-*.
 
-### Consumer COPY-GUIDE (дополнение к будущим версиям)
+### Consumer COPY-GUIDE (future version supplement)
 
 ```scss
 // consumer styles.scss
 @use 'packages/ui-primeng-kit/src/angular/styles/tokens' as kp;
 @include kp.kp-light-tokens-on-root;
 
-// опционально: override
+// optional: override
 :root {
   --kp-primary: #your-brand;
 }
@@ -238,72 +238,72 @@ provideUiPrimengKit({ /* future: defaultVariant, tokenOverrides */ }),
 
 ---
 
-## 5. Дорожная карта (phased)
+## 5. Roadmap (phased)
 
-### v0.1 — ✅ сейчас
+### v0.1 — ✅ current
 
 - KpButton / KpInput / KpDialog
 - Tokens + SCSS mixins
-- Статичный demo catalog
+- Static demo catalog
 
-### v0.2 — Demo playground (без персистенции в repo)
+### v0.2 — Demo playground (no repo persistence)
 
-- [ ] Layout demo-страницы кнопки: **preview слева / panel справа** (или наоборот)
-- [ ] Panel: sliders/color pickers для `--kp-primary`, `--kp-button-border-radius`, padding, shadow toggles
-- [ ] Live binding через `[style.--kp-primary]` на wrapper или `:host` context
-- [ ] Черновик в **sessionStorage / localStorage** (опционально)
-- [ ] Кнопка «Reset to defaults»
+- [ ] Layout button demo page: **preview left / panel right** (or vice versa)
+- [ ] Panel: sliders/color pickers for `--kp-primary`, `--kp-button-border-radius`, padding, shadow toggles
+- [ ] Live binding via `[style.--kp-primary]` on wrapper or `:host` context
+- [ ] Draft in **sessionStorage / localStorage** (optional)
+- [ ] "Reset to defaults" button
 
-**Не делать в v0.2:** запись файлов на диск, API, БД.
+**Not in v0.2:** file writes to disk, API, DB.
 
-### v0.3 — Export артеfactов
+### v0.3 — Export artifacts
 
-- [ ] «Save / Export» → modal с тремя вкладками: **JSON tokens**, **SCSS snippet**, **TS preset**
+- [ ] "Save / Export" → modal with three tabs: **JSON tokens**, **SCSS snippet**, **TS preset**
 - [ ] Copy to clipboard
-- [ ] Добавить `core/button-variants.types.ts` + `variants/button.presets.ts` с 2–3 approved примерами
-- [ ] Документировать в COPY-GUIDE: как consumer применяет export
+- [ ] Add `core/button-variants.types.ts` + `variants/button.presets.ts` with 2–3 approved examples
+- [ ] Document in COPY-GUIDE: how consumer applies export
 
-### v0.4 — Optional persistence (только если нужно)
+### v0.4 — Optional persistence (only if needed)
 
-- [ ] Dev-server endpoint `POST /api/ui-kit/drafts` — **только local dev**, gitignored
-- [ ] Или import JSON preset из файла в demo panel
-- [ ] **Не** добавлять в production consumer path
+- [ ] Dev-server endpoint `POST /api/ui-kit/drafts` — **local dev only**, gitignored
+- [ ] Or import JSON preset from file into demo panel
+- [ ] **Not** adding to production consumer path
 
 ### v1.0 — Composite integration
 
-- [ ] crud-page-kit / layout-shell-kit используют `<up-kp-button>` + documented token setup
-- [ ] `provideUiPrimengKit({ tokenOverrides })` — runtime CSS vars injection (если нужен white-label без rebuild)
+- [ ] crud-page-kit / layout-shell-kit use `<up-kp-button>` + documented token setup
+- [ ] `provideUiPrimengKit({ tokenOverrides })` — runtime CSS vars injection (if white-label needed without rebuild)
 
 ---
 
-## 6. Риски и anti-patterns
+## 6. Risks and anti-patterns
 
-| Риск | Митигация |
+| Risk | Mitigation |
 |------|-----------|
-| Demo panel становится единственным способом настройки | Документировать прямое редактирование `_tokens.scss` как primary path |
-| Raw CSS в panel обходит token system | Panel редактирует только whitelist `--kp-*` keys |
-| «Save» пишет в repo из браузера | Только export + manual commit |
-| Дублирование стилей между kits | Общие tokens в ui-primeng-kit; composite kits не форкают button SCSS |
-| БД для тем в copy-paste kit | Явно out of scope; отдельный продукт |
+| Demo panel becomes the only customization method | Document direct `_tokens.scss` editing as primary path |
+| Raw CSS in panel bypasses token system | Panel only edits whitelist `--kp-*` keys |
+| "Save" writes to repo from browser | Only export + manual commit |
+| Style duplication between kits | Common tokens in ui-primeng-kit; composite kits do not fork button SCSS |
+| DB for themes in copy-paste kit | Explicitly out of scope; separate product |
 
 ---
 
-## 7. Краткий вывод для принятия решения
+## 7. Summary for decision making
 
-| Вопрос | Ответ |
-|--------|-------|
-| Делать боковую панель? | **Да**, в demo hub — как playground, не как prod-config |
-| БД для стилей? | **Нет** для portable_kits |
-| Куда «Save»? | **Export → git** (tokens / presets / SCSS snippet) |
-| «Папка кирпичей»? | Уже **`src/angular/styles/`**; composite kits тянут через import + build bundle |
-| Править код напрямую? | **Да**, это основной путь; panel ускоряет эксперименты и фиксацию presets |
+| Question | Answer |
+|----------|--------|
+| Build side panel? | **Yes**, in demo hub — as playground, not prod-config |
+| DB for styles? | **No** for portable_kits |
+| Where to "Save"? | **Export → git** (tokens / presets / SCSS snippet) |
+| "Bricks folder"? | Already **`src/angular/styles/`**; composite kits pull via import + build bundle |
+| Edit code directly? | **Yes**, primary path; panel accelerates experiments and preset capture |
 
 ---
 
-## Связанные документы
+## Related documents
 
-- [USER-WISHES-CHECKLIST.md](./USER-WISHES-CHECKLIST.md) — свод пожеланий пользователя (чек-лист для обсуждения)
-- [HOW-TO-ADD-KIT.md](./HOW-TO-ADD-KIT.md) — модель portable kits
-- [ui-primeng-kit/STATUS.md](../ui-primeng-kit/STATUS.md) — текущий статус kit
-- [ui-primeng-kit/COPY-GUIDE.md](../ui-primeng-kit/COPY-GUIDE.md) — перенос в consumer
+- [USER-WISHES-CHECKLIST.md](./USER-WISHES-CHECKLIST.md) — user wishes summary (discussion checklist)
+- [HOW-TO-ADD-KIT.md](./HOW-TO-ADD-KIT.md) — portable kits model
+- [ui-primeng-kit/STATUS.md](../ui-primeng-kit/STATUS.md) — current kit status
+- [ui-primeng-kit/COPY-GUIDE.md](../ui-primeng-kit/COPY-GUIDE.md) — port to consumer
 - [ui-primeng-kit/README.md](../ui-primeng-kit/README.md) — public API

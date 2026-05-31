@@ -1,5 +1,11 @@
 # INTEGRATION-KPPDF — placeholder-kit
 
-Backlog. Подключать в KPPDF только после ✅ demo + tests.
+**Status:** ✅ v0.1 ready in portable_kits (2026-05-30)
 
-Источник: `shared/placeholder/, kp-placeholder-picker`
+Copy `placeholder-kit/src/`, wire `providePlaceholderKit()`, use `resolvePlaceholders()` + `<ph-placeholder-picker>`.
+
+**KPPDF source:** `shared/placeholder/`, `kp-placeholder-picker`
+
+**Hub demo:** `/modules/placeholder-kit` · **Tests:** `schema-table-kit/tests/placeholder-kit.spec.ts`
+
+v0.1: resolution engine + picker UI + extensible registry.
