@@ -1,23 +1,23 @@
 export type KitReadiness = 'ready' | 'stub' | 'scaffold';
 
-/** Уровень сложности модуля в иерархии композиции */
+/** Module complexity level in composition hierarchy */
 export type DemoModuleTier = 'brick' | 'composite' | 'application';
 
 export interface DemoModule {
   id: string;
-  /** Русское название модуля (заголовок карточки) */
+  /** Module display name (card heading) */
   title: string;
-  /** Английское имя kit-папки (подзаголовок) */
+  /** Kit folder name (card subtitle) */
   subtitle: string;
   description: string;
   route: string;
-  /** false — карточка видна, но переход недоступен (устарело: используйте hasDemo) */
+  /** false — card visible but not clickable (deprecated: use hasDemo) */
   available: boolean;
-  /** true — есть рабочее demo; false — страница-заглушка «в разработке» */
+  /** true — working demo page exists; false — placeholder 'under development' page */
   hasDemo?: boolean;
   /** ready = working src + demo; stub = placeholder in hub; scaffold = export {} in src/ */
   readiness: KitReadiness;
-  /** brick = атомарные UI/утилиты; composite = из кирпичиков; application = из составных */
+  /** brick = atomic UI/utils; composite = composed from bricks; application = composed from composites */
   tier: DemoModuleTier;
 }
 
@@ -27,25 +27,25 @@ export interface DemoModuleTierSection {
   subtitle?: string;
 }
 
-/** Секции home-страницы hub: слева направо по возрастанию сложности */
+/** Home page sections: left to right by increasing complexity */
 export const DEMO_MODULE_TIER_SECTIONS: DemoModuleTierSection[] = [
-  { tier: 'brick', heading: 'Кирпичики', subtitle: 'UI и утилиты' },
-  { tier: 'composite', heading: 'Составные модули' },
-  { tier: 'application', heading: 'Приложения и редакторы' },
+  { tier: 'brick', heading: 'Bricks', subtitle: 'UI & Utilities' },
+  { tier: 'composite', heading: 'Composite modules' },
+  { tier: 'application', heading: 'Applications & Editors' },
 ];
 
 export function getDemoModulesByTier(tier: DemoModuleTier): DemoModule[] {
   return DEMO_MODULES.filter((m) => m.tier === tier);
 }
 
-/** Реестр demo-модулей. Чтобы добавить новый — допишите объект в массив и зарегистрируйте route в app.routes.ts */
+/** Demo module registry. To add a new kit — append an object here and register a route in app.routes.ts */
 export const DEMO_MODULES: DemoModule[] = [
   {
     id: 'schema-table-kit',
-    title: 'Конструктор колонок таблиц',
+    title: 'Table Column Builder',
     subtitle: 'schema-table-kit',
     description:
-      'Единый config таблиц БД + конструктор колонок для Angular (+ optional Express schema API)',
+      'Unified DB table config + Angular column builder (+ optional Express schema API)',
     route: '/modules/schema-table-kit',
     available: true,
     hasDemo: true,
@@ -54,10 +54,10 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'schema-data-table-kit',
-    title: 'Таблица данных по схеме',
+    title: 'Schema Data Table',
     subtitle: 'schema-data-table-kit',
     description:
-      'Таблица данных по schema-table config: <sdt-schema-data-table tableKey="..." [rows]="..." />',
+      'Data table driven by schema-table config: <sdt-schema-data-table tableKey="..." [rows]="..." />',
     route: '/modules/schema-data-table-kit',
     available: true,
     hasDemo: true,
@@ -66,10 +66,10 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'entity-picker-kit',
-    title: 'Выбор сущности',
+    title: 'Entity Picker',
     subtitle: 'entity-picker-kit',
     description:
-      'Модальное окно выбора сущности по ключу: <ep-entity-picker entityKey="..." [(visible)]="v" (selected)="onPick($event)" />',
+      'Modal entity selection by key: <ep-entity-picker entityKey="..." [(visible)]="v" (selected)="onPick($event)" />',
     route: '/modules/entity-picker-kit',
     available: true,
     hasDemo: true,
@@ -78,10 +78,10 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'document-canvas-kit',
-    title: 'Редактор блоков документа',
+    title: 'Document Block Editor',
     subtitle: 'document-canvas-kit',
     description:
-      'Редактор блоков документа (шаблон или экземпляр): <dc-document-canvas mode="instance|template" [(blocks)]="blocks" />',
+      'Document block editor (template or instance): <dc-document-canvas mode="instance|template" [(blocks)]="blocks" />',
     route: '/modules/document-canvas-kit',
     available: true,
     hasDemo: true,
@@ -90,9 +90,9 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'photo-uploader-kit',
-    title: 'Загрузка фотографий',
+    title: 'Photo Uploader',
     subtitle: 'photo-uploader-kit',
-    description: 'Загрузка и управление фотографиями: <pu-photo-uploader [(photos)]="photos" />',
+    description: 'Photo upload and management: <pu-photo-uploader [(photos)]="photos" />',
     route: '/modules/photo-uploader-kit',
     available: true,
     hasDemo: true,
@@ -101,10 +101,10 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'sortable-kit',
-    title: 'Сортируемые списки',
+    title: 'Sortable Lists',
     subtitle: 'sortable-kit',
     description:
-      'Drag-and-drop списки на @angular/cdk/drag-drop: soSortableList, soSortableItem, soSortableHandle, moveSortableItems()',
+      'Drag-and-drop lists via @angular/cdk/drag-drop: soSortableList, soSortableItem, soSortableHandle, moveSortableItems()',
     route: '/modules/sortable-kit',
     available: true,
     hasDemo: true,
@@ -113,10 +113,10 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'placeholder-kit',
-    title: 'Подстановка плейсхолдеров',
+    title: 'Placeholder Substitution',
     subtitle: 'placeholder-kit',
     description:
-      'Подстановка плейсхолдеров в текст и UI-пикер: resolvePlaceholders(text, ctx), <ph-placeholder-picker />',
+      'Placeholder resolution in text + UI picker: resolvePlaceholders(text, ctx), <ph-placeholder-picker />',
     route: '/modules/placeholder-kit',
     available: true,
     hasDemo: true,
@@ -125,10 +125,10 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'crud-page-kit',
-    title: 'CRUD-страница',
+    title: 'CRUD Page',
     subtitle: 'crud-page-kit',
     description:
-      'Универсальная CRUD-страница Angular: <cp-crud-page [store]="store" [config]="cfg" [columns]="cols" />',
+      'Generic Angular CRUD page: <cp-crud-page [store]="store" [config]="cfg" [columns]="cols" />',
     route: '/modules/crud-page-kit',
     available: true,
     hasDemo: true,
@@ -137,10 +137,10 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'crud-factory-kit',
-    title: 'Фабрика CRUD (Express)',
+    title: 'CRUD Factory (Express)',
     subtitle: 'crud-factory-kit',
     description:
-      'Express CRUD-роутер из Mongoose-модели: createCrudRouter(model, { permPrefix, ... })',
+      'Express CRUD router from Mongoose model: createCrudRouter(model, { permPrefix, ... })',
     route: '/modules/crud-factory-kit',
     available: true,
     hasDemo: true,
@@ -149,10 +149,10 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'options-resolver-kit',
-    title: 'Резолвер опций',
+    title: 'Options Resolver',
     subtitle: 'options-resolver-kit',
     description:
-      'Кэш и загрузка опций для select/autocomplete: provideOptionsResolver(config), OptionsResolver.getOptions(entityKey)',
+      'Options cache & loader for select/autocomplete: provideOptionsResolver(config), OptionsResolver.getOptions(entityKey)',
     route: '/modules/options-resolver-kit',
     available: true,
     hasDemo: true,
@@ -161,10 +161,10 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'ui-primeng-kit',
-    title: 'UI-кит',
+    title: 'UI Kit',
     subtitle: 'ui-primeng-kit',
     description:
-      'Каталог kp-* обёрток PrimeNG: таблица типов → demo вариантов (button, input, dialog, …)',
+      'Catalog of kp-* PrimeNG wrappers: type table → variant demo (button, input, dialog, …)',
     route: '/modules/ui-primeng-kit',
     available: true,
     hasDemo: true,
@@ -173,10 +173,10 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'ui-kit-composer',
-    title: 'Конструктор UI-кита',
+    title: 'UI Kit Composer',
     subtitle: 'ui-kit-composer',
     description:
-      'Визуальная настройка kp-кирпичиков: палитра → preview → export JSON / localStorage draft',
+      'Visual kp-brick customization: palette → preview → export JSON / localStorage draft',
     route: '/modules/ui-kit-composer',
     available: true,
     hasDemo: true,
@@ -185,10 +185,10 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'auth-rbac-kit',
-    title: 'Аутентификация и права',
+    title: 'Auth & RBAC',
     subtitle: 'auth-rbac-kit',
     description:
-      'JWT, guards и проверка прав: provideAuthRbacKit(), hasPermission(), createAuthMiddleware()',
+      'JWT, guards & permission checks: provideAuthRbacKit(), hasPermission(), createAuthMiddleware()',
     route: '/modules/auth-rbac-kit',
     available: true,
     hasDemo: true,
@@ -197,10 +197,10 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'eav-kit',
-    title: 'EAV-атрибуты',
+    title: 'EAV Attributes',
     subtitle: 'eav-kit',
     description:
-      'Редактор EAV-атрибутов сущности: <eav-attribute-editor entityKey="..." />, provideEavKit()',
+      'Entity attribute-value editor: <eav-attribute-editor entityKey="..." />, provideEavKit()',
     route: '/modules/eav-kit',
     available: true,
     hasDemo: true,
@@ -209,10 +209,10 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'quotation-editor',
-    title: 'Редактор коммерческих предложений',
+    title: 'Quotation Editor',
     subtitle: 'quotation-editor',
     description:
-      'Редактор КП: document-canvas + entity-picker + placeholders — <qe-quotation-editor />',
+      'Quotation editor: document-canvas + entity-picker + placeholders — <qe-quotation-editor />',
     route: '/modules/quotation-editor',
     available: true,
     hasDemo: true,
@@ -221,10 +221,10 @@ export const DEMO_MODULES: DemoModule[] = [
   },
   {
     id: 'layout-shell-kit',
-    title: 'Оболочка приложения',
+    title: 'App Shell',
     subtitle: 'layout-shell-kit',
     description:
-      'Оболочка приложения: <ls-layout-shell> с боковым меню и router-outlet',
+      'Application shell: <ls-layout-shell> with sidebar menu and router-outlet',
     route: '/modules/layout-shell-kit',
     available: true,
     hasDemo: true,
