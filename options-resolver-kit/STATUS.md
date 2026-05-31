@@ -12,9 +12,9 @@
 
 ## v0.2 Roadmap
 
-- [ ] HttpClient-backed default loader helper
-- [ ] `patchColumnOptions()` util from `crud-column-options.util.ts`
-- [ ] Domain-specific loaders (products, users, …) as optional presets
+- [x] HttpClient-backed default loader helper (`HttpOptionsLoader`)
+- [x] `patchColumnOptions()` util + `createPresetLoader()`
+- [ ] Domain-specific preset loaders integration
 - [ ] Async validation support
 
 ## Notes

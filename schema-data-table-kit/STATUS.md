@@ -12,7 +12,8 @@
 
 ## v0.2 Roadmap
 
-- [ ] Sortable columns, pagination
+- [x] Sortable columns (▲▼ icons, toggle cycle)
+- [x] Pagination (prev/next, page info, configurable pageSize)
 - [ ] `tableKey` → resolve columns from saved TableDefinition provider
 - [ ] Integration with document-canvas-kit table blocks
 - [ ] Row selection / click handler

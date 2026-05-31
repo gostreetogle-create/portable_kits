@@ -18,7 +18,7 @@
 ## v0.2 Roadmap
 
 - [ ] KpSelect, KpAutocomplete, KpToggle, KpChip, KpBadge, KpMenu, KpFileUpload, KpImage
-- [ ] KppdfPreset theme override helper in `provideUiPrimengKit()`
+- [x] `UiPrimengPresetOverride` type + `presetOverrides` in config
 - [ ] Composer v0.2: compositions (row/card), import JSON
 - [ ] SCSS export & clipboard copy in composer
 - [ ] Standalone demo app in `ui-primeng-kit/demo/`

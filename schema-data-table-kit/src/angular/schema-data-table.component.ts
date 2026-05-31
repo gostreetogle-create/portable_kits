@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
 
-import { formatSchemaCell } from '../core';
-import type { SchemaDataTableRow } from '../core';
+import { formatSchemaCell, sortRows, paginateRows, calculatePagination, toggleSort } from '../core';
+import type { SchemaDataTableRow, SortState, PaginationState } from '../core';
 import type { SchemaDataTableColumn } from '../core';
 import { SCHEMA_DATA_TABLE_KIT_CONFIG } from './tokens';
 
@@ -18,19 +18,30 @@ import { SCHEMA_DATA_TABLE_KIT_CONFIG } from './tokens';
           <thead>
             <tr>
               @for (col of visibleColumns(); track col.field) {
-                <th [style.width]="col.width">{{ col.header }}</th>
+                <th
+                  [style.width]="col.width"
+                  [class.sdt-sortable]="col.sortable !== false"
+                  (click)="col.sortable !== false && onSort(col)"
+                >
+                  {{ col.header }}
+                  @if (sortState()?.field === col.field) {
+                    <span class="sdt-sort-icon">
+                      {{ sortState()?.direction === 'asc' ? '\u25B2' : '\u25BC' }}
+                    </span>
+                  }
+                </th>
               }
             </tr>
           </thead>
           <tbody>
-            @if (rows().length === 0) {
+            @if (displayRows().length === 0) {
               <tr>
                 <td [attr.colspan]="visibleColumns().length" class="sdt-empty">
                   {{ emptyMessage() }}
                 </td>
               </tr>
             } @else {
-              @for (row of rows(); track trackRow($index, row)) {
+              @for (row of displayRows(); track trackRow($index, row)) {
                 <tr>
                   @for (col of visibleColumns(); track col.field) {
                     <td>{{ formatCell(row, col) }}</td>
@@ -40,6 +51,31 @@ import { SCHEMA_DATA_TABLE_KIT_CONFIG } from './tokens';
             }
           </tbody>
         </table>
+
+        @if (pagination().total > defaultPageSize()) {
+          <div class="sdt-paginator">
+            <button
+              class="sdt-pg-btn"
+              [disabled]="pagination().page <= 1"
+              (click)="goToPage(pagination().page - 1)"
+            >
+              &laquo; Prev
+            </button>
+
+            <span class="sdt-pg-info">
+              Page {{ pagination().page }} of {{ totalPages() }}
+              ({{ pagination().total }} items)
+            </span>
+
+            <button
+              class="sdt-pg-btn"
+              [disabled]="pagination().page >= totalPages()"
+              (click)="goToPage(pagination().page + 1)"
+            >
+              Next &raquo;
+            </button>
+          </div>
+        }
       }
     </div>
   `,
@@ -68,6 +104,21 @@ import { SCHEMA_DATA_TABLE_KIT_CONFIG } from './tokens';
       background: #f9fafb;
       font-weight: 600;
       color: #374151;
+      user-select: none;
+    }
+
+    .sdt-sortable {
+      cursor: pointer;
+    }
+
+    .sdt-sortable:hover {
+      background: #e5e7eb;
+    }
+
+    .sdt-sort-icon {
+      margin-left: 4px;
+      font-size: 0.625rem;
+      vertical-align: middle;
     }
 
     .sdt-empty {
@@ -75,6 +126,42 @@ import { SCHEMA_DATA_TABLE_KIT_CONFIG } from './tokens';
       text-align: center;
       color: #6b7280;
       margin: 0;
+    }
+
+    .sdt-paginator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 0.75rem;
+      border-top: 1px solid var(--sdt-border, #e5e7eb);
+      font-size: 0.8125rem;
+      color: #374151;
+    }
+
+    .sdt-pg-btn {
+      padding: 0.375rem 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+      font-size: 0.8125rem;
+      color: #374151;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .sdt-pg-btn:hover:not(:disabled) {
+      background: #f3f4f6;
+      border-color: #9ca3af;
+    }
+
+    .sdt-pg-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .sdt-pg-info {
+      color: #6b7280;
     }
   `,
 })
@@ -84,6 +171,10 @@ export class SchemaDataTableComponent {
   readonly tableKey = input<string>('');
   readonly columns = input<SchemaDataTableColumn[]>([]);
   readonly rows = input<SchemaDataTableRow[]>([]);
+  readonly pageSize = input<number>(this.config?.pageSize ?? 0);
+
+  readonly sortState = signal<SortState | null>(null);
+  readonly currentPage = signal(1);
 
   readonly visibleColumns = computed(() =>
     this.columns().filter((col: SchemaDataTableColumn) => col.field || col.header),
@@ -93,6 +184,25 @@ export class SchemaDataTableComponent {
     () => this.config?.emptyMessage ?? 'No data to display',
   );
 
+  readonly defaultPageSize = computed(() => this.pageSize() || this.config?.pageSize || 10);
+
+  readonly sortedRows = computed(() =>
+    sortRows(this.rows(), this.sortState()),
+  );
+
+  readonly pagination = computed<PaginationState>(() =>
+    calculatePagination(this.sortedRows().length, this.currentPage(), this.defaultPageSize()),
+  );
+
+  readonly totalPages = computed(() =>
+    Math.max(1, Math.ceil(this.pagination().total / this.pagination().pageSize)),
+  );
+
+  readonly displayRows = computed(() => {
+    if (!this.defaultPageSize()) return this.sortedRows();
+    return paginateRows(this.sortedRows(), this.pagination());
+  });
+
   formatCell(row: SchemaDataTableRow, column: SchemaDataTableColumn): string {
     return formatSchemaCell(row, column);
   }
@@ -100,5 +210,15 @@ export class SchemaDataTableComponent {
   trackRow(index: number, row: SchemaDataTableRow): string {
     const id = row['_id'];
     return id != null ? String(id) : String(index);
+  }
+
+  onSort(column: SchemaDataTableColumn): void {
+    if (!column.field) return;
+    this.sortState.update((current) => toggleSort(current, column.field!));
+    this.currentPage.set(1);
+  }
+
+  goToPage(page: number): void {
+    this.currentPage.set(Math.max(1, page));
   }
 }
