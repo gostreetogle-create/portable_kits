@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SchemaDataTableComponent } from '@schema-data-table-kit/angular';
+import type { SchemaDataTableColumn } from '@schema-data-table-kit/core';
 import { SAVED_TABLES_MOCK } from '../../mock-data/saved-tables.mock';
 import { buildTablePreview } from '../../mock-data/table-preview-samples';
 
@@ -9,7 +10,7 @@ const preview = buildTablePreview(example.builder.columns);
 
 /** Map formatted preview strings back to row objects for the data table demo. */
 function previewRowsToObjects(
-  columns: typeof preview.columns,
+  columns: readonly SchemaDataTableColumn[],
   rows: string[][],
 ): Record<string, unknown>[] {
   return rows.map((cells) => {
@@ -30,6 +31,6 @@ function previewRowsToObjects(
 })
 export class SchemaDataTableKitDemoComponent {
   readonly tableKey = example.key;
-  readonly columns = preview.columns;
-  readonly rows = previewRowsToObjects(preview.columns, preview.rows);
+  readonly columns = preview.columns as unknown as SchemaDataTableColumn[];
+  readonly rows = previewRowsToObjects(this.columns, preview.rows);
 }

@@ -1,8 +1,8 @@
 {
   "name": "quotation-editor",
-  "version": "0.0.0-scaffold",
+  "version": "0.1.0",
   "private": true,
-  "description": "Portable kit: quotation-editor",
+  "description": "Portable kit: quotation editor composing canvas, entity picker and placeholders",
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest"

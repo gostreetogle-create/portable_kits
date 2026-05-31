@@ -12,7 +12,7 @@ import {
   groupPlaceholdersByCategory,
   buildPlaceholderGroups,
 } from '../../placeholder-kit/src/core/placeholder.registry';
-import { escapeHtml, wrapPlaceholderDisplay, formatRuDate } from '../../placeholder-kit/src/core/placeholder-display.util';
+import { escapeHtml, wrapPlaceholderDisplay, formatDate } from '../../placeholder-kit/src/core/placeholder-display.util';
 
 const ctx = {
   org: { name: 'ООО Ромашка', inn: '123' },
@@ -202,19 +202,19 @@ describe('placeholder-display.util', () => {
     });
   });
 
-  describe('formatRuDate', () => {
-    it('formats ISO date to ru-RU locale', () => {
-      const result = formatRuDate('2026-05-30T12:00:00.000Z');
-      expect(result).toBe('30.05.2026');
+  describe('formatDate', () => {
+    it('formats ISO date to YYYY-MM-DD', () => {
+      const result = formatDate('2026-05-30T12:00:00.000Z');
+      expect(result).toBe('2026-05-30');
     });
 
     it('returns empty string for null/undefined', () => {
-      expect(formatRuDate(null)).toBe('');
-      expect(formatRuDate(undefined)).toBe('');
+      expect(formatDate(null)).toBe('');
+      expect(formatDate(undefined)).toBe('');
     });
 
     it('returns raw string for invalid date', () => {
-      expect(formatRuDate('not-a-date')).toBe('not-a-date');
+      expect(formatDate('not-a-date')).toBe('not-a-date');
     });
   });
 });

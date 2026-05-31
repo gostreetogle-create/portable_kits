@@ -1,21 +1,21 @@
 # crud-page-kit
 
-> **Статус:** 📋 scaffold — реализация не начата  
-> **Паттерн упаковки:** **D**  
-> **Приоритет:** P2 · **Универсальность:** high
+> **Status:** ✅ v0.1  
+> **Packaging pattern:** **D**  
+> **Priority:** P2 · **Universality:** high
 
-## Назначение
+## Purpose
 
-Portable kit из KPPDF 3.0.
+Generic CRUD page shell: CrudStore, list component, inline create/edit, permission hooks.
 
 | | |
 |--|--|
-| **Источник KPPDF** | `shared/crud/kp-crud-page, crud-store, crud-api` |
-| **Public API** | <cp-crud-page [config]="cfg" />, CrudStore, provideCrudPageKit() |
-| **Зависимости** | ui-primeng-kit or native; schema-table-kit for columns (later) |
-| **Префикс** | `cp-` (компоненты / CSS vars) |
+| **KPPDF source** | `shared/crud/kp-crud-page`, crud-store, crud-api |
+| **Public API** | `<cp-crud-page [store]="store" [config]="cfg" />`, `CrudStore`, `provideCrudPageKit()` |
+| **Dependencies** | ui-primeng-kit or native; schema-table-kit for columns (future) |
+| **Prefix** | `cp-` (components / CSS vars) |
 
-## Упаковка (consumer)
+## Packaging (consumer)
 
 Copy **`crud-page-kit/src/`** → `packages/crud-page-kit/src/`
 
@@ -26,14 +26,16 @@ Path alias:
 "@crud-page-kit/angular": ["packages/crud-page-kit/src/angular/index.ts"]
 ```
 
-Подробно: [COPY-GUIDE.md](./COPY-GUIDE.md)
+Details: [COPY-GUIDE.md](./COPY-GUIDE.md)
 
-## Разработка
+## Development
+
+Demo and tests via `schema-table-kit` hub:
 
 ```bash
-cd crud-page-kit
-# после реализации demo:
-npm install && npm start
+cd schema-table-kit
+npm test
+ng serve demo --port 4201
 ```
 
-Сейчас — только scaffold. См. [STATUS.md](./STATUS.md)
+See [STATUS.md](./STATUS.md)

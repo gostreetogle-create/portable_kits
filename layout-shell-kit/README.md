@@ -1,38 +1,40 @@
 # layout-shell-kit
 
-> **Статус:** 📋 scaffold — в разработке  
-> **Паттерн упаковки:** **B**  
-> **Приоритет:** P3 · **Универсальность:** high
+> **Status:** ✅ v0.1  
+> **Packaging pattern:** **B**  
+> **Priority:** P3 · **Universality:** high
 
-## Назначение
+## Purpose
 
-Переносимый модуль оболочки приложения: боковое меню, layout, хлебные крошки и метки маршрутов.
+Portable app shell: sidebar navigation, responsive mobile drawer, router outlet.
 
 | | |
 |--|--|
-| **Источник (план извлечения)** | `layout/*, menu, kp-breadcrumbs ROUTE_LABELS` |
-| **Public API** | `<ls-app-shell ... />`, menu, breadcrumbs (TBD) |
-| **Зависимости** | auth-rbac-kit (TBD) |
-| **Префикс** | `ls-` (компоненты / CSS vars) |
+| **KPPDF source (planned)** | `layout/*`, menu, `kp-breadcrumbs ROUTE_LABELS` |
+| **Public API** | `<ls-layout-shell [navItems]="..." [appTitle]="..." />`, `provideLayoutShellKit()` |
+| **Dependencies** | auth-rbac-kit (future) |
+| **Prefix** | `ls-` (components / CSS vars) |
 
-## Упаковка (consumer)
+## Packaging (consumer)
 
 Copy **`layout-shell-kit/src/`** → `packages/layout-shell-kit/src/`
 
-Path alias (после реализации):
+Path alias:
 
 ```json
 "@layout-shell-kit/angular": ["packages/layout-shell-kit/src/angular/index.ts"]
 ```
 
-Подробно: COPY-GUIDE.md (после реализации)
+Details: [COPY-GUIDE.md](./COPY-GUIDE.md)
 
-## Разработка
+## Development
+
+Demo and tests via `schema-table-kit` hub:
 
 ```bash
-cd layout-shell-kit
-# после реализации demo:
-npm install && npm start
+cd schema-table-kit
+npm test
+ng serve demo --port 4201
 ```
 
-Сейчас — только scaffold. См. [STATUS.md](./STATUS.md)
+See [STATUS.md](./STATUS.md)

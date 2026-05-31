@@ -2,8 +2,8 @@
 
 **Level 3** = working `src/` code + hub demo page + vitest green + STATUS ✅
 
-Last updated: 2026-05-30 (Phase 3–4 complete)  
-*Last audited: 2026-05-30 — checklist audit (subagent 442258a1)*
+Last updated: 2026-05-31 — Comprehensive audit + fix session  
+*Last audited: 2026-05-31 — Russian→English i18n sweep, TS fixes, scaffold cleanup, cross-kit deps audit*
 
 ---
 
@@ -100,7 +100,7 @@ Last updated: 2026-05-30 (Phase 3–4 complete)
 
 ```bash
 cd schema-table-kit
-npm test      # 52 tests, all kits
+npm test      # 393+ tests, all kits
 npm run build # demo bundle OK
 ng serve demo --port 4201
 ```

@@ -1,38 +1,40 @@
 # quotation-editor
 
-> **Статус:** 📋 scaffold — в разработке  
-> **Паттерн упаковки:** **B**  
-> **Приоритет:** P0 · **Универсальность:** domain
+> **Status:** ✅ v0.1  
+> **Packaging pattern:** **B**  
+> **Priority:** P0 · **Universality:** domain
 
-## Назначение
+## Purpose
 
-Переносимый модуль редактора коммерческих предложений: строки, таблицы, расчёты и экспорт документа.
+Quotation editor composing document-canvas-kit, entity-picker-kit, and placeholder-kit.
 
 | | |
 |--|--|
-| **Источник (план извлечения)** | `features/quotations/quotation-editor.component.ts` |
-| **Public API** | `<qe-quotation-editor ... />` (TBD) |
-| **Зависимости** | schema-data-table-kit, document-canvas-kit (TBD) |
-| **Префикс** | `qe-` (компоненты / CSS vars) |
+| **KPPDF source** | `features/quotations/quotation-editor.component.ts` |
+| **Public API** | `<qe-quotation-editor [(blocks)]="..." />`, `provideQuotationEditorKit()` |
+| **Dependencies** | document-canvas-kit, entity-picker-kit, placeholder-kit |
+| **Prefix** | `qe-` (components / CSS vars) |
 
-## Упаковка (consumer)
+## Packaging (consumer)
 
 Copy **`quotation-editor/src/`** → `packages/quotation-editor/src/`
 
-Path alias (после реализации):
+Path alias:
 
 ```json
 "@quotation-editor/angular": ["packages/quotation-editor/src/angular/index.ts"]
 ```
 
-Подробно: COPY-GUIDE.md (после реализации)
+Details: [COPY-GUIDE.md](./COPY-GUIDE.md)
 
-## Разработка
+## Development
+
+Demo and tests via `schema-table-kit` hub:
 
 ```bash
-cd quotation-editor
-# после реализации demo:
-npm install && npm start
+cd schema-table-kit
+npm test
+ng serve demo --port 4201
 ```
 
-Сейчас — только scaffold. См. [STATUS.md](./STATUS.md)
+See [STATUS.md](./STATUS.md)

@@ -4,18 +4,18 @@
 > **Паттерн упаковки:** **A**  
 > **Приоритет:** P1 · **Универсальность:** domain
 
-## Назначение
+## Purpose
 
-Таблица данных по schema-table config (plain HTML v0.1).
+Data table component using column config (plain HTML v0.1, no PrimeNG dependency).
 
 | | |
 |--|--|
-| **Источник KPPDF** | inline `kp-table` + column config |
+| **KPPDF source** | inline `kp-table` + column config |
 | **Public API** | `<sdt-schema-data-table [columns]="..." [rows]="..." />` |
-| **Зависимости** | schema-table-kit core (`getFieldValue`) |
-| **Префикс** | `sdt-` |
+| **Dependencies** | `@angular/core`, `@angular/forms` only |
+| **Prefix** | `sdt-` |
 
-## Упаковка (consumer)
+## Packaging (consumer)
 
 Copy **`schema-data-table-kit/src/`** → `packages/schema-data-table-kit/src/`
 
@@ -26,11 +26,11 @@ Path alias:
 "@schema-data-table-kit/angular": ["packages/schema-data-table-kit/src/angular/index.ts"]
 ```
 
-Подробно: [COPY-GUIDE.md](./COPY-GUIDE.md)
+Details: [COPY-GUIDE.md](./COPY-GUIDE.md)
 
-## Разработка
+## Development
 
-Demo и тесты через hub `schema-table-kit`:
+Demo and tests via `schema-table-kit` hub:
 
 ```bash
 cd schema-table-kit
@@ -38,4 +38,4 @@ npm test
 ng serve demo --port 4201
 ```
 
-См. [STATUS.md](./STATUS.md)
+See [STATUS.md](./STATUS.md)

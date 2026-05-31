@@ -1,6 +1,6 @@
 # PROJECT AUDIT & CORRECTION PLAN
 
-**Date:** 2026-05-30  
+**Date:** 2026-05-31 (audit)  
 **Repo:** `portable_kits`  
 **Hub:** `schema-table-kit/demo` (`ng serve demo`)
 
@@ -10,7 +10,7 @@
 
 `portable_kits` is a **copy-paste module warehouse**: each kit is a root-level folder whose `src/` can be copied into any consumer (KPPDF or otherwise) with path aliases and `provide*Kit()` wiring. The **schema-table-kit demo hub** is the shared dev/test shell for all kits.
 
-**Current progress:** **15/15 kits** at Level 3 — real portable `src/`, hub demos, vitest green, STATUS ✅.
+**Current progress:** **15/15 kits** at Level 3 — real portable `src/`, hub demos, **393 tests** ✅, 0 TS errors ✅, build ✅.
 
 **Direction is correct** — monorepo-at-root, hub-driven demos, zero KPPDF imports, COPY-GUIDE per kit. Remaining debt: **per-kit COPY-GUIDE accuracy (🟡)**, **Angular prebundle/workaround**, **full KPPDF cutover** (INTEGRATION-KPPDF backlog).
 
@@ -82,7 +82,7 @@
 | ID | Problem | Status |
 |----|---------|--------|
 | P2-1 | scaffold-kits.mjs stale output | ✅ |
-| P2-2 | placeholder-kit express stub | 🟡 |
+| P2-2 | placeholder-kit express stub | ✅ Restored 2026-05-31 — `src/express/index.ts` stub |
 | P2-3 | No isolated npm start per kit | ✅ C21: hub is canonical |
 | P2-4 | entity-picker test gap | ✅ Fixed v0.2 |
 | P2-5 | INTEGRATION-KPPDF boilerplate | 🟡 C22: updated for new kits; full cutover deferred |
@@ -127,7 +127,7 @@
 | D4 | Hub home shows accurate readiness | ✅ |
 | D5 | CI test + build green | ✅ |
 | D6 | Zero kppdf-3.0 imports in kit `src/` | ✅ |
-| D7 | COPY-GUIDE accurate | 🟡 v0.1 subset documented |
+| D7 | COPY-GUIDE accurate | 🟡 v0.1 subset documented; all kits have COPY-GUIDE |
 | D8 | quotation-editor composes canvas + picker | ✅ |
 | D9 | Consumer copy per COPY-GUIDE | ✅ pattern established |
 | D10 | No misleading v1 on partial ports | ✅ |

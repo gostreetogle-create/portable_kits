@@ -1,8 +1,8 @@
 {
   "name": "crud-page-kit",
-  "version": "0.0.0-scaffold",
+  "version": "0.1.0",
   "private": true,
-  "description": "Portable kit: crud-page-kit (scaffold)",
+  "description": "Portable kit: CrudStore, generic list page component, CRUD page shell",
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest"

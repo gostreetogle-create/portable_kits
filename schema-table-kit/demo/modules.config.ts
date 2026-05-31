@@ -15,7 +15,7 @@ export interface DemoModule {
   available: boolean;
   /** true — есть рабочее demo; false — страница-заглушка «в разработке» */
   hasDemo?: boolean;
-  /** ready = рабочий src + demo; stub = заглушка в hub; scaffold = export {} в src/ */
+  /** ready = working src + demo; stub = placeholder in hub; scaffold = export {} in src/ */
   readiness: KitReadiness;
   /** brick = атомарные UI/утилиты; composite = из кирпичиков; application = из составных */
   tier: DemoModuleTier;

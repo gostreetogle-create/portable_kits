@@ -24,4 +24,4 @@ export {
   createPlaceholderResolver,
 } from './resolve-placeholders';
 
-export { escapeHtml, wrapPlaceholderDisplay, formatRuDate } from './placeholder-display.util';
+export { escapeHtml, wrapPlaceholderDisplay, formatDate } from './placeholder-display.util';

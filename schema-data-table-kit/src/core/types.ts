@@ -1,9 +1,17 @@
-import type { SchemaColumn } from '@schema-table-kit/core';
-
 export interface SchemaDataTableConfig {
   emptyMessage?: string;
 }
 
-export interface SchemaDataTableColumn extends SchemaColumn {}
+/** Column definition — local copy to avoid cross-kit dependency. */
+export interface SchemaDataTableColumn {
+  field?: string;
+  header?: string;
+  width?: string;
+  type?: string;
+  isOrphan?: boolean;
+  selectable?: boolean;
+  visible?: boolean;
+  [key: string]: unknown;
+}
 
 export type SchemaDataTableRow = Record<string, unknown>;

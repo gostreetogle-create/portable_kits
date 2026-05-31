@@ -1,8 +1,8 @@
 {
   "name": "options-resolver-kit",
-  "version": "0.0.0-scaffold",
+  "version": "0.1.0",
   "private": true,
-  "description": "Portable kit: options-resolver-kit (scaffold)",
+  "description": "Portable kit: cached options resolver for select/autocomplete fields",
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest"

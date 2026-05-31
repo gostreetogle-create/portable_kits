@@ -1,21 +1,21 @@
 # eav-kit
 
-> **Статус:** 📋 scaffold — реализация не начата  
-> **Паттерн упаковки:** **A**  
-> **Приоритет:** P3 · **Универсальность:** domain
+> **Status:** ✅ v0.1  
+> **Packaging pattern:** **A**  
+> **Priority:** P3 · **Universality:** domain
 
-## Назначение
+## Purpose
 
-Portable kit из KPPDF 3.0.
+Entity-Attribute-Value attribute definition editor component.
 
 | | |
 |--|--|
-| **Источник KPPDF** | `features/attribute-definitions, EAV in products` |
-| **Public API** | <eav-attribute-editor entityKey="..." />, EavSchemaProvider |
-| **Зависимости** | schema-table-kit, crud-page-kit |
-| **Префикс** | `eav-` (компоненты / CSS vars) |
+| **KPPDF source** | `features/attribute-definitions`, EAV in products |
+| **Public API** | `<eav-attribute-editor entityKey="..." />`, `provideEavKit()` |
+| **Dependencies** | schema-table-kit (future), crud-page-kit (future) |
+| **Prefix** | `eav-` (components / CSS vars) |
 
-## Упаковка (consumer)
+## Packaging (consumer)
 
 Copy **`eav-kit/src/`** → `packages/eav-kit/src/`
 
@@ -26,14 +26,16 @@ Path alias:
 "@eav-kit/angular": ["packages/eav-kit/src/angular/index.ts"]
 ```
 
-Подробно: [COPY-GUIDE.md](./COPY-GUIDE.md)
+Details: [COPY-GUIDE.md](./COPY-GUIDE.md)
 
-## Разработка
+## Development
+
+Demo and tests via `schema-table-kit` hub:
 
 ```bash
-cd eav-kit
-# после реализации demo:
-npm install && npm start
+cd schema-table-kit
+npm test
+ng serve demo --port 4201
 ```
 
-Сейчас — только scaffold. См. [STATUS.md](./STATUS.md)
+See [STATUS.md](./STATUS.md)

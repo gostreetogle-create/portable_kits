@@ -1,8 +1,8 @@
 {
   "name": "document-canvas-kit",
-  "version": "0.0.0-scaffold",
+  "version": "0.2.0",
   "private": true,
-  "description": "Portable kit: document-canvas-kit (scaffold)",
+  "description": "Portable kit: document block editor with text, table, separator blocks, background image",
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest"

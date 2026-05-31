@@ -39,8 +39,13 @@ export function wrapPlaceholderDisplay(
   return result;
 }
 
-export function formatRuDate(iso?: string | null): string {
+/**
+ * Format an ISO date string to a locale-independent short date (YYYY-MM-DD).
+ * Consumer can override by providing a custom formatter in PlaceholderKitConfig.
+ */
+export function formatDate(iso?: string | null): string {
   if (!iso) return '';
   const d = new Date(iso);
-  return Number.isNaN(d.getTime()) ? String(iso) : d.toLocaleDateString('ru-RU');
+  if (Number.isNaN(d.getTime())) return String(iso);
+  return d.toISOString().split('T')[0];
 }

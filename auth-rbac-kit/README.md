@@ -1,21 +1,21 @@
 # auth-rbac-kit
 
-> **Статус:** 📋 scaffold — реализация не начата  
-> **Паттерн упаковки:** **CD**  
-> **Приоритет:** P3 · **Универсальность:** low
+> **Status:** ✅ v0.1  
+> **Packaging pattern:** **CD**  
+> **Priority:** P3 · **Universality:** low
 
-## Назначение
+## Purpose
 
-Portable kit из KPPDF 3.0.
+Portable kit for role-based access control: permission checking, Angular service, Express middleware.
 
 | | |
 |--|--|
-| **Источник KPPDF** | `core/permissions.ts, auth guards, backend JWT` |
-| **Public API** | provideAuthRbacKit(), hasPermission(), createAuthMiddleware() |
-| **Зависимости** | consumer seed roles; extract after crud-factory-kit |
-| **Префикс** | `ar-` (компоненты / CSS vars) |
+| **KPPDF source** | `core/permissions.ts`, auth guards, backend JWT |
+| **Public API** | `provideAuthRbacKit()`, `hasPermission()`, `createAuthMiddleware()` |
+| **Dependencies** | consumer seed roles; extract after crud-factory-kit |
+| **Prefix** | `ar-` (components / CSS vars) |
 
-## Упаковка (consumer)
+## Packaging (consumer)
 
 Copy **`auth-rbac-kit/src/`** → `packages/auth-rbac-kit/src/`
 
@@ -26,14 +26,16 @@ Path alias:
 "@auth-rbac-kit/angular": ["packages/auth-rbac-kit/src/angular/index.ts"]
 ```
 
-Подробно: [COPY-GUIDE.md](./COPY-GUIDE.md)
+Details: [COPY-GUIDE.md](./COPY-GUIDE.md)
 
-## Разработка
+## Development
+
+Demo and tests via `schema-table-kit` hub:
 
 ```bash
-cd auth-rbac-kit
-# после реализации demo:
-npm install && npm start
+cd schema-table-kit
+npm test
+ng serve demo --port 4201
 ```
 
-Сейчас — только scaffold. См. [STATUS.md](./STATUS.md)
+See [STATUS.md](./STATUS.md)

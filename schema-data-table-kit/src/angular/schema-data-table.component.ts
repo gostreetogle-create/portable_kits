@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, input } from '@an
 
 import { formatSchemaCell } from '../core';
 import type { SchemaDataTableRow } from '../core';
-import type { SchemaColumn } from '@schema-table-kit/core';
+import type { SchemaDataTableColumn } from '../core';
 import { SCHEMA_DATA_TABLE_KIT_CONFIG } from './tokens';
 
 @Component({
@@ -82,18 +82,18 @@ export class SchemaDataTableComponent {
   private readonly config = inject(SCHEMA_DATA_TABLE_KIT_CONFIG, { optional: true });
 
   readonly tableKey = input<string>('');
-  readonly columns = input<SchemaColumn[]>([]);
+  readonly columns = input<SchemaDataTableColumn[]>([]);
   readonly rows = input<SchemaDataTableRow[]>([]);
 
   readonly visibleColumns = computed(() =>
-    this.columns().filter((col: SchemaColumn) => col.field || col.header),
+    this.columns().filter((col: SchemaDataTableColumn) => col.field || col.header),
   );
 
   readonly emptyMessage = computed(
-    () => this.config?.emptyMessage ?? 'Нет данных для отображения',
+    () => this.config?.emptyMessage ?? 'No data to display',
   );
 
-  formatCell(row: SchemaDataTableRow, column: SchemaColumn): string {
+  formatCell(row: SchemaDataTableRow, column: SchemaDataTableColumn): string {
     return formatSchemaCell(row, column);
   }
 

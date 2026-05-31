@@ -1,8 +1,8 @@
 {
   "name": "crud-factory-kit",
-  "version": "0.0.0-scaffold",
+  "version": "0.1.0",
   "private": true,
-  "description": "Portable kit: crud-factory-kit (scaffold)",
+  "description": "Portable kit: Express CRUD router generator from Mongoose models",
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest"

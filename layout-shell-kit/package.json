@@ -1,8 +1,8 @@
 {
   "name": "layout-shell-kit",
-  "version": "0.0.0-scaffold",
+  "version": "0.1.0",
   "private": true,
-  "description": "Portable kit: layout-shell-kit",
+  "description": "Portable kit: app shell with sidebar navigation and responsive mobile drawer",
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest"
