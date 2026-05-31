@@ -34,13 +34,13 @@ describe('KpBreadcrumbsComponent', () => {
 
   it('homeItem has home icon', async () => {
     const fixture = await createTestFixture(KpBreadcrumbsComponent, { extraProviders: [provideRouter([])] });
-    expect(fixture.componentInstance.homeItem.icon).toBe('pi pi-home');
-    expect(fixture.componentInstance.homeItem.routerLink).toBe('/dashboard');
+    expect(fixture.componentInstance.homeItem['icon']).toBe('pi pi-home');
+    expect(fixture.componentInstance.homeItem['routerLink']).toBe('/dashboard');
   });
 
   it('humanizeSegment converts kebab to title', async () => {
     const fixture = await createTestFixture(KpBreadcrumbsComponent, { extraProviders: [provideRouter([])] });
-    const result = (fixture.componentInstance as any).humanizeSegment('product-passports');
+    const result = (fixture.componentInstance as unknown as { humanizeSegment(s: string): string }).humanizeSegment('product-passports');
     expect(result).toBe('Product Passports');
   });
 

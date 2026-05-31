@@ -44,7 +44,7 @@
 
 ### 🔴 Priority 1 — Critical Infrastructure
 
-- [ ] **CI pipeline** — `.github/workflows/ci.yml` — is it set up? Run `npm test` + `npm run build`
+- [ ] **CI pipeline** — `.github/workflows/ci.yml` — exists, runs `npm test` + `npm run build` on push/PR
 - [ ] **npm audit / security** — Check for vulnerable dependencies across all kits
 - [ ] **Cross-kit dependency audit** — Ensure no kit imports from other kits (should be independent)
 
@@ -57,8 +57,8 @@
 
 ### 🟡 Priority 2 — Philosophy & Code Quality
 
-- [ ] **`kp-breadcrumbs.component.spec.ts` homeItem test** — Uses dot notation on `homeItem.icon` and `homeItem.routerLink`. If `MenuItem` has index signature, these should use bracket notation
-- [ ] **Double cast in breadcrumbs test** — `as unknown as {...}` then `as any` — simplify to single `as any`
+- [x] **`kp-breadcrumbs.component.spec.ts` homeItem test** — Fixed to bracket notation `homeItem['icon']` / `homeItem['routerLink']`
+- [x] **Double cast in breadcrumbs test** — Replaced `as any` cast with typed `as unknown as { humanizeSegment(s: string): string }`
 - [ ] **Russian string in demo file `schema-export.json`** — Already fixed this session ✅
 - [ ] **Barrel export consistency audit** — Some kits use `export *`, others use explicit named exports. Standardize.
 - [ ] **All tests use `any` cast for private methods** — Acceptable for tests but could be cleaner
@@ -113,6 +113,7 @@
 - [ ] **Demo app runtime test** — Start dev server and verify with browser automation
 - [ ] **Demo navigation** — Ensure all kit demo pages are accessible from hub
 - [ ] **Mobile responsiveness** — Test demo on mobile viewports
+- [x] **tsconfig.json include** — Fixed to cover tests/ + all external kit Angular sources (previously broke options-resolver-kit spec)
 - [x] **Demo consistency** — All demo pages follow the same layout pattern ✅
 
 ### 🔵 Priority 4 — Documentation ✅ *Full audit & i18n sweep completed 2026-05-31*
@@ -148,7 +149,7 @@
 |--------|-------|
 | Total test files | 41 |
 | Total tests | 393 |
-| Tests passing | 393 ✅ |
+| Tests passing | 393 ✅ (41 test files) |
 | TS errors (core) | 0 ✅ |
 | TS errors (demo) | 0 ✅ |
 | Angular build | ✅ |

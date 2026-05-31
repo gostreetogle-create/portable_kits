@@ -52,6 +52,7 @@
       "@quotation-editor/angular": ["../quotation-editor/src/angular/index.ts"]
     }
   },
+  "include": ["src/**/*.ts", "tests/**/*.ts", "../*/src/**/*.ts"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
