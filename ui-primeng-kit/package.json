@@ -8,6 +8,10 @@
     "test:watch": "vitest"
   },
   "devDependencies": {
+    "@analogjs/vite-plugin-angular": "^2.5.2",
+    "@angular/platform-browser-dynamic": "^21.2.15",
+    "@types/jsdom": "^28.0.3",
+    "jsdom": "^29.1.1",
     "typescript": "~5.9.0",
     "vitest": "^3.0.0"
   }
