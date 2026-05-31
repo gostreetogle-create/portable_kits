@@ -40,8 +40,7 @@ describe('KpBreadcrumbsComponent', () => {
 
   it('humanizeSegment converts kebab to title', async () => {
     const fixture = await createTestFixture(KpBreadcrumbsComponent, { extraProviders: [provideRouter([])] });
-    const comp = fixture.componentInstance as unknown as { humanizeSegment(s: string): string };
-    const result = (comp as any).humanizeSegment('product-passports');
+    const result = (fixture.componentInstance as any).humanizeSegment('product-passports');
     expect(result).toBe('Product Passports');
   });
 
