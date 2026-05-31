@@ -1,0 +1,420 @@
+<aside class="composer-props">
+  <h2 class="composer-props__title">Свойства</h2>
+
+  @if (!state.selectedType()) {
+    <p class="composer-props__empty">Выберите тип компонента</p>
+  } @else {
+    <fieldset class="composer-props__group">
+      <legend>Пресет</legend>
+      <label class="composer-props__field">
+        <span>Название</span>
+        <input
+          type="text"
+          [value]="state.currentPreset().name ?? ''"
+          (input)="onNameInput($event)"
+        />
+      </label>
+      <label class="composer-props__field">
+        <span>Описание</span>
+        <textarea
+          rows="2"
+          [value]="state.currentPreset().description ?? ''"
+          (input)="onDescriptionInput($event)"
+        ></textarea>
+      </label>
+    </fieldset>
+
+    @switch (state.selectedType()) {
+      @case ('up-kp-button') {
+        @let bp = buttonProps();
+        <fieldset class="composer-props__group">
+          <legend>Кнопка</legend>
+          <label class="composer-props__field">
+            <span>Label</span>
+            <input type="text" [value]="bp.label" (input)="onPropInput('label', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Variant</span>
+            <select [value]="bp.variant" (change)="onPropSelect('variant', $event)">
+              <option value="premium">premium</option>
+              <option value="flat">flat</option>
+            </select>
+          </label>
+          <label class="composer-props__field">
+            <span>Severity</span>
+            <select [value]="bp.severity" (change)="onPropSelect('severity', $event)">
+              <option value="primary">primary</option>
+              <option value="secondary">secondary</option>
+              <option value="danger">danger</option>
+            </select>
+          </label>
+          <label class="composer-props__field">
+            <span>Size</span>
+            <select [value]="bp.size" (change)="onPropSelect('size', $event)">
+              <option value="small">small</option>
+              <option value="large">large</option>
+            </select>
+          </label>
+          <label class="composer-props__field">
+            <span>Icon (PrimeIcons class)</span>
+            <input type="text" [value]="bp.icon" placeholder="pi pi-check" (input)="onPropInput('icon', $event)" />
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="bp.disabled" (change)="onPropCheckbox('disabled', $event)" />
+            Disabled
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="bp.outlined" (change)="onPropCheckbox('outlined', $event)" />
+            Outlined
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="bp.text" (change)="onPropCheckbox('text', $event)" />
+            Text
+          </label>
+        </fieldset>
+        <fieldset class="composer-props__group">
+          <legend>Tokens</legend>
+          <label class="composer-props__field">
+            <span>Primary color</span>
+            <input
+              type="color"
+              [value]="tokenString('--kp-primary') || '#2563eb'"
+              (input)="onTokenInput('--kp-primary', $event)"
+            />
+          </label>
+          <label class="composer-props__field">
+            <span>Border radius</span>
+            <input
+              type="text"
+              [value]="tokenString('--kp-button-border-radius')"
+              (input)="onTokenInput('--kp-button-border-radius', $event)"
+            />
+          </label>
+          <label class="composer-props__field">
+            <span>Padding X</span>
+            <input
+              type="text"
+              [value]="tokenString('--kp-button-padding-x-sm')"
+              (input)="onTokenInput('--kp-button-padding-x-sm', $event)"
+            />
+          </label>
+        </fieldset>
+      }
+      @case ('up-kp-input') {
+        @let ip = inputProps();
+        <fieldset class="composer-props__group">
+          <legend>Поле ввода</legend>
+          <label class="composer-props__field">
+            <span>Label</span>
+            <input type="text" [value]="ip.label" (input)="onPropInput('label', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Placeholder</span>
+            <input type="text" [value]="ip.placeholder" (input)="onPropInput('placeholder', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Error</span>
+            <input type="text" [value]="ip.error" (input)="onPropInput('error', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Size</span>
+            <select [value]="ip.size" (change)="onPropSelect('size', $event)">
+              <option value="small">small</option>
+              <option value="large">large</option>
+            </select>
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="ip.disabled" (change)="onPropCheckbox('disabled', $event)" />
+            Disabled
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="ip.required" (change)="onPropCheckbox('required', $event)" />
+            Required
+          </label>
+        </fieldset>
+        <fieldset class="composer-props__group">
+          <legend>Tokens</legend>
+          <label class="composer-props__field">
+            <span>Border radius</span>
+            <input
+              type="text"
+              [value]="tokenString('--kp-radius-md')"
+              (input)="onTokenInput('--kp-radius-md', $event)"
+            />
+          </label>
+          <label class="composer-props__field">
+            <span>Control height</span>
+            <input
+              type="text"
+              [value]="tokenString('--kp-control-height')"
+              (input)="onTokenInput('--kp-control-height', $event)"
+            />
+          </label>
+          <label class="composer-props__field">
+            <span>Border color</span>
+            <input
+              type="color"
+              [value]="tokenString('--kp-border') || '#e2e8f0'"
+              (input)="onTokenInput('--kp-border', $event)"
+            />
+          </label>
+        </fieldset>
+      }
+      @case ('up-kp-select') {
+        @let sp = selectProps();
+        <fieldset class="composer-props__group">
+          <legend>Выпадающий список</legend>
+          <label class="composer-props__field">
+            <span>Label</span>
+            <input type="text" [value]="sp.label" (input)="onPropInput('label', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Placeholder</span>
+            <input type="text" [value]="sp.placeholder" (input)="onPropInput('placeholder', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Error</span>
+            <input type="text" [value]="sp.error" (input)="onPropInput('error', $event)" />
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="sp.disabled" (change)="onPropCheckbox('disabled', $event)" />
+            Disabled
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="sp.required" (change)="onPropCheckbox('required', $event)" />
+            Required
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="sp.loading" (change)="onPropCheckbox('loading', $event)" />
+            Loading
+          </label>
+        </fieldset>
+      }
+      @case ('up-kp-checkbox') {
+        @let cp = checkboxProps();
+        <fieldset class="composer-props__group">
+          <legend>Чекбокс</legend>
+          <label class="composer-props__field">
+            <span>Label</span>
+            <input type="text" [value]="cp.label" (input)="onPropInput('label', $event)" />
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="cp.disabled" (change)="onPropCheckbox('disabled', $event)" />
+            Disabled
+          </label>
+        </fieldset>
+      }
+      @case ('up-kp-tag') {
+        @let tp = tagProps();
+        <fieldset class="composer-props__group">
+          <legend>Тег</legend>
+          <label class="composer-props__field">
+            <span>Value</span>
+            <input type="text" [value]="tp.value" (input)="onPropInput('value', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Severity</span>
+            <select [value]="tp.severity" (change)="onPropSelect('severity', $event)">
+              <option value="info">info</option>
+              <option value="success">success</option>
+              <option value="warn">warn</option>
+              <option value="danger">danger</option>
+              <option value="secondary">secondary</option>
+              <option value="contrast">contrast</option>
+            </select>
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="tp.rounded" (change)="onPropCheckbox('rounded', $event)" />
+            Rounded
+          </label>
+        </fieldset>
+      }
+      @case ('up-kp-search') {
+        @let sp = searchProps();
+        <fieldset class="composer-props__group">
+          <legend>Поиск</legend>
+          <label class="composer-props__field">
+            <span>Label</span>
+            <input type="text" [value]="sp.label" (input)="onPropInput('label', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Placeholder</span>
+            <input type="text" [value]="sp.placeholder" (input)="onPropInput('placeholder', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Size</span>
+            <select [value]="sp.size" (change)="onPropSelect('size', $event)">
+              <option value="small">small</option>
+              <option value="large">large</option>
+            </select>
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="sp.disabled" (change)="onPropCheckbox('disabled', $event)" />
+            Disabled
+          </label>
+        </fieldset>
+      }
+      @case ('up-kp-textarea') {
+        @let tp = textareaProps();
+        <fieldset class="composer-props__group">
+          <legend>Многострочное поле</legend>
+          <label class="composer-props__field">
+            <span>Label</span>
+            <input type="text" [value]="tp.label" (input)="onPropInput('label', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Placeholder</span>
+            <input type="text" [value]="tp.placeholder" (input)="onPropInput('placeholder', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Error</span>
+            <input type="text" [value]="tp.error" (input)="onPropInput('error', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Rows</span>
+            <input type="number" [value]="tp.rows" (input)="onPropInput('rows', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Size</span>
+            <select [value]="tp.size" (change)="onPropSelect('size', $event)">
+              <option value="small">small</option>
+              <option value="large">large</option>
+            </select>
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="tp.disabled" (change)="onPropCheckbox('disabled', $event)" />
+            Disabled
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="tp.required" (change)="onPropCheckbox('required', $event)" />
+            Required
+          </label>
+        </fieldset>
+      }
+      @case ('up-kp-multiselect') {
+        @let mp = multiselectProps();
+        <fieldset class="composer-props__group">
+          <legend>Мультиселект</legend>
+          <label class="composer-props__field">
+            <span>Label</span>
+            <input type="text" [value]="mp.label" (input)="onPropInput('label', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Placeholder</span>
+            <input type="text" [value]="mp.placeholder" (input)="onPropInput('placeholder', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Error</span>
+            <input type="text" [value]="mp.error" (input)="onPropInput('error', $event)" />
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="mp.disabled" (change)="onPropCheckbox('disabled', $event)" />
+            Disabled
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="mp.required" (change)="onPropCheckbox('required', $event)" />
+            Required
+          </label>
+        </fieldset>
+      }
+      @case ('up-kp-input-number') {
+        @let inp = inputNumberProps();
+        <fieldset class="composer-props__group">
+          <legend>Числовое поле</legend>
+          <label class="composer-props__field">
+            <span>Label</span>
+            <input type="text" [value]="inp.label" (input)="onPropInput('label', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Placeholder</span>
+            <input type="text" [value]="inp.placeholder" (input)="onPropInput('placeholder', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Error</span>
+            <input type="text" [value]="inp.error" (input)="onPropInput('error', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Min</span>
+            <input type="number" [value]="inp.min" (input)="onPropInput('min', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Max</span>
+            <input type="number" [value]="inp.max" (input)="onPropInput('max', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Step</span>
+            <input type="number" [value]="inp.step" (input)="onPropInput('step', $event)" />
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="inp.disabled" (change)="onPropCheckbox('disabled', $event)" />
+            Disabled
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="inp.required" (change)="onPropCheckbox('required', $event)" />
+            Required
+          </label>
+        </fieldset>
+      }
+      @case ('up-kp-datepicker') {
+        @let dp = datepickerProps();
+        <fieldset class="composer-props__group">
+          <legend>Дата</legend>
+          <label class="composer-props__field">
+            <span>Label</span>
+            <input type="text" [value]="dp.label" (input)="onPropInput('label', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Error</span>
+            <input type="text" [value]="dp.error" (input)="onPropInput('error', $event)" />
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="dp.disabled" (change)="onPropCheckbox('disabled', $event)" />
+            Disabled
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="dp.required" (change)="onPropCheckbox('required', $event)" />
+            Required
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="dp.readonly" (change)="onPropCheckbox('readonly', $event)" />
+            Readonly
+          </label>
+        </fieldset>
+      }
+      @case ('up-kp-password') {
+        @let pp = passwordProps();
+        <fieldset class="composer-props__group">
+          <legend>Пароль</legend>
+          <label class="composer-props__field">
+            <span>Label</span>
+            <input type="text" [value]="pp.label" (input)="onPropInput('label', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Placeholder</span>
+            <input type="text" [value]="pp.placeholder" (input)="onPropInput('placeholder', $event)" />
+          </label>
+          <label class="composer-props__field">
+            <span>Error</span>
+            <input type="text" [value]="pp.error" (input)="onPropInput('error', $event)" />
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="pp.disabled" (change)="onPropCheckbox('disabled', $event)" />
+            Disabled
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="pp.required" (change)="onPropCheckbox('required', $event)" />
+            Required
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="pp.toggleMask" (change)="onPropCheckbox('toggleMask', $event)" />
+            Toggle mask
+          </label>
+          <label class="composer-props__check">
+            <input type="checkbox" [checked]="pp.feedback" (change)="onPropCheckbox('feedback', $event)" />
+            Password strength
+          </label>
+        </fieldset>
+      }
+    }
+  }
+</aside>

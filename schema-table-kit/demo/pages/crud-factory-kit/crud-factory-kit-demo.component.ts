@@ -21,7 +21,7 @@ export class CrudFactoryKitDemoComponent {
     50,
   );
 
-  readonly createResponse = success({ _id: '3', name: 'Новая запись' }, 'Created');
+  readonly createResponse = success({ _id: '3', name: 'New record' }, 'Created');
 
   readonly routerSnippet = `import { createCrudRouter } from '@crud-factory-kit/express';
 

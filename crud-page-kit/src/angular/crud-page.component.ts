@@ -408,7 +408,7 @@ export class CrudPageComponent implements OnInit {
   openCreate(): void {
     this.editingId.set(null);
     this.editRow.set({});
-    this.dialogTitle.set('Создание');
+    this.dialogTitle.set('Create');
     this.dialogVisible.set(true);
   }
 

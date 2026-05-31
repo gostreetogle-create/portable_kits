@@ -169,6 +169,16 @@
   opacity: 1;
 }
 
+.pu-photo-uploader__error {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8125rem;
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
 .photos-add-row {
   display: flex;
   gap: 0.5rem;

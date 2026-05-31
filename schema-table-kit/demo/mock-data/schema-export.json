@@ -20,7 +20,7 @@
         { "field": "status", "label": "Статус", "type": "select", "width": "110px", "group": "Основное" },
         { "field": "description", "label": "Описание", "type": "textarea", "group": "Основное" },
         { "field": "_id", "label": "ID", "type": "text", "selectable": false },
-        { "field": "createdAt", "label": "Создан", "type": "date", "selectable": false },
+        { "field": "createdAt", "label": "Created", "type": "date", "selectable": false },
         { "field": "updatedAt", "label": "Обновлён", "type": "date", "selectable": false }
       ]
     }

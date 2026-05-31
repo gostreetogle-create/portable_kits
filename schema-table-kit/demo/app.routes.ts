@@ -20,6 +20,7 @@ import { EavKitDemoComponent } from './pages/eav-kit/eav-kit-demo.component';
 import { AuthRbacKitDemoComponent } from './pages/auth-rbac-kit/auth-rbac-kit-demo.component';
 import { LayoutShellKitDemoComponent } from './pages/layout-shell-kit/layout-shell-kit-demo.component';
 import { QuotationEditorDemoComponent } from './pages/quotation-editor/quotation-editor-demo.component';
+import { UiKitComposerPageComponent } from './pages/ui-kit-composer/composer-page.component';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -42,6 +43,7 @@ export const appRoutes: Routes = [
       { path: ':componentId', component: UiPrimengPlannedDemoComponent },
     ],
   },
+  { path: 'modules/ui-kit-composer', component: UiKitComposerPageComponent },
   { path: 'modules/crud-page-kit', component: CrudPageKitDemoComponent },
   { path: 'modules/eav-kit', component: EavKitDemoComponent },
   { path: 'modules/auth-rbac-kit', component: AuthRbacKitDemoComponent },

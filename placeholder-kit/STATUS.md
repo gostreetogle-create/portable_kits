@@ -22,5 +22,4 @@
 ## Next
 
 - [ ] Full token registry from KPPDF
-- [x] `resolvePlaceholderBlock()` for document-canvas integration
 - [ ] Express endpoint helpers in `src/express/` (pattern A)

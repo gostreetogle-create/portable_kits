@@ -1,0 +1,19 @@
+<span class="up-kp-search" [class.up-kp-search--has-label]="!!label()">
+  @if (label()) {
+    <label class="up-kp-search__label" [attr.for]="inputId">{{ label() }}</label>
+  }
+  <span class="up-kp-search__input-wrap">
+    <i class="pi pi-search up-kp-search__icon" aria-hidden="true"></i>
+    <input
+      [id]="inputId"
+      pInputText
+      type="search"
+      [ngModel]="query()"
+      (ngModelChange)="onInput($event)"
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      class="up-kp-search__control"
+      [attr.aria-label]="ariaLabel() || placeholder() || 'Поиск'"
+    />
+  </span>
+</span>

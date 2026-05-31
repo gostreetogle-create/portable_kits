@@ -3,7 +3,7 @@ import {
   Component,
   effect,
   inject,
-  input,
+  model,
   signal,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -162,7 +162,7 @@ import { EAV_KIT_CONFIG } from './tokens';
 export class EavAttributeEditorComponent {
   private readonly config = inject(EAV_KIT_CONFIG, { optional: true }) ?? {};
 
-  readonly entityKey = input.required<string>();
+  readonly entityKey = model<string>('');
 
   readonly attributes = signal<EavAttributeDefinition[]>([]);
   readonly loading = signal(false);
@@ -212,7 +212,7 @@ export class EavAttributeEditorComponent {
     try {
       await this.config.saveAttributes(this.entityKey(), this.attributes());
     } catch (err: unknown) {
-      this.error.set(err instanceof Error ? err.message : 'Ошибка сохранения');
+      this.error.set(err instanceof Error ? err.message : 'Save error');
     } finally {
       this.saving.set(false);
     }
@@ -229,7 +229,7 @@ export class EavAttributeEditorComponent {
       const attrs = await this.config.loadAttributes(entityKey);
       this.attributes.set(normalizeEavAttributeOrder(attrs));
     } catch (err: unknown) {
-      this.error.set(err instanceof Error ? err.message : 'Ошибка загрузки');
+      this.error.set(err instanceof Error ? err.message : 'Load error');
       this.attributes.set([]);
     } finally {
       this.loading.set(false);

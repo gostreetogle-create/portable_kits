@@ -91,7 +91,7 @@ export class CrudStore<T extends object> {
     } catch (err: unknown) {
       this.#items.set([]);
       this.#total.set(0);
-      const msg = err instanceof Error ? err.message : 'Ошибка загрузки данных';
+      const msg = err instanceof Error ? err.message : 'Failed to load data';
       this.#error.set(msg);
       this.#options.onError(msg);
     } finally {
@@ -128,11 +128,11 @@ export class CrudStore<T extends object> {
     this.#error.set(null);
     try {
       const result = await this.#api.create(this.#options.basePath, body);
-      this.#options.onSuccess('Запись успешно создана');
+      this.#options.onSuccess('Record created successfully');
       this.goToPage(1);
       return result;
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Ошибка создания';
+      const msg = err instanceof Error ? err.message : 'Failed to create record';
       this.#error.set(msg);
       this.#options.onError(msg);
       return null;
@@ -146,11 +146,11 @@ export class CrudStore<T extends object> {
     this.#error.set(null);
     try {
       const result = await this.#api.update(this.#options.basePath, id, body);
-      this.#options.onSuccess('Запись успешно обновлена');
+      this.#options.onSuccess('Record updated successfully');
       await this.load();
       return result;
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Ошибка обновления';
+      const msg = err instanceof Error ? err.message : 'Failed to update record';
       this.#error.set(msg);
       this.#options.onError(msg);
       return null;
@@ -164,11 +164,11 @@ export class CrudStore<T extends object> {
     this.#error.set(null);
     try {
       await this.#api.delete(this.#options.basePath, id);
-      this.#options.onSuccess('Запись успешно удалена');
+      this.#options.onSuccess('Record deleted successfully');
       await this.load();
       return true;
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Ошибка удаления';
+      const msg = err instanceof Error ? err.message : 'Failed to delete record';
       this.#error.set(msg);
       this.#options.onError(msg);
       return false;

@@ -1,0 +1,116 @@
+/* ═══════════════════════════════════════════════
+   kp-button — Premium/flat variants, severity matrix
+   ═══════════════════════════════════════════════ */
+
+@use '../styles/kp-field' as field;
+
+/* ── Base ── */
+
+:host {
+  display: inline-block;
+}
+
+/* ── Block host ── */
+
+:host(.up-kp-button--block-host) {
+  display: block;
+  width: 100%;
+}
+
+:host(.up-kp-button--block-host) .p-button {
+  width: 100%;
+}
+
+/* ── Block modifier ── */
+
+.up-kp-button--block {
+  width: 100%;
+}
+
+/* ── Premium variant ── */
+
+:host(.up-kp-button--variant-premium) .p-button {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: var(--kp-shadow-premium-sm);
+  transition:
+    box-shadow var(--kp-transition-base),
+    transform var(--kp-transition-base),
+    background var(--kp-transition-fast),
+    border-color var(--kp-transition-fast);
+}
+
+:host(.up-kp-button--variant-premium) .p-button:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: var(--kp-shadow-premium);
+}
+
+:host(.up-kp-button--variant-premium) .p-button:not(:disabled):active {
+  transform: translateY(0);
+  box-shadow: var(--kp-shadow-sm);
+}
+
+/* ── Variant: flat ── */
+
+:host(.up-kp-button--variant-flat) .p-button {
+  font-weight: 500;
+  box-shadow: none;
+}
+
+:host(.up-kp-button--variant-flat) .p-button:not(:disabled):hover {
+  box-shadow: none;
+}
+
+/* ── Severity: primary ── */
+
+:host(.up-kp-button--variant-premium.up-kp-button--severity-primary) .p-button {
+  background: linear-gradient(135deg, var(--kp-primary), var(--kp-primary-hover));
+  border: 1px solid var(--kp-primary-hover);
+}
+
+:host(.up-kp-button--variant-premium.up-kp-button--severity-primary) .p-button:not(:disabled):hover {
+  background: linear-gradient(135deg, var(--kp-primary-hover), var(--kp-primary-active));
+  border-color: var(--kp-primary-active);
+}
+
+/* ── Severity: secondary ── */
+
+:host(.up-kp-button--variant-premium.up-kp-button--severity-secondary) .p-button {
+  background: linear-gradient(135deg, var(--kp-bg-muted), var(--kp-bg-soft));
+  border: 1px solid var(--kp-border-strong);
+  color: var(--kp-text);
+}
+
+:host(.up-kp-button--variant-premium.up-kp-button--severity-secondary) .p-button:not(:disabled):hover {
+  background: linear-gradient(135deg, var(--kp-bg-soft), var(--kp-surface-hover));
+  border-color: var(--kp-border-strong);
+}
+
+/* ── Severity: danger ── */
+
+:host(.up-kp-button--variant-premium.up-kp-button--severity-danger) .p-button {
+  background: linear-gradient(135deg, var(--kp-danger), var(--kp-danger-hover));
+  border: 1px solid var(--kp-danger-hover);
+  color: #fff;
+}
+
+:host(.up-kp-button--variant-premium.up-kp-button--severity-danger) .p-button:not(:disabled):hover {
+  background: linear-gradient(135deg, var(--kp-danger-hover), #b91c1c);
+  border-color: #b91c1c;
+}
+
+/* ── Focus ring ── */
+
+.p-button:focus-visible {
+  box-shadow: var(--kp-focus-ring-premium);
+}
+
+/* ── Disabled ── */
+
+:host(.up-kp-button--variant-premium) .p-button:disabled {
+  opacity: 0.5;
+  background: var(--kp-bg-muted);
+  border-color: var(--kp-border);
+  box-shadow: none;
+  transform: none;
+}

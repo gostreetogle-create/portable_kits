@@ -1,0 +1,43 @@
+.composer-canvas {
+  background: var(--st-surface);
+  border: 1px solid var(--st-border);
+  border-radius: 8px;
+  padding: 1rem;
+  min-height: 280px;
+}
+
+.composer-canvas__title {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--st-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.composer-canvas__frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 2rem;
+  background: var(--st-surface-hover);
+  border: 1px dashed var(--st-border);
+  border-radius: 8px;
+}
+
+.composer-canvas__preview {
+  display: inline-block;
+  min-width: 200px;
+}
+
+.composer-canvas__preview up-kp-input {
+  display: block;
+  min-width: 280px;
+}
+
+.composer-canvas__empty {
+  margin: 3rem 0;
+  text-align: center;
+  color: var(--st-text-tertiary);
+}

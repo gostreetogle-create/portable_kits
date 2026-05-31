@@ -1,0 +1,53 @@
+@use '../styles/kp-field' as field;
+
+.up-kp-input-number {
+  @include field.kp-field-root;
+}
+
+.up-kp-input-number__label {
+  @include field.kp-field-label;
+}
+
+.up-kp-input-number__required {
+  @include field.kp-field-required;
+}
+
+.up-kp-input-number__error {
+  @include field.kp-field-error;
+}
+
+:host ::ng-deep {
+  @include field.kp-field-prime-inputnumber;
+
+  .up-kp-input-number--error.p-inputnumber,
+  .up-kp-input-number--error .p-inputnumber {
+    border-color: var(--kp-danger) !important;
+  }
+}
+
+:host.up-kp-input-number-host--compact {
+  display: inline-block;
+  vertical-align: middle;
+
+  .up-kp-input-number {
+    width: auto;
+    min-width: 0;
+  }
+
+  ::ng-deep {
+    .p-inputnumber {
+      width: calc(4ch + 1.25rem) !important;
+      min-width: 0;
+      max-width: calc(4ch + 1.25rem);
+    }
+
+    .p-inputnumber-input,
+    .p-inputnumber .p-inputtext {
+      width: 100% !important;
+      min-width: 0;
+      padding: 2px 4px !important;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+}

@@ -15,4 +15,4 @@ export function formatSchemaCell(
   return String(value);
 }
 
-export * from './types';
+export type { SchemaDataTableConfig, SchemaDataTableColumn, SchemaDataTableRow } from './types';

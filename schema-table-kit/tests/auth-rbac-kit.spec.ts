@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DEMO_PERMISSIONS, hasAnyPermission, hasPermission } from '../auth-rbac-kit/src/core';
+import { DEMO_PERMISSIONS, hasAnyPermission, hasPermission } from '../../auth-rbac-kit/src/core';
 
 describe('hasPermission', () => {
   it('checks user permission list', () => {

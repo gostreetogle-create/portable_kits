@@ -1,0 +1,30 @@
+<div class="up-kp-input-number">
+  @if (label(); as lbl) {
+    <label class="up-kp-input-number__label" [attr.for]="name()">
+      {{ lbl }}
+      @if (required()) { <span class="up-kp-input-number__required">*</span> }
+    </label>
+  }
+  <p-inputNumber
+    [inputId]="name()"
+    [ngModel]="value()"
+    (ngModelChange)="value.set($event)"
+    [placeholder]="placeholder()"
+    [disabled]="disabled()"
+    [readonly]="readonly()"
+    [min]="min()"
+    [max]="max()"
+    [step]="step()"
+    [mode]="mode()"
+    [useGrouping]="useGrouping()"
+    [class]="compact() ? 'up-kp-input-number__control up-kp-input-number__control--compact' : 'up-kp-input-number__control w-full'"
+    [inputStyleClass]="error() ? 'up-kp-input-number--error' : ''"
+    size="small"
+    [attr.aria-label]="inputAriaLabel() || null"
+    [attr.aria-invalid]="error() ? true : null"
+    [attr.aria-describedby]="error() ? errorId() : null"
+  />
+  @if (error()) {
+    <span [id]="errorId()" class="up-kp-input-number__error" role="alert">{{ error() }}</span>
+  }
+</div>

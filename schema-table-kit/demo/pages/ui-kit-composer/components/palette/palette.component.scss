@@ -1,0 +1,57 @@
+.composer-palette {
+  background: var(--st-surface);
+  border: 1px solid var(--st-border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.composer-palette__title {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--st-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.composer-palette__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.composer-palette__item {
+  width: 100%;
+  text-align: left;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid var(--st-border);
+  border-radius: 6px;
+  background: var(--st-surface-hover);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.composer-palette__item:hover {
+  border-color: var(--st-primary);
+}
+
+.composer-palette__item--active {
+  border-color: var(--st-primary);
+  background: #eff6ff;
+}
+
+.composer-palette__item-title {
+  display: block;
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+.composer-palette__item-code {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--st-text-tertiary);
+}

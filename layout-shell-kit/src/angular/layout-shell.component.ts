@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 import type { LayoutNavItem } from '../core';
@@ -17,13 +17,13 @@ import { LAYOUT_SHELL_KIT_CONFIG } from './tokens';
 
       <header class="ls-mobile-header">
         <button type="button" class="ls-menu-btn" (click)="toggleSidebar()" aria-label="Меню">☰</button>
-        <span>{{ config.appTitle ?? 'App' }}</span>
+        <span>{{ config.appTitle ?? 'Приложение' }}</span>
       </header>
 
       <aside class="ls-sidebar" [class.ls-sidebar--open]="sidebarOpen()">
-        <div class="ls-logo">{{ config.appTitle ?? 'App' }}</div>
+        <div class="ls-logo">{{ config.appTitle ?? 'Приложение' }}</div>
         <nav class="ls-nav" aria-label="Основная навигация">
-          @for (item of navItems; track item.route) {
+          @for (item of navItems(); track item.route) {
             <a
               class="ls-nav-item"
               [routerLink]="item.route"
@@ -149,7 +149,7 @@ export class LayoutShellComponent {
   private readonly kitConfig = inject(LAYOUT_SHELL_KIT_CONFIG, { optional: true }) ?? {};
 
   readonly config = this.kitConfig;
-  readonly navItems: LayoutNavItem[] = this.kitConfig.navItems ?? [];
+  readonly navItems = computed(() => this.kitConfig.navItems ?? []);
   readonly sidebarOpen = signal(false);
 
   toggleSidebar(): void {

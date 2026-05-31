@@ -57,7 +57,10 @@ cd schema-table-kit
 npm test
 npm run build
 npm start            # ng serve demo --port 4200
+npm run demo         # ng serve demo --port 4201 (из корня repo)
 ```
+
+**Angular CLI:** `angular.json` только в `schema-table-kit/`. `ng serve` из корня repo не работает — используйте `npm run demo` / `npm start` из корня или `cd schema-table-kit` и `ng serve demo --port 4201`.
 
 Альтернатива — только hub:
 

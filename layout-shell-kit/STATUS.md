@@ -8,7 +8,7 @@
 - [x] `provideLayoutShellKit({ appTitle, navItems })`
 - [x] Responsive mobile drawer
 - [x] Hub demo (embedded preview)
-- [x] Unit tests
+- [x] Unit tests (`schema-table-kit/tests/layout-shell-kit.spec.ts`)
 
 ## Next
 

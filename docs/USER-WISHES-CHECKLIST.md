@@ -43,11 +43,12 @@
 
 Детальный roadmap: [UI-KIT-VISUAL-CUSTOMIZATION-VISION.md](./UI-KIT-VISUAL-CUSTOMIZATION-VISION.md) §5 (v0.2–v0.4).
 
-- [ ] **P1** — Боковая панель на demo-странице **кнопки**: настройка через **CSS/SCSS** (токены `--kp-*`), панель слева или справа, live preview
-- [ ] **P1** — Действие **«Сохранить»** → зафиксировать результат как **подтверждённый вариант ui-kit** (approved variant / preset в репозитории, не флаг в БД)
-- [ ] **P2** — Export после Save: JSON tokens, SCSS snippet, TS preset → clipboard (разработчик коммитит в git)
+- [x] **P1** — **Конструктор UI-кита v0.1** (`/modules/ui-kit-composer`): палитра + canvas + properties, button/input, localStorage draft, export JSON
+- [ ] **P1** — Боковая панель на demo-странице **кнопки** (отдельная от composer — опционально, частично покрыто composer)
+- [x] **P1** — Действие **«Сохранить»** / Export → JSON preset (ручное размещение в `ui-primeng-kit/variants/presets/`)
+- [ ] **P2** — Export SCSS snippet, TS preset → clipboard помимо JSON
 - [ ] **P2** — `core/button-variants.types.ts` + `variants/button.presets.ts` с примерами approved-вариантов
-- [ ] **P3** — Черновик настроек в sessionStorage/localStorage (только demo, не prod)
+- [x] **P3** — Черновик настроек в localStorage (composer, ключ `kit-composer-draft-v1`)
 - [ ] **P3** — Dev-only persistence (gitignored drafts) — **только если** понадобится после export-flow
 
 **Заметки:** panel — инструмент hub/demo, не обязательный путь для consumer; primary path — правка `_tokens.scss` / override CSS vars.
@@ -84,6 +85,7 @@
 - [x] **P1** — Каталог hub: таблица + per-type routes + тесты catalog
 - [x] **P1** — Home three-tier columns
 - [x] **P1** — KpButton fix + статичная витрина вариантов на `/modules/ui-primeng-kit/button`
+- [x] **P1** — Аудит чек-листов 2026-05-30 (KPPDF-MODULES, KITS-READINESS, STATUS, HOW-TO-ADD-KIT §8)
 
 ---
 

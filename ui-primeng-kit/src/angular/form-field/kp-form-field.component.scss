@@ -1,0 +1,30 @@
+@use '../styles/kp-field' as field;
+
+.up-kp-form-field {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto minmax(0, auto) auto;
+  gap: var(--kp-space-1);
+  @include field.kp-field-root;
+}
+
+.up-kp-form-field__label {
+  @include field.kp-field-label;
+}
+
+.up-kp-form-field__required {
+  @include field.kp-field-required;
+}
+
+.up-kp-form-field__control {
+  min-width: 0;
+}
+
+.up-kp-form-field__hint {
+  font-size: var(--kp-font-size-caption);
+  color: var(--kp-text-muted);
+}
+
+.up-kp-form-field__error {
+  @include field.kp-field-error;
+}

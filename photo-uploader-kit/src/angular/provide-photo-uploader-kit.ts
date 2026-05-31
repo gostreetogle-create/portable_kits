@@ -6,5 +6,3 @@ import { PHOTO_UPLOADER_KIT_CONFIG } from './tokens';
 export function providePhotoUploaderKit(config: PhotoUploaderKitConfig = {}): Provider[] {
   return [{ provide: PHOTO_UPLOADER_KIT_CONFIG, useValue: config }];
 }
-
-export { PHOTO_UPLOADER_KIT_CONFIG };

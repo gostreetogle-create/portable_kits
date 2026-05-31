@@ -1,0 +1,21 @@
+<button
+  [type]="type()"
+  [class]="buttonClasses()"
+  [disabled]="disabled() || loading()"
+  [attr.autofocus]="autoFocus() ? '' : null"
+  [attr.aria-label]="ariaLabel() || label() || tooltip() || null"
+  [attr.title]="tooltipText() || null"
+  (click)="onClick($event)"
+>
+  @if (loading()) {
+    <span class="p-button-loading-icon pi pi-spinner pi-spin" aria-hidden="true"></span>
+  } @else if (icon()) {
+    <span [class]="iconClasses()" aria-hidden="true"></span>
+  }
+  @if (label()) {
+    <span class="p-button-label">{{ label() }}</span>
+  }
+  @if (badge()) {
+    <span [class]="badgeClasses()">{{ badge() }}</span>
+  }
+</button>

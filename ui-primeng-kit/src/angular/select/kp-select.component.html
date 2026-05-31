@@ -1,0 +1,26 @@
+<div class="up-kp-select">
+  @if (label(); as lbl) {
+    <label class="up-kp-select__label" [attr.for]="name()">
+      {{ lbl }}
+      @if (required()) { <span class="up-kp-select__required">*</span> }
+    </label>
+  }
+  <p-select
+    [inputId]="name()"
+    [options]="options()"
+    [(ngModel)]="value"
+    [placeholder]="placeholder()"
+    [disabled]="disabled() || loading()"
+    [showClear]="!required()"
+    [loading]="loading()"
+    appendTo="body"
+    [attr.aria-label]="inputAriaLabel() || null"
+    optionLabel="label"
+    optionValue="value"
+    size="small"
+    [styleClass]="controlClass()"
+  />
+  @if (error()) {
+    <span class="up-kp-select__error">{{ error() }}</span>
+  }
+</div>

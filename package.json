@@ -22,7 +22,8 @@
   "scripts": {
     "test": "npm test --workspace=schema-table-kit",
     "build": "npm run build --workspace=schema-table-kit",
-    "start": "npm start --workspace=schema-table-kit"
+    "start": "npm start --workspace=schema-table-kit",
+    "demo": "npm run demo --workspace=schema-table-kit"
   },
   "dependencies": {
     "@angular/animations": "^21.0.0",

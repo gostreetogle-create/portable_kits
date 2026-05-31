@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { moveSortableItems } from '../sortable-kit/src/angular/sortable.utils';
+import { moveSortableItems } from '../../sortable-kit/src/angular/sortable.utils';
 
 describe('moveSortableItems', () => {
   it('reorders array by drag indices', () => {

@@ -13,9 +13,9 @@
   <section class="ui-kit-section">
     <h2>Severity</h2>
     <div class="ui-kit-row">
-      <up-kp-button label="Primary" (buttonClick)="onPrimaryClick()" />
-      <up-kp-button label="Secondary" severity="secondary" />
-      <up-kp-button label="Danger" severity="danger" />
+      <up-kp-button label="Основная" (buttonClick)="onPrimaryClick()" />
+      <up-kp-button label="Вторичная" severity="secondary" />
+      <up-kp-button label="Опасная" severity="danger" />
     </div>
     <p class="ui-kit-hint">Кликов по Primary: {{ clickCount() }}</p>
   </section>
@@ -23,44 +23,44 @@
   <section class="ui-kit-section">
     <h2>Variant</h2>
     <div class="ui-kit-row">
-      <up-kp-button label="Premium (default)" />
-      <up-kp-button label="Flat" variant="flat" />
-      <up-kp-button label="Flat secondary" variant="flat" severity="secondary" />
+      <up-kp-button label="Premium (по умолч.)" />
+      <up-kp-button label="Плоская" variant="flat" />
+      <up-kp-button label="Плоская вторичная" variant="flat" severity="secondary" />
     </div>
   </section>
 
   <section class="ui-kit-section">
     <h2>Style modifiers</h2>
     <div class="ui-kit-row">
-      <up-kp-button label="Outlined" [outlined]="true" />
-      <up-kp-button label="Raised" [raised]="true" />
-      <up-kp-button label="Text" [text]="true" />
-      <up-kp-button label="Disabled" [disabled]="true" />
+      <up-kp-button label="Контурная" [outlined]="true" />
+      <up-kp-button label="Приподнятая" [raised]="true" />
+      <up-kp-button label="Текстовая" [text]="true" />
+      <up-kp-button label="Отключена" [disabled]="true" />
     </div>
   </section>
 
   <section class="ui-kit-section">
     <h2>Size</h2>
     <div class="ui-kit-row">
-      <up-kp-button label="Small (default)" size="small" />
-      <up-kp-button label="Large" size="large" />
+      <up-kp-button label="Малая (по умолч.)" size="small" />
+      <up-kp-button label="Крупная" size="large" />
     </div>
   </section>
 
   <section class="ui-kit-section">
     <h2>Icon</h2>
     <div class="ui-kit-row">
-      <up-kp-button label="Save" icon="pi pi-check" />
+      <up-kp-button label="Сохранить" icon="pi pi-check" />
       <up-kp-button icon="pi pi-trash" severity="danger" [rounded]="true" [text]="true" tooltip="Удалить" />
-      <up-kp-button label="Next" icon="pi pi-arrow-right" iconPos="right" />
+      <up-kp-button label="Далее" icon="pi pi-arrow-right" iconPos="right" />
     </div>
   </section>
 
   <section class="ui-kit-section">
     <h2>Loading &amp; badge</h2>
     <div class="ui-kit-row">
-      <up-kp-button label="Load" [loading]="loading()" (buttonClick)="simulateLoading()" />
-      <up-kp-button label="Inbox" icon="pi pi-inbox" badge="3" />
+      <up-kp-button label="Загрузка" [loading]="loading()" (buttonClick)="simulateLoading()" />
+      <up-kp-button label="Входящие" icon="pi pi-inbox" badge="3" />
     </div>
   </section>
 </section>

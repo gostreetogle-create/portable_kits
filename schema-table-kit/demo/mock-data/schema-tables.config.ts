@@ -23,7 +23,7 @@ export const PRODUCTS_ENTITY: EntitySchema = {
     { field: 'materials', label: 'Материалы', type: 'text', group: 'Техническое' },
     { field: 'weight', label: 'Вес', type: 'number', width: '90px', group: 'Техническое' },
     { field: '_id', label: 'ID', type: 'text', selectable: false },
-    { field: 'createdAt', label: 'Создан', type: 'date', selectable: false },
+    { field: 'createdAt', label: 'Created', type: 'date', selectable: false },
     { field: 'updatedAt', label: 'Обновлён', type: 'date', selectable: false },
   ],
 };

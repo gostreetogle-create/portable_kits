@@ -258,10 +258,10 @@ import { ENTITY_PICKER_KIT_CONFIG } from './tokens';
 export class EntityPickerComponent {
   private readonly config = inject(ENTITY_PICKER_KIT_CONFIG);
 
-  readonly entityKey = input.required<string>();
+  readonly entityKey = model<string>('');
   readonly visible = model(false);
   /** Override entity definition selection mode. */
-  readonly selectionMode = input<EntityPickerSelectionMode | undefined>(undefined);
+  readonly selectionMode = model<EntityPickerSelectionMode | undefined>(undefined);
 
   readonly selected = output<EntityPickerRow>();
   readonly selectedMany = output<EntityPickerRow[]>();
@@ -399,7 +399,7 @@ export class EntityPickerComponent {
       this.rows.set(result.items);
     } catch (err: unknown) {
       this.rows.set([]);
-      this.error.set(err instanceof Error ? err.message : 'Ошибка загрузки');
+      this.error.set(err instanceof Error ? err.message : 'Load error');
     } finally {
       this.loading.set(false);
     }

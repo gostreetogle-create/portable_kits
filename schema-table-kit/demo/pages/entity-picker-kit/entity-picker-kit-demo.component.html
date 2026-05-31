@@ -4,17 +4,17 @@
   <p class="demo-lead">v0.2: single + multi-select modes.</p>
 
   <div class="demo-actions">
-    <button type="button" class="demo-btn" (click)="openSingle()">Single select</button>
-    <button type="button" class="demo-btn" (click)="openMulti()">Multi select</button>
+    <button type="button" class="demo-btn" (click)="openSingle()">Одиночный выбор</button>
+    <button type="button" class="demo-btn" (click)="openMulti()">Множественный выбор</button>
   </div>
 
   @if (selected(); as row) {
-    <h3>Single selection</h3>
+    <h3>Одиночный выбор</h3>
     <pre class="demo-json">{{ row | json }}</pre>
   }
 
   @if (selectedMany().length > 0) {
-    <h3>Multi selection ({{ selectedMany().length }})</h3>
+    <h3>Множественный выбор ({{ selectedMany().length }})</h3>
     <pre class="demo-json">{{ selectedMany() | json }}</pre>
   }
 

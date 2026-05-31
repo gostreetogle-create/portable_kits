@@ -2,7 +2,8 @@
 
 **Level 3** = working `src/` code + hub demo page + vitest green + STATUS ✅
 
-Last updated: 2026-05-30 (Phase 3–4 complete)
+Last updated: 2026-05-30 (Phase 3–4 complete)  
+*Last audited: 2026-05-30 — checklist audit (subagent 442258a1)*
 
 ---
 
@@ -92,14 +93,14 @@ Last updated: 2026-05-30 (Phase 3–4 complete)
 - [x] **crud-page-kit v0.1** — CrudStore + `<cp-crud-page>` + hub demo
 - [x] **eav-kit v0.1** — `<eav-attribute-editor>` + mock persistence
 - [x] **auth-rbac-kit v0.1** — hasPermission + AuthRbacService + Express stub
-- [x] **layout-shell-kit v0.1** — `<ls-layout-shell>` sidebar shell
+- [x] **layout-shell-kit v0.1** — `<ls-layout-shell>` sidebar shell + vitest spec
 - [x] **quotation-editor v0.1** — `<qe-quotation-editor>` composes canvas + picker + placeholders
 
 ## Commands
 
 ```bash
 cd schema-table-kit
-npm test      # 40 tests, all kits
+npm test      # 52 tests, all kits
 npm run build # demo bundle OK
 ng serve demo --port 4201
 ```

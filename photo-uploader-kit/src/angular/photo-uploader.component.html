@@ -79,6 +79,12 @@
     />
   </div>
 
+  @if (errorMessage(); as msg) {
+    <div class="pu-photo-uploader__error" role="alert">
+      {{ msg }}
+    </div>
+  }
+
   <div class="photos-add-row">
     <div class="photos-add-row__input">
       <input

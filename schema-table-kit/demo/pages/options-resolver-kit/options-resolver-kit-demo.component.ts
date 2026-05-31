@@ -31,7 +31,7 @@ export class OptionsResolverKitDemoComponent implements OnInit {
       this.options.set(opts);
     } catch (err: unknown) {
       this.options.set([]);
-      this.error.set(err instanceof Error ? err.message : 'Ошибка');
+      this.error.set(err instanceof Error ? err.message : 'Error');
     } finally {
       this.loading.set(false);
     }

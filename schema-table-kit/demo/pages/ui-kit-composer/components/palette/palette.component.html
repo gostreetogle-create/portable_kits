@@ -1,0 +1,18 @@
+<aside class="composer-palette">
+  <h2 class="composer-palette__title">Палитра</h2>
+  <ul class="composer-palette__list">
+    @for (entry of entries; track entry.id) {
+      <li>
+        <button
+          type="button"
+          class="composer-palette__item"
+          [class.composer-palette__item--active]="isActive(entry.componentType)"
+          (click)="select(entry.componentType)"
+        >
+          <span class="composer-palette__item-title">{{ entry.title }}</span>
+          <code class="composer-palette__item-code">{{ entry.selector }}</code>
+        </button>
+      </li>
+    }
+  </ul>
+</aside>

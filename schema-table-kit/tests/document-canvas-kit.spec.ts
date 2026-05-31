@@ -4,7 +4,7 @@ import {
   normalizeBlockOrder,
   tableSumColumnIndex,
   DEFAULT_TABLE_COLUMNS,
-} from '../document-canvas-kit/src/core/types';
+} from '../../document-canvas-kit/src/core/types';
 
 describe('normalizeBlockOrder', () => {
   it('reindexes block order field', () => {

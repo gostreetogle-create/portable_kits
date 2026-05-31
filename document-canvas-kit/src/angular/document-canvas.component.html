@@ -108,16 +108,16 @@
             <table class="dc-table__grid">
               <thead>
                 <tr>
-                  @for (col of blockTableColumns(block); track col.field) {
+                  @for (col of getBlockTableColumns(block, tableTypeColumns()); track col.field) {
                     <th [style.width]="col.width || null">{{ col.header }}</th>
                   }
                 </tr>
               </thead>
               <tbody>
-                @if (blockItemRows(block).length > 0) {
-                  @for (row of blockItemRows(block); track row.item._id || row.index) {
+                @if (getBlockItemRows(block, tableItems()).length > 0) {
+                  @for (row of getBlockItemRows(block, tableItems()); track row.item._id || row.index) {
                     <tr>
-                      @for (col of blockTableColumns(block); track col.field) {
+                      @for (col of getBlockTableColumns(block, tableTypeColumns()); track col.field) {
                         <td
                           [style.width]="col.width || null"
                           [style.text-align]="col.type === 'number' || col.type === 'currency' ? 'right' : null"
@@ -131,7 +131,7 @@
                   <tr>
                     <td>1</td>
                     <td
-                      [attr.colspan]="blockTableColumns(block).length - 1"
+                      [attr.colspan]="getBlockTableColumns(block, tableTypeColumns()).length - 1"
                       class="dc-table__placeholder"
                     >
                       @if (mode() === 'template') {
@@ -143,15 +143,15 @@
                   </tr>
                 }
               </tbody>
-              @if (blockItemRows(block).length > 0) {
-                @let sumIdx = blockSumColumnIndex(block);
-                @let colCount = blockTableColumns(block).length;
+              @if (getBlockItemRows(block, tableItems()).length > 0) {
+                @let sumIdx = getBlockSumColumnIndex(block, tableTypeColumns());
+                @let colCount = getBlockTableColumns(block, tableTypeColumns()).length;
                 <tfoot>
                   <tr>
                     @if (sumIdx > 0) {
                       <td [attr.colspan]="sumIdx" class="dc-table__total-label">Итого:</td>
                     }
-                    <td class="dc-table__total">{{ blockItemsTotal(block) | number: '1.2-2' }}</td>
+                    <td class="dc-table__total">{{ computeBlockItemsTotal(block, tableItems()) | number: '1.2-2' }}</td>
                     @if (colCount - sumIdx - 1 > 0) {
                       <td [attr.colspan]="colCount - sumIdx - 1" aria-hidden="true"></td>
                     }
@@ -167,11 +167,11 @@
             [style.padding-bottom.px]="block.settings.paddingBottom ?? 4"
           >
             @if (!block.settings.lineHidden) {
-              <hr class="dc-separator" [ngStyle]="separatorLineStyles(block)" />
+              <hr class="dc-separator" [ngStyle]="computeSeparatorLineStyles(block, defaultSeparatorLineColor)" />
             }
           </div>
         } @else {
-          <div class="dc-block__body" [ngStyle]="blockStyles(block)">
+          <div class="dc-block__body" [ngStyle]="computeBlockStyles(block)">
             @if (activeBlockIndex() === i && (block.type === 'text' || block.type === 'header')) {
               <textarea
                 class="dc-block__editor"

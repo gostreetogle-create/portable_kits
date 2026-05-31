@@ -4,6 +4,7 @@ import {
   inject,
   input,
   model,
+  output,
   signal,
 } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
@@ -30,6 +31,8 @@ export class PhotoUploaderComponent {
 
   readonly isDragOver = signal(false);
   readonly newUrl = signal('');
+  readonly uploadError = output<string>();
+  readonly errorMessage = signal<string | null>(null);
   readonly zoomedUrl = signal<string | null>(null);
   readonly isProcessing = signal(false);
   readonly editingFrameIndex = signal<number | null>(null);
@@ -178,6 +181,7 @@ export class PhotoUploaderComponent {
   }
 
   private processFiles(fileList: FileList): void {
+    this.errorMessage.set(null);
     const imageFiles = Array.from(fileList).filter((f) => f.type.startsWith('image/'));
     if (imageFiles.length === 0 || !this.canAddMore()) return;
 
@@ -188,11 +192,14 @@ export class PhotoUploaderComponent {
     this.isProcessing.set(true);
     Promise.all(slice.map((f) => this.fileToBase64(f)))
       .then((dataUrls) => {
+        this.errorMessage.set(null);
         const items: PhotoItem[] = dataUrls.map((url) => ({ url }));
         this.photos.update((arr: PhotoItem[]) => [...arr, ...items]);
       })
       .catch((err) => {
-        console.warn('[PhotoUploader] Failed to convert file(s):', err);
+        const message = err instanceof Error ? err.message : String(err);
+        this.errorMessage.set(message);
+        this.uploadError.emit(message);
       })
       .finally(() => {
         this.isProcessing.set(false);

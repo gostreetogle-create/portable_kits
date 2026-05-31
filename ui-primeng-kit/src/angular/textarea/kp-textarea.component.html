@@ -1,0 +1,29 @@
+<div class="up-kp-textarea">
+  @if (label(); as lbl) {
+    <label class="up-kp-textarea__label" [attr.for]="name()">
+      {{ lbl }}
+      @if (required()) { <span class="up-kp-textarea__required">*</span> }
+    </label>
+  }
+  <textarea
+    [id]="name()"
+    pTextarea
+    class="up-kp-textarea__control w-full"
+    [class.up-kp-textarea__control--error]="!!error()"
+    [ngModel]="value()"
+    (ngModelChange)="value.set($event)"
+    [placeholder]="placeholder()"
+    [rows]="rows()"
+    [readonly]="readonly()"
+    [disabled]="disabled()"
+    [attr.required]="required() ? '' : null"
+    [autoResize]="autoResize()"
+    [class.up-kp-textarea__control--large]="size() === 'large'"
+    [attr.aria-label]="inputAriaLabel() || null"
+    [attr.aria-invalid]="error() ? true : null"
+    [attr.aria-describedby]="error() ? errorId() : null"
+  ></textarea>
+  @if (error()) {
+    <span [id]="errorId()" class="up-kp-textarea__error" role="alert">{{ error() }}</span>
+  }
+</div>

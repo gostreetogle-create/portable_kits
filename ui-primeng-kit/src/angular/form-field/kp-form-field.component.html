@@ -1,0 +1,17 @@
+<div class="up-kp-form-field" role="group" [attr.aria-labelledby]="label() ? labelId() : null">
+  @if (label()) {
+    <label class="up-kp-form-field__label" [id]="labelId()" [attr.for]="forId()">
+      {{ label() }}
+      @if (required()) { <span class="up-kp-form-field__required">*</span> }
+    </label>
+  }
+  <div class="up-kp-form-field__control">
+    <ng-content />
+  </div>
+  @if (hint() && !error()) {
+    <span class="up-kp-form-field__hint">{{ hint() }}</span>
+  }
+  @if (error()) {
+    <span class="up-kp-form-field__error">{{ error() }}</span>
+  }
+</div>

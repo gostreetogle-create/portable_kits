@@ -172,6 +172,18 @@ export const DEMO_MODULES: DemoModule[] = [
     tier: 'brick',
   },
   {
+    id: 'ui-kit-composer',
+    title: 'Конструктор UI-кита',
+    subtitle: 'ui-kit-composer',
+    description:
+      'Визуальная настройка kp-кирпичиков: палитра → preview → export JSON / localStorage draft',
+    route: '/modules/ui-kit-composer',
+    available: true,
+    hasDemo: true,
+    readiness: 'ready',
+    tier: 'brick',
+  },
+  {
     id: 'auth-rbac-kit',
     title: 'Аутентификация и права',
     subtitle: 'auth-rbac-kit',

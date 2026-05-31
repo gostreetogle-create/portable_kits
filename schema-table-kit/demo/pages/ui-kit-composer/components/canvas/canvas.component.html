@@ -1,0 +1,140 @@
+<section class="composer-canvas">
+  <h2 class="composer-canvas__title">Preview</h2>
+
+  @if (state.selectedType(); as type) {
+    <div class="composer-canvas__frame">
+      <div class="composer-canvas__preview" [style]="tokenStyles()">
+        @switch (type) {
+          @case ('up-kp-button') {
+            @let bp = buttonProps();
+            <up-kp-button
+              [label]="bp.label"
+              [severity]="bp.severity"
+              [variant]="bp.variant"
+              [size]="bp.size"
+              [disabled]="bp.disabled"
+              [icon]="bp.icon"
+              [outlined]="bp.outlined"
+              [text]="bp.text"
+            />
+          }
+          @case ('up-kp-input') {
+            @let ip = inputProps();
+            <up-kp-input
+              [label]="ip.label"
+              name="composer-preview-input"
+              [placeholder]="ip.placeholder"
+              [disabled]="ip.disabled"
+              [required]="ip.required"
+              [error]="ip.error"
+              [size]="ip.size"
+            />
+          }
+          @case ('up-kp-select') {
+            @let sp = selectProps();
+            <up-kp-select
+              [label]="sp.label"
+              name="composer-preview-select"
+              [placeholder]="sp.placeholder"
+              [disabled]="sp.disabled"
+              [required]="sp.required"
+              [loading]="sp.loading"
+              [error]="sp.error"
+              [options]="[{label: 'Вариант 1', value: '1'}, {label: 'Вариант 2', value: '2'}]"
+            />
+          }
+          @case ('up-kp-checkbox') {
+            @let cp = checkboxProps();
+            <up-kp-checkbox
+              [label]="cp.label"
+              name="composer-preview-checkbox"
+              [disabled]="cp.disabled"
+            />
+          }
+          @case ('up-kp-tag') {
+            @let tp = tagProps();
+            <up-kp-tag
+              [value]="tp.value"
+              [severity]="tp.severity"
+              [rounded]="tp.rounded"
+            />
+          }
+          @case ('up-kp-search') {
+            @let sp = searchProps();
+            <up-kp-search
+              [label]="sp.label"
+              [placeholder]="sp.placeholder"
+              [disabled]="sp.disabled"
+              [size]="sp.size"
+            />
+          }
+          @case ('up-kp-textarea') {
+            @let tp = textareaProps();
+            <up-kp-textarea
+              [label]="tp.label"
+              name="composer-preview-textarea"
+              [placeholder]="tp.placeholder"
+              [disabled]="tp.disabled"
+              [required]="tp.required"
+              [error]="tp.error"
+              [rows]="tp.rows"
+              [size]="tp.size"
+            />
+          }
+          @case ('up-kp-multiselect') {
+            @let mp = multiselectProps();
+            <up-kp-multiselect
+              [label]="mp.label"
+              name="composer-preview-multiselect"
+              [placeholder]="mp.placeholder"
+              [disabled]="mp.disabled"
+              [required]="mp.required"
+              [error]="mp.error"
+              [options]="['Вариант 1', 'Вариант 2', 'Вариант 3']"
+            />
+          }
+          @case ('up-kp-input-number') {
+            @let inp = inputNumberProps();
+            <up-kp-input-number
+              [label]="inp.label"
+              name="composer-preview-input-number"
+              [placeholder]="inp.placeholder"
+              [disabled]="inp.disabled"
+              [required]="inp.required"
+              [error]="inp.error"
+              [min]="inp.min"
+              [max]="inp.max"
+              [step]="inp.step"
+            />
+          }
+          @case ('up-kp-datepicker') {
+            @let dp = datepickerProps();
+            <up-kp-datepicker
+              [label]="dp.label"
+              name="composer-preview-datepicker"
+              [disabled]="dp.disabled"
+              [required]="dp.required"
+              [readonly]="dp.readonly"
+              [error]="dp.error"
+            />
+          }
+          @case ('up-kp-password') {
+            @let pp = passwordProps();
+            <up-kp-password
+              [label]="pp.label"
+              name="composer-preview-password"
+              [placeholder]="pp.placeholder"
+              [disabled]="pp.disabled"
+              [required]="pp.required"
+              [toggleMask]="pp.toggleMask"
+              [feedback]="pp.feedback"
+              [error]="pp.error"
+            />
+          }
+        }
+      </div>
+    </div>
+  } @else {
+    <p class="composer-canvas__empty">Выберите компонент в палитре слева</p>
+  }
+</section>

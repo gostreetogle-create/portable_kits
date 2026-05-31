@@ -1,0 +1,32 @@
+@use '../styles/kp-field' as field;
+
+.up-kp-select {
+  @include field.kp-field-root;
+  width: 100%;
+}
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.up-kp-select__label {
+  @include field.kp-field-label;
+}
+
+.up-kp-select__required {
+  @include field.kp-field-required;
+}
+
+.up-kp-select__error {
+  @include field.kp-field-error;
+}
+
+:host ::ng-deep {
+  @include field.kp-field-prime-control('.p-select');
+  @include field.kp-field-prime-label-sm('.p-select-label');
+
+  .up-kp-select__control--error.p-select {
+    border-color: var(--kp-danger) !important;
+  }
+}

@@ -32,31 +32,32 @@ export function createCrudRouter<T>(
 
   router.get('/', p('view'), async (req: Request, res: Response) => {
     try {
-      const page = parseInt(req.query.page as string) || 1;
-      const limit = parseInt(req.query.limit as string) || 50;
+      const q = req.query as Record<string, string | undefined>;
+      const page = parseInt(q['page'] ?? '1') || 1;
+      const limit = parseInt(q['limit'] ?? '50') || 50;
       const skip = (page - 1) * limit;
       const filter: Record<string, unknown> = {};
 
-      const showAll = req.query.all === 'true';
+      const showAll = q['all'] === 'true';
       if (!showAll) {
-        filter.isActive = true;
+        filter['isActive'] = true;
       }
 
-      const search = req.query.search as string | undefined;
+      const search = q['search'];
       if (search && searchFields.length > 0) {
         const regex = { $regex: search, $options: 'i' };
-        filter.$or = searchFields.map((field) => ({ [field]: regex }));
+        filter['$or'] = searchFields.map((field) => ({ [field]: regex }));
       }
 
       const knownParams = ['page', 'limit', 'search', 'sort', 'order', 'all'];
-      for (const key of Object.keys(req.query)) {
-        if (!knownParams.includes(key) && req.query[key]) {
-          filter[key] = req.query[key];
+      for (const key of Object.keys(q)) {
+        if (!knownParams.includes(key) && q[key]) {
+          filter[key] = q[key];
         }
       }
 
-      const sortField = (req.query.sort as string) || 'createdAt';
-      const sortOrder = (req.query.order as string) === 'asc' ? 1 : -1;
+      const sortField = q['sort'] || 'createdAt';
+      const sortOrder = q['order'] === 'asc' ? 1 : -1;
       const sort: Record<string, 1 | -1> = { [sortField]: sortOrder };
 
       const [data, total] = await Promise.all([
@@ -73,7 +74,7 @@ export function createCrudRouter<T>(
 
   router.get('/:id', p('view'), async (req: Request, res: Response) => {
     try {
-      const doc = await model.findById(req.params.id);
+      const doc = await model.findById(req.params['id']);
       if (!doc) {
         res.status(404).json(error('Not found'));
         return;
@@ -103,7 +104,7 @@ export function createCrudRouter<T>(
       if (hooks?.beforeUpdate) {
         await hooks.beforeUpdate(req.body);
       }
-      const doc = await model.findByIdAndUpdate(req.params.id, req.body, {
+      const doc = await model.findByIdAndUpdate(req.params['id'], req.body, {
         new: true,
         runValidators: true,
       });
@@ -120,7 +121,7 @@ export function createCrudRouter<T>(
 
   router.delete('/:id', p('delete'), async (req: Request, res: Response) => {
     try {
-      const doc = await model.findByIdAndDelete(req.params.id);
+      const doc = await model.findByIdAndDelete(req.params['id']);
       if (!doc) {
         res.status(404).json(error('Not found'));
         return;

@@ -1,0 +1,15 @@
+<nav class="up-kp-tab-group" role="tablist" [attr.aria-label]="ariaLabel()">
+  @for (tab of options(); track tab.value) {
+    <up-kp-button
+      role="tab"
+      [label]="tab.label"
+      [icon]="tab.icon || ''"
+      [severity]="activeTab() === tab.value ? 'primary' : 'secondary'"
+      [outlined]="activeTab() !== tab.value"
+      size="small"
+      variant="flat"
+      [attr.aria-selected]="activeTab() === tab.value"
+      (buttonClick)="onTabClick(tab.value)"
+    />
+  }
+</nav>

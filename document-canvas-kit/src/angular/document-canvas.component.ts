@@ -20,11 +20,8 @@ import {
 
 import {
   DEFAULT_DOCUMENT_BLOCKS,
-  DEFAULT_TABLE_COLUMNS,
   FALLBACK_TABLE_BLOCK_OPTIONS,
-  computeTableItemSum,
   normalizeBlockOrder,
-  tableSumColumnIndex,
   type DocTableColumn,
   type DocumentBlock,
   type DocumentCanvasMode,
@@ -32,6 +29,20 @@ import {
   type TableItem,
 } from '../core';
 import { DOCUMENT_CANVAS_KIT_CONFIG } from './tokens';
+import {
+  computeBlockStyles,
+  computeBlockItemsTotal,
+  computeSeparatorLineStyles,
+  createBlock,
+  createTableBlock,
+  getBlockItemRows,
+  getBlockSumColumnIndex,
+  getBlockTableColumns,
+  getItemField,
+  insertPlaceholderText,
+  readFileAsDataUrl,
+  trackBlock,
+} from './document-canvas.utils';
 
 @Component({
   selector: 'dc-document-canvas',
@@ -63,12 +74,15 @@ export class DocumentCanvasComponent {
   readonly placeholderRequested = output<void>();
   readonly pickerRequested = output<number>();
   readonly backgroundChange = output<string | undefined>();
+  /** Emitted when background file read fails. */
+  readonly backgroundError = output<string>();
 
   readonly activeBlockIndex = signal<number | null>(null);
   readonly showAddMenu = signal(false);
   readonly selectedTableKind = signal('products');
   readonly bgDragOver = signal(false);
 
+  /** Exposed for template — default separator color. */
   readonly defaultSeparatorLineColor = '#d1d5db';
 
   readonly availableTableBlockOptions = computed(() => {
@@ -79,6 +93,16 @@ export class DocumentCanvasComponent {
     );
     return this.tableBlockOptions().filter((opt) => !existing.has(opt.value));
   });
+
+  /** Exposed for template — pure utility references. */
+  readonly computeBlockStyles = computeBlockStyles;
+  readonly computeSeparatorLineStyles = computeSeparatorLineStyles;
+  readonly computeBlockItemsTotal = computeBlockItemsTotal;
+  readonly getBlockTableColumns = getBlockTableColumns;
+  readonly getBlockItemRows = getBlockItemRows;
+  readonly getItemField = getItemField;
+  readonly getBlockSumColumnIndex = getBlockSumColumnIndex;
+  readonly trackBlock = trackBlock;
 
   constructor() {
     effect(() => {
@@ -115,27 +139,11 @@ export class DocumentCanvasComponent {
   }
 
   addTextBlock(): void {
-    this.addBlock('text');
+    this.addBlockInternal('text');
   }
 
   addBlock(type: 'text' | 'separator'): void {
-    const newBlock: DocumentBlock =
-      type === 'text'
-        ? {
-            type: 'text',
-            order: this.blocks().length,
-            content: 'Новый текст…',
-            settings: { fontSize: 11, fontWeight: 'normal', align: 'left', paddingTop: 8, paddingBottom: 8 },
-          }
-        : {
-            type: 'separator',
-            order: this.blocks().length,
-            content: '',
-            settings: { fontSize: 11, fontWeight: 'normal', align: 'left', paddingTop: 8, paddingBottom: 4 },
-          };
-    this.blocks.update((items: DocumentBlock[]) => normalizeBlockOrder([...items, newBlock]));
-    this.activeBlockIndex.set(this.blocks().length - 1);
-    this.showAddMenu.set(false);
+    this.addBlockInternal(type);
   }
 
   addTableBlock(kind?: string): void {
@@ -144,14 +152,7 @@ export class DocumentCanvasComponent {
     const option = options.find((o) => o.value === selectedKind) ?? options[0];
     if (!option) return;
 
-    const newBlock: DocumentBlock = {
-      type: 'table',
-      order: this.blocks().length,
-      title: option.label,
-      tableKind: String(option.value),
-      content: '',
-      settings: { fontSize: 10, fontWeight: 'normal', align: 'left', paddingTop: 8, paddingBottom: 8 },
-    };
+    const newBlock = createTableBlock(this.blocks().length, option.label, String(option.value));
     this.blocks.update((items: DocumentBlock[]) => normalizeBlockOrder([...items, newBlock]));
     this.activeBlockIndex.set(this.blocks().length - 1);
     this.showAddMenu.set(false);
@@ -169,31 +170,22 @@ export class DocumentCanvasComponent {
   }
 
   updateContent(index: number, content: string): void {
-    this.blocks.update((items: DocumentBlock[]) => {
-      const updated = [...items];
-      updated[index] = { ...updated[index], content };
-      return updated;
-    });
+    this.updateBlock(index, (block) => ({ ...block, content }));
   }
 
   setAlign(index: number, align: DocumentTextAlign): void {
-    this.blocks.update((items: DocumentBlock[]) => {
-      const updated = [...items];
-      const block = updated[index];
-      updated[index] = {
-        ...block,
-        settings: { ...block.settings, align },
-      };
-      return updated;
-    });
+    this.updateBlock(index, (block) => ({
+      ...block,
+      settings: { ...block.settings, align },
+    }));
   }
 
   toggleSeparatorLine(index: number, event: Event): void {
     event.stopPropagation();
     this.blocks.update((items: DocumentBlock[]) => {
-      const updated = [...items];
-      const block = updated[index];
+      const block = items[index];
       if (block.type !== 'separator') return items;
+      const updated = [...items];
       updated[index] = {
         ...block,
         settings: { ...block.settings, lineHidden: !block.settings.lineHidden },
@@ -215,77 +207,10 @@ export class DocumentCanvasComponent {
 
   insertPlaceholder(token: string): void {
     const idx = this.activeBlockIndex();
-    if (idx === null || idx < 0 || idx >= this.blocks().length) return;
-    const block = this.blocks()[idx];
-    if (block.type !== 'text' && block.type !== 'header') return;
-    this.updateContent(idx, (block.content ?? '') + token);
-  }
-
-  blockStyles(block: DocumentBlock): Record<string, string> {
-    const s = block.settings;
-    const styles: Record<string, string> = {
-      'text-align': s.align ?? 'left',
-      'font-size': `${s.fontSize ?? 11}px`,
-      'font-weight': s.fontWeight === 'bold' ? '700' : s.fontWeight === 'semibold' ? '600' : '400',
-      'padding-top': `${s.paddingTop ?? 8}px`,
-      'padding-bottom': `${s.paddingBottom ?? 8}px`,
-    };
-    if (s.color) styles['color'] = s.color;
-    if (s.backgroundColor) styles['background-color'] = s.backgroundColor;
-    return styles;
-  }
-
-  separatorLineStyles(block: DocumentBlock): Record<string, string> {
-    const width = block.settings.lineWidth ?? 1;
-    const color = block.settings.lineColor || this.defaultSeparatorLineColor;
-    return {
-      'border-top-width': `${width}px`,
-      'border-top-color': color,
-      'border-top-style': 'solid',
-    };
-  }
-
-  getTableColumns(tableKind?: string): DocTableColumn[] {
-    if (!tableKind) return DEFAULT_TABLE_COLUMNS;
-    const custom = this.tableTypeColumns()[tableKind];
-    return custom?.length ? custom : DEFAULT_TABLE_COLUMNS;
-  }
-
-  blockTableColumns(block: DocumentBlock): DocTableColumn[] {
-    if (block.type !== 'table') return [];
-    return this.getTableColumns(block.tableKind);
-  }
-
-  blockItemRows(block: DocumentBlock): { item: TableItem; index: number }[] {
-    if (block.type !== 'table') return [];
-    const kind = block.tableKind ?? 'products';
-    return this.tableItems()
-      .map((item, index) => ({ item, index }))
-      .filter(({ item }) => (item.tableKind ?? 'products') === kind);
-  }
-
-  blockItemsTotal(block: DocumentBlock): number {
-    return this.blockItemRows(block).reduce(
-      (acc, { item }) => acc + computeTableItemSum(item),
-      0,
-    );
-  }
-
-  getItemField(item: TableItem, field: string): string | number {
-    if (field === 'sum') return computeTableItemSum(item);
-    if (field === 'index') return (item.order ?? 0) + 1;
-    const value = item[field as keyof TableItem];
-    if (value == null) return '—';
-    return value as string | number;
-  }
-
-  tableColspan(tableKind?: string): number {
-    const cols = this.getTableColumns(tableKind);
-    return cols.length > 0 ? cols.length : 6;
-  }
-
-  blockSumColumnIndex(block: DocumentBlock): number {
-    return tableSumColumnIndex(this.blockTableColumns(block));
+    const newBlocks = insertPlaceholderText(this.blocks(), idx, token);
+    if (newBlocks !== this.blocks()) {
+      this.blocks.set(newBlocks);
+    }
   }
 
   onBgDragOver(event: DragEvent): void {
@@ -306,14 +231,14 @@ export class DocumentCanvasComponent {
     this.bgDragOver.set(false);
     const file = event.dataTransfer?.files?.[0];
     if (file?.type.startsWith('image/')) {
-      void this.processBgFile(file);
+      void this.#processBgFile(file);
     }
   }
 
   onBgFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
-    if (file) void this.processBgFile(file);
+    if (file) void this.#processBgFile(file);
     input.value = '';
   }
 
@@ -322,18 +247,31 @@ export class DocumentCanvasComponent {
     this.backgroundChange.emit(undefined);
   }
 
-  private async processBgFile(file: File): Promise<void> {
-    const url = await new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = () => reject(new Error('FileReader error'));
-      reader.readAsDataURL(file);
-    });
-    this.backgroundImage.set(url);
-    this.backgroundChange.emit(url);
+  // ── Internal helpers ─────────────────────────────────────────────────────
+
+  private addBlockInternal(type: 'text' | 'separator'): void {
+    const newBlock = createBlock(type, this.blocks().length);
+    this.blocks.update((items: DocumentBlock[]) => normalizeBlockOrder([...items, newBlock]));
+    this.activeBlockIndex.set(this.blocks().length - 1);
+    this.showAddMenu.set(false);
   }
 
-  trackBlock(index: number, block: DocumentBlock): string {
-    return block._id ?? `${block.type}-${index}`;
+  private updateBlock(index: number, mutate: (block: DocumentBlock) => DocumentBlock): void {
+    this.blocks.update((items: DocumentBlock[]) => {
+      const updated = [...items];
+      updated[index] = mutate(updated[index]);
+      return updated;
+    });
+  }
+
+  async #processBgFile(file: File): Promise<void> {
+    try {
+      const url = await readFileAsDataUrl(file);
+      this.backgroundImage.set(url);
+      this.backgroundChange.emit(url);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to read file';
+      this.backgroundError.emit(message);
+    }
   }
 }

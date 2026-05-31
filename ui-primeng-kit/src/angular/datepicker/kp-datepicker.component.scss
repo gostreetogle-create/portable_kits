@@ -1,0 +1,25 @@
+@use '../styles/kp-field' as field;
+
+.up-kp-datepicker {
+  @include field.kp-field-root;
+}
+
+.up-kp-datepicker__label {
+  @include field.kp-field-label;
+}
+
+.up-kp-datepicker__required {
+  @include field.kp-field-required;
+}
+
+.up-kp-datepicker__error {
+  @include field.kp-field-error;
+}
+
+:host ::ng-deep {
+  @include field.kp-field-prime-datepicker;
+
+  .up-kp-datepicker__control--error .p-inputtext {
+    border-color: var(--kp-danger) !important;
+  }
+}

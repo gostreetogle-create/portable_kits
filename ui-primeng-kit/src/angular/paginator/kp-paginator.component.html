@@ -1,0 +1,11 @@
+<p-paginator
+  styleClass="kp-paginator"
+  [first]="first()"
+  [rows]="rows()"
+  [totalRecords]="totalRecords()"
+  [rowsPerPageOptions]="rowsPerPageOptions()"
+  [showFirstLastIcon]="true"
+  [showCurrentPageReport]="showCurrentPageReport()"
+  [currentPageReportTemplate]="currentPageReportTemplate()"
+  (onPageChange)="onPageChange($event)"
+/>

@@ -1,0 +1,27 @@
+<div class="up-kp-multiselect">
+  @if (label(); as lbl) {
+    <label class="up-kp-multiselect__label" [attr.for]="name()">
+      {{ lbl }}
+      @if (required()) { <span class="up-kp-multiselect__required">*</span> }
+    </label>
+  }
+  <p-multiselect
+    [inputId]="name()"
+    [options]="selectOptions()"
+    [(ngModel)]="value"
+    [placeholder]="placeholder()"
+    [disabled]="disabled()"
+    [showClear]="!required()"
+    [filter]="true"
+    [maxSelectedLabels]="maxSelectedLabels()"
+    display="chip"
+    [styleClass]="controlClass()"
+    size="small"
+    [attr.aria-label]="inputAriaLabel() || null"
+    [attr.aria-invalid]="error() ? true : null"
+    [attr.aria-describedby]="error() ? errorId() : null"
+  />
+  @if (error()) {
+    <span [id]="errorId()" class="up-kp-multiselect__error" role="alert">{{ error() }}</span>
+  }
+</div>

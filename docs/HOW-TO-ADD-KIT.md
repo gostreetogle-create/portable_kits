@@ -63,3 +63,22 @@ portable-kits/
 | Dev server | `cd schema-table-kit && ng serve demo --port 4201` |
 
 CI (`.github/workflows/ci.yml`): `npm ci` в корне → `npm test` + `npm run build` в `schema-table-kit`.
+
+## 8. Регистрация в hub
+
+После создания `src/` зарегистрируйте kit в **schema-table-kit** (dev shell), чтобы demo и vitest работали без consumer-проекта:
+
+| # | Файл | Что добавить |
+|---|------|--------------|
+| 1 | `schema-table-kit/demo/modules.config.ts` | Запись в `DEMO_MODULES`: `id`, `title`, `route`, `hasDemo: true`, `readiness`, tier |
+| 2 | `schema-table-kit/demo/app.routes.ts` | `{ path: 'modules/<kit-id>', component: ...DemoComponent }` |
+| 3 | `schema-table-kit/demo/pages/<kit-id>/` | Demo-страница (`*-demo.component.ts`, при необходимости `.html`/`.scss`) |
+| 4 | `schema-table-kit/tsconfig.json` | Path aliases: `@<kit-id>/core`, `@<kit-id>/angular` (и др. по паттерну kit) |
+| 5 | `schema-table-kit/tsconfig.demo.json` | `"../<kit-id>/src/**/*.ts"` в `include` |
+| 6 | `schema-table-kit/vitest.config.ts` | Aliases для `@<kit-id>/core` (и angular, если тесты импортируют) |
+| 7 | `schema-table-kit/tests/<kit-id>.spec.ts` | Минимальный vitest: core-логика и/или проверка barrel exports |
+| 8 | `<kit-id>/STATUS.md` | Done / Next, версия, честный статус тестов |
+| 9 | `<kit-id>/README.md` | Краткое описание + ссылка на COPY-GUIDE / QUICKSTART |
+| 10 | Корневой `README.md` | Строка в каталоге kits |
+
+Проверка: `cd schema-table-kit && npm test && npm run build && ng serve demo`.

@@ -1,0 +1,25 @@
+@use '../styles/kp-field' as field;
+
+.up-kp-multiselect {
+  @include field.kp-field-root;
+}
+
+.up-kp-multiselect__label {
+  @include field.kp-field-label;
+}
+
+.up-kp-multiselect__required {
+  @include field.kp-field-required;
+}
+
+.up-kp-multiselect__error {
+  @include field.kp-field-error;
+}
+
+:host ::ng-deep {
+  @include field.kp-field-prime-control('.p-multiselect');
+
+  .up-kp-multiselect__control--error.p-multiselect {
+    border-color: var(--kp-danger) !important;
+  }
+}

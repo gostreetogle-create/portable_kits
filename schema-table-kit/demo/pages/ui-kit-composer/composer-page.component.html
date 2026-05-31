@@ -1,0 +1,37 @@
+<section class="composer-page">
+  <nav class="composer-page__breadcrumb">
+    <a routerLink="/">Все модули</a>
+    <span>/</span>
+    <a routerLink="/modules/ui-primeng-kit">UI-кит</a>
+    <span>/</span>
+    <span>Конструктор</span>
+  </nav>
+
+  <header class="composer-page__header">
+    <div>
+      <h1>Конструктор UI-кита</h1>
+      <p class="composer-page__lead">
+        Настройте kp-кирпичик, посмотрите preview и экспортируйте пресет в JSON.
+      </p>
+    </div>
+    <div class="composer-page__toolbar">
+      <button type="button" class="composer-page__btn" (click)="saveDraft()">Save Draft</button>
+      <button type="button" class="composer-page__btn" (click)="exportJson()">Export JSON</button>
+      <button type="button" class="composer-page__btn" (click)="downloadJson()">Download .json</button>
+      <button type="button" class="composer-page__btn composer-page__btn--muted" (click)="reset()">Reset</button>
+      <button type="button" class="composer-page__btn composer-page__btn--muted" (click)="clearDraft()">
+        Clear draft
+      </button>
+    </div>
+  </header>
+
+  @if (statusMessage()) {
+    <p class="composer-page__status" role="status">{{ statusMessage() }}</p>
+  }
+
+  <div class="composer-page__grid">
+    <demo-composer-palette />
+    <demo-composer-canvas />
+    <demo-composer-properties-panel />
+  </div>
+</section>

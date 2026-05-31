@@ -1,0 +1,22 @@
+{
+  "id": "primary-large-button",
+  "name": "Primary Large Button",
+  "description": "Example exported preset for ui-primeng-kit composer v0.1",
+  "componentType": "up-kp-button",
+  "props": {
+    "label": "Click me",
+    "severity": "primary",
+    "variant": "premium",
+    "size": "large",
+    "disabled": false,
+    "icon": "",
+    "outlined": false,
+    "text": false
+  },
+  "tokenOverrides": {
+    "--kp-button-border-radius": "12px",
+    "--kp-button-padding-x-sm": "2rem",
+    "--kp-primary": "#2563eb"
+  },
+  "createdAt": "2026-05-30T12:00:00.000Z"
+}

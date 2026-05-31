@@ -1,3 +1,3 @@
 /** Public barrel — crud-factory-kit */
-export * from './core/index';
-export * from './express/index';
+export * from './core';
+export * from './express';

@@ -1,9 +1,30 @@
-export * from './types';
-export * from './field-value';
-export * from './registry';
-export * from './validation';
-export * from './provider.interface';
-export * from './presets';
+export type {
+  SchemaColumnType,
+  EntityFieldMeta,
+  EntitySchema,
+  SchemaColumn,
+  ColumnBuilderValue,
+  SchemaTableKitConfig,
+  ProviderStatus,
+  ColumnValidationCode,
+  ColumnValidationIssue,
+  ColumnTypeDefinition,
+  TableDefinitionDraft,
+} from './types';
+export { getFieldValue, FIELD_PATH_PATTERN, isValidFieldPath } from './field-value';
+export {
+  findEntity,
+  findFieldMeta,
+  getSelectableFields,
+  fieldOptionLabel,
+  buildColumnFromField,
+  detectSchemaDrift,
+  mergeSchemas,
+} from './registry';
+export { markOrphanColumns, validateColumns } from './validation';
+export type { SchemaProvider } from './provider.interface';
+export type { ColumnPreset } from './presets';
+export { applyPreset } from './presets';
 
 export const DEFAULT_COLUMN_TYPES = [
   { type: 'text', label: 'Текст' },

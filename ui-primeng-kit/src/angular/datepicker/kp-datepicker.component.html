@@ -1,0 +1,27 @@
+<div class="up-kp-datepicker">
+  @if (label(); as lbl) {
+    <label class="up-kp-datepicker__label" [attr.for]="name()">
+      {{ lbl }}
+      @if (required()) { <span class="up-kp-datepicker__required">*</span> }
+    </label>
+  }
+  <p-datepicker
+    [inputId]="name()"
+    [ngModel]="dateValue()"
+    (ngModelChange)="onDateChange($event)"
+    [disabled]="disabled()"
+    [readonlyInput]="readonly()"
+    dateFormat="dd.mm.yy"
+    [showIcon]="true"
+    iconDisplay="input"
+    class="w-full"
+    [styleClass]="error() ? 'up-kp-datepicker__control--error' : ''"
+    size="small"
+    [attr.aria-label]="inputAriaLabel() || null"
+    [attr.aria-invalid]="error() ? true : null"
+    [attr.aria-describedby]="error() ? errorId() : null"
+  />
+  @if (error()) {
+    <span [id]="errorId()" class="up-kp-datepicker__error" role="alert">{{ error() }}</span>
+  }
+</div>

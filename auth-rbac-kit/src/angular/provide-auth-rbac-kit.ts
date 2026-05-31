@@ -7,5 +7,3 @@ import { AuthRbacService } from './auth-rbac.service';
 export function provideAuthRbacKit(config: AuthRbacKitConfig = {}): Provider[] {
   return [{ provide: AUTH_RBAC_KIT_CONFIG, useValue: config }, AuthRbacService];
 }
-
-export { AUTH_RBAC_KIT_CONFIG, AuthRbacService };

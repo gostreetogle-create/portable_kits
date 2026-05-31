@@ -75,6 +75,7 @@
 | P1-4 | scaffold.spec.ts placeholders | 🟡 Low priority cleanup |
 | P1-5 | quotation-editor empty | ✅ v0.1 ported |
 | P1-6 | No CI | ✅ GitHub Actions |
+| P1-7 | layout-shell-kit missing vitest spec | ✅ Fixed 2026-05-30 — `layout-shell-kit.spec.ts` (barrel + provider) |
 
 ### P2 — Nice to have / cleanup
 

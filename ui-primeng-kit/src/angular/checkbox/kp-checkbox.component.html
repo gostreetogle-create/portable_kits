@@ -1,0 +1,13 @@
+<div class="up-kp-checkbox">
+  <p-checkbox
+    [inputId]="name()"
+    [(ngModel)]="checked"
+    [binary]="true"
+    [disabled]="disabled()"
+    size="small"
+    [attr.aria-label]="inputAriaLabel() || null"
+  />
+  @if (label(); as lbl) {
+    <label class="up-kp-checkbox__label" [attr.for]="name()">{{ lbl }}</label>
+  }
+</div>

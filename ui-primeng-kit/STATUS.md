@@ -17,6 +17,12 @@
 - `/modules/ui-primeng-kit` — таблица всех kp-* типов (ready / planned)
 - `/modules/ui-primeng-kit/button|input|dialog` — demo всех вариантов одного типа
 - `/modules/ui-primeng-kit/:id` — заглушка для planned компонентов
+- `/modules/ui-kit-composer` — **конструктор v0.1**: палитра, preview, properties, localStorage draft, export JSON
+
+## Presets
+
+- Пример export: `variants/presets/primary-large-button.example.json`
+- Утверждённые пресеты вручную кладутся в `variants/presets/` (runtime load — v0.2+)
 
 ## Notes
 
@@ -26,11 +32,17 @@
 
 ## Visual customization vision
 
-Playground (side panel, Save → approved variant) — **не реализовано**. Архитектурный аудит и roadmap: [docs/UI-KIT-VISUAL-CUSTOMIZATION-VISION.md](../docs/UI-KIT-VISUAL-CUSTOMIZATION-VISION.md).
+- [x] **Composer v0.1** — `/modules/ui-kit-composer` (palette + canvas + properties, button/input)
+- Roadmap v0.2+: compositions, SCSS export, catalog preset load — [docs/UI-KIT-VISUAL-CUSTOMIZATION-VISION.md](../docs/UI-KIT-VISUAL-CUSTOMIZATION-VISION.md)
+
+## Done
+
+- [x] `<up-kp-table>` — data-driven table: toolbar, search, sorting, pagination, row actions, empty state
+- [x] `<up-kp-paginator>` — PrimeNG Paginator wrapper with page report
 
 ## Next
 
-- [ ] KpTable, KpSelect, KpPaginator
+- [ ] KpSelect, KpAutocomplete, KpToggle, KpChip, KpBadge, KpMenu, KpFileUpload, KpImage
 - [ ] KppdfPreset theme override helper in `provideUiPrimengKit()`
 - [ ] Standalone demo app in `ui-primeng-kit/demo/`
-- [ ] v0.2 demo style playground (button page) — см. vision doc
+- [ ] v0.2 composer: compositions (row/card), import JSON
