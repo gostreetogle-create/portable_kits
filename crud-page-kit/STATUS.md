@@ -10,8 +10,9 @@
 - [x] Demo in schema-table-kit hub with in-memory mock API
 - [x] Unit tests for CrudStore
 
-## Next
+## v0.2 Roadmap
 
 - [ ] PrimeNG table skin via ui-primeng-kit
-- [ ] Sort column headers
+- [ ] Sortable column headers
 - [ ] Toast/confirm dialog integration
+- [ ] Inline editing support

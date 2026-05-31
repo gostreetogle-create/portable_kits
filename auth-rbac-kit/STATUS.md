@@ -10,8 +10,9 @@
 - [x] Hub demo with permission toggles
 - [x] Unit tests
 
-## Next
+## v0.2 Roadmap
 
 - [ ] JWT decode helper
-- [ ] Angular route guards
-- [ ] Full permission registry port from KPPDF
+- [ ] Angular route guards (canActivate, canMatch)
+- [ ] Full permission registry ported from KPPDF
+- [ ] Permission inheritance / role hierarchy support

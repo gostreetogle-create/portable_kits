@@ -15,7 +15,7 @@
 - [x] Demo in `schema-table-kit/demo/pages/document-canvas-kit/`
 - [x] Unit tests (normalizeBlockOrder, table helpers)
 
-## Next
+## v0.2 Roadmap
 
 - [ ] Multi-cell text blocks (split card)
 - [ ] `kp-document-text-block-edit` dialog port

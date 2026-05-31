@@ -10,8 +10,9 @@
 - [x] Demo in schema-table-kit hub (single + multi)
 - [x] Unit tests (`toggleEntityPickerSelection`, `entityPickerRowId`)
 
-## Next
+## v0.2 Roadmap
 
 - [ ] Pagination in picker dialog
 - [ ] Keyboard navigation improvements
 - [ ] ui-primeng dialog skin
+- [ ] Search/filter within picker

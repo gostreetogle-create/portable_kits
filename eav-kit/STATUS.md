@@ -10,8 +10,9 @@
 - [x] Hub demo with in-memory mock store
 - [x] Unit tests
 
-## Next
+## v0.2 Roadmap
 
 - [ ] Value editor for entity instances
 - [ ] Select options UI for `type: select`
 - [ ] Express schema API stub
+- [ ] Validation rules engine

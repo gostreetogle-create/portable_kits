@@ -11,7 +11,7 @@
 - [x] Hub demo page
 - [x] Unit tests
 
-## Next
+## v0.2 Roadmap
 
 - [ ] Save/load quotation JSON
 - [ ] PDF export hook

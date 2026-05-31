@@ -10,8 +10,9 @@
 - [x] Hub demo (embedded preview)
 - [x] Unit tests (`schema-table-kit/tests/layout-shell-kit.spec.ts`)
 
-## Next
+## v0.2 Roadmap
 
 - [ ] Breadcrumbs component
 - [ ] ui-primeng skin for nav items
 - [ ] User menu / logout slot
+- [ ] Collapsible sidebar sections
